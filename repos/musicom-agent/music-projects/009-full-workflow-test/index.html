@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Full Workflow Test | Musicom Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: 'JetBrains Mono', monospace; padding: 2rem; }
+        .header { border-bottom: 2px solid #a78bfa; padding-bottom: 1rem; margin-bottom: 2rem; }
+        .pulse { display: inline-block; width: 10px; height: 10px; background: #a78bfa; border-radius: 50%; animation: p 2s infinite; }
+        @keyframes p { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .card { background: rgba(30, 41, 59, 0.5); border: 1px solid #1e293b; padding: 1.5rem; border-radius: 0.5rem; }
+        h2 { color: #a78bfa; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        .dna-vis { color: #fbbf24; font-weight: bold; }
+        .link { color: #22d3ee; text-decoration: none; border-bottom: 1px dashed #22d3ee; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><span class="pulse"></span> PROJECT: Full Workflow Test</h1>
+        <p>Validation of Multi-Role Pattern pipeline</p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <h2>Theoretician Report</h2>
+            <p><strong>Tonality:</strong> D Dorian (62)</p>
+            <p><strong>Genre:</strong> Jazz (Complex Syncopation)</p>
+            <p><strong>Strategy:</strong> Established modal framework for Melodist.</p>
+        </div>
+        <div class="card">
+            <h2>Melodist DNA</h2>
+            <p class="dna-vis">Pitch DNA: [0, 2, 4, 3, 5, 4, 2, 0]</p>
+            <p class="dna-vis">Rhythm: Euclidean(5, 8)</p>
+        </div>
+        <div class="card">
+            <h2>Arranger Logic</h2>
+            <p>Generated inverse bass voice via <code>CounterpointTransformer</code>.</p>
+            <p>Coordinated 16-step matrix across two synthesis layers.</p>
+        </div>
+        <div class="card">
+            <h2>Export Status</h2>
+            <p>Audio Rendered: <span style="color: #34d399;">SUCCESS</span></p>
+            <p>Dashboard Published: <span style="color: #34d399;">SUCCESS</span></p>
+        </div>
+    </div>
+    <div style="margin-top: 2rem; text-align: center;">
+        <a href="../index.html" class="link">Back to Index</a>
+    </div>
+</body>
+</html>
