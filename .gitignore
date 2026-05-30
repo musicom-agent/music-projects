@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.tmp
+*.bak
+.env
+.github_token
+.git-credentials
+venv/
+.venv/
+repos/
+projects/
+music-projects/

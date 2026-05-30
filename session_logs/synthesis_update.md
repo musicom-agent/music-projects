@@ -1,0 +1,4 @@
+--- Session Log: 2026-05-23 ---
+- **Violin**: Stabilized pitch drift; added wood resonances.
+- **Piano**: Added inharmonicity and transients.
+- **Genre**: Balfolk 6/8 Jig exploration.
