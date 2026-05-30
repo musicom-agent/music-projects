@@ -25,6 +25,15 @@ Core method: riff → groove → power-chord harmony → song form → arrangeme
 - Form: 24 bars: 12-bar blues x2
 - Files: `MIDI/study-02-blues-rock-shuffle-engine.mid`, `Audio/study-02-blues-rock-shuffle-engine.ogg`
 
+### Study 03
+
+- Title: Voice-Derived Motif
+- Source: incoming Telegram voice/sound
+- Analysis: stable pitch around D5 (~590 Hz), high brightness, clear onsets
+- Composition move: treat D5 as b7 in E blues, then resolve through B–Bb–A–G–E
+- Tempo: 108 BPM
+- Files: `MIDI/study-03-voice-derived-motif.mid`, `Audio/study-03-voice-derived-motif.ogg`
+
 ## Rock rules we test
 
 1. Guitar is rhythm engine, not only harmony.
