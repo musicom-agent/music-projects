@@ -32,6 +32,8 @@ references:
   - references/music21-v10-api-notes.md
   - references/improvement-plan.md
   - references/official-skill-standards.md
+  - references/rock-apprenticeship-study.md
+  - references/voice-derived-motif-workflow.md
 ---
 
 # Musicom Composer — End-to-End Music Composition
@@ -55,9 +57,188 @@ See `references/lyria-3-model-clarification.md` for full breakdown.
 
 Orchestrates the full music composition workflow across the three Musicom repos. **The core principle: every musical element is a Pattern.** Pitch patterns and rhythm patterns are first-class compositional elements that combine into melodic phrases, which then flow through harmony, structure, and transformation stages to produce a complete composition as MIDI + audio, or exported to MusicXML/PianoRoll.
 
+## Generic Interactive Composer Workflow — Axel ↔ Agent
+
+This is the default way of working observed across Musicom projects: the user says what they want, think, hear, or wonder; the agent turns that into a small composed artifact, teaches the musical logic, shows/listens through results, then iterates toward a finished piece.
+
+### 0. Receive intent, not only requirements
+
+Treat the user's message as creative direction. Capture:
+
+- **Desire**: genre, mood, sound world, reference, dance/function, learning goal.
+- **Thought**: theory question, taste reaction, objection, curiosity, next experiment.
+- **Constraint**: key, meter, instrument, length, project number, delivery format.
+- **Input artifact**: MIDI, voice note, audio render, lyric, text idea, existing project.
+
+If unclear, ask one targeted question only when it blocks progress. Otherwise choose a musically reasonable default and document it.
+
+### 1. Decide the iteration type
+
+Pick one primary loop for the next artifact:
+
+- **New piece**: concept → DNA → arrangement → render.
+- **Study/lesson**: teach a genre by composing one focused study (e.g. riff → backbeat → bass lock → form).
+- **Variation**: preserve core identity, change one or two variables.
+- **Analysis-to-composition**: analyze MIDI/audio/voice/lyrics, extract DNA, compose from it.
+- **Production pass**: improve render, instrumentation, humanization, density, mix, dashboard.
+- **Handover/docs pass**: explain method, preserve decisions, update skill/docs.
+
+### 2. Create or continue a numbered project
+
+Use `musicom-agent/music-projects` as canonical project repo.
+
+Project folder:
+
+```text
+NNN-project-name/
+├── README.md              # concept, status, files
+├── MIDI/                  # editable DAW files
+├── Audio/                 # OGG/WAV renders
+├── Analysis/              # DNA, grids, feature analysis, comparisons
+├── Notes/                 # lessons, decisions, next moves
+├── Scores/                # MusicXML/notation when relevant
+├── Scripts/ or src/       # project-local generators
+└── index.html             # dashboard / publish surface
+```
+
+### 3. Convert intent into a composition brief
+
+Before coding, write or infer a compact brief:
+
+- title / working title
+- genre and subgenre
+- emotional target
+- key/scale/mode
+- tempo and meter/subdivision
+- form length: loop, 8 bars, 12-bar, AABB, verse/chorus, cinematic build
+- instrumentation and voice roles
+- lesson objective: what the user learns by hearing this version
+- artifact objective: what files/dashboard will prove progress
+
+### 4. Extract the musical DNA
+
+Represent the idea with inspectable patterns before rendering:
+
+- **Pitch DNA**: scale degrees, interval contour, motif, hook notes, tension notes.
+- **Rhythm DNA**: grid, Euclidean pattern, shuffle/triplet math, rests, metrical gravity.
+- **Harmony DNA**: chord degrees, functional gravity (HOME/LIFT/TENSE/TURN), cadences.
+- **Voice DNA**: lead, bass, drums, chordal texture, counterline, call-response.
+- **Structure DNA**: section map across bars; density curve; contrast plan.
+- **Timbre DNA**: instrument/program choices, articulation, register, effects.
+
+Always expose the DNA in human-readable form. Prefer high-contrast ASCII grids with `█` onsets and `░` rests.
+
+### 5. Compose a fast playable draft
+
+Generate a short complete version quickly rather than over-planning.
+
+- Use stable local tools: `music21`/`mido` for MIDI, FluidSynth CLI for acoustic/GM renders, `ffmpeg` for OGG.
+- Keep first draft constrained: one strong motif, one groove, one harmonic plan, one clear form.
+- Avoid black-box music generation when structured control is needed.
+- For voice/audio input, analyze features first, then map to project key/genre rather than copying noisy data literally.
+
+### 6. Export dual artifacts every time
+
+Every listening artifact needs a DAW artifact:
+
+- `.mid` next to `.ogg` for every generated composition.
+- `.wav` may exist for production, but remove large raw/intermediate WAVs before commit unless intentionally archived.
+- MusicXML/score when notation or theory review matters.
+- `index.html` dashboard for published project review.
+
+### 7. Teach through the artifact
+
+Delivery must educate, not only attach files.
+
+Explain:
+
+- what changed
+- what to listen for
+- why the rhythm/harmony/motif works
+- where the tension/release happens
+- which genre rule is being tested
+- what the next useful variable could be
+
+Use project notes for durable lesson text:
+
+- `Notes/lesson-*.md`
+- `Analysis/rhythm-dna*.md`
+- `Analysis/matrix_viz.md`
+- `Analysis/lyrics_rhythm.md`
+- `Analysis/*_analysis.md`
+
+### 8. Show results in multiple views
+
+For each meaningful iteration, provide some mix of:
+
+- Telegram-ready OGG for immediate listening
+- MIDI for editing/import
+- dashboard with play links and DNA grids
+- README status update
+- analysis note with rhythm/pitch/harmony grids
+- visual image when analysis benefits from plot/spectrogram/piano roll
+
+### 9. Use feedback as compositional control data
+
+When the user reacts, translate language into parameters:
+
+- “more drive” → denser rhythm, stronger kick/bass lock, faster subdivision, higher velocity
+- “more human” → microtiming, velocity spread, phrase breathing, articulation variation
+- “darker” → lower register, minor/modal borrowing, less bright timbre, slower attack
+- “bigger” → wider voicing, octave doubling, added percussion, longer reverb, density rise
+- “simpler” → fewer voices, clearer motif, longer notes, less syncopation
+- “teach me” → create study note + listening checklist + next exercise
+- “use this sound/voice” → extract pitch/onset/timbre DNA, quantize into project scale, compose response
+
+Change only a small number of variables per iteration unless the user asks for a full rewrite. Preserve the strongest identity marker from the previous version.
+
+### 10. Iterate toward a piece
+
+Typical arc:
+
+```text
+Idea → Study 01 / sketch → listen → explain → user reaction
+→ Study 02 / variation → compare → dashboard → arrangement expansion
+→ production render → documentation → publish
+```
+
+Composition grows by accumulating validated decisions:
+
+- motif survives repetition
+- groove teaches body feel
+- harmony supports emotional function
+- form creates contrast
+- arrangement assigns roles
+- production makes it listenable
+- dashboard makes logic visible
+
+### 11. Publish and preserve
+
+When iteration produces durable value:
+
+1. Update project files in `musicom-agent/music-projects`.
+2. Update `README.md`, `index.html`, notes, analysis.
+3. Verify MIDI/audio paths and dashboard links.
+4. Commit with project-number message.
+5. Push `main`.
+6. If the method changed, update this skill or a reference file in `axelwiertz/musicom-agent`.
+
+### 12. Quality gate before reporting done
+
+Check:
+
+- MIDI exists for each audio render.
+- OGG plays/is non-empty.
+- Dashboard exists for portfolio projects.
+- Rhythm DNA or equivalent explanation exists for learning projects.
+- Project folder follows numbered naming.
+- Git status clean after commit/push when repo update requested.
+- No accidental project portfolio content added to `axelwiertz/musicom-agent`.
+
 ## When to Use
 
 - Composing original music from a concept
+- Teaching a genre through active composition studies (e.g., rock apprenticeship: riff → backbeat → power chords → form)
 - Generating chord progressions with musicom's theory engine
 - Creating MIDI files from pattern-based compositions
 - Converting between musical formats (MIDI ↔ MusicXML ↔ audio)
@@ -121,6 +302,27 @@ Step 7: ARRANGE   — structure into sections (intro, verse, chorus, etc.)
 Step 8: TRANSFORM — embellish, transpose, canon, retrograde, augment
 Step 9: VOICE     — assign to instruments, add countermelodies
 Step 10: EXPORT   — MIDI file, audio (numpy+ffplay or AudioCraft), MusicXML
+
+**Always generate a MIDI file next to sound.**
+Every composition MUST produce a **MIDI file** (`.mid`) alongside the audio for DAW compatibility and structural review.
+
+### Standard Dashboard Visualization (VoltAgent Styling)
+When building project dashboards, adhere to the **VoltAgent** (Black/Emerald) aesthetic to ensure high visibility of metrical gravity:
+- **Colors:** Background `#050507`, Accent `#00d992`, Surface `#101010`.
+- **Rhythm DNA:** Visualize as a grid of high-contrast cells (█ for onset, ░ for rest).
+- **Legato/Slide:** Use linear gradients (e.g., `#818cf8` to `#00d992`) to distinguish legato sweeps (Steel Guitar, Violins) from discrete plucks.
+- **Hierarchy:** System-ui for headers ($60px$, line-height $1.0$), JetBrains Mono for technical metrics.
+- **Project Link:** Always serve via `index.html` within the `[NNN-name]` project directory.
+
+- **Audio Driver**: Prefer **FluidSynth CLI** (`fluidsynth -ni ...`) for rendering MIDI to WAV. It is more stable than the `ctypes` bridge in sandbox environments.
+- **Synthesis Protocol**: Primary engine is **FluidSynth** (`fluidsynth` CLI) with `FluidR3_GM.sf2`. **NOTE**: The `fluidsynth` CLI is more stable than `ctypes` bindings for batch rendering. Use `-ni` (no interaction) and `-F <wav>` flags.
+- **Normalization**: Always use `ffmpeg -i <in> -af 'peaknorm=level=-1'` or verify filter availability. If `peaknorm` is missing, use `-af "volume=0.89"` or verify peak manually.
+- **Delivery**: Convert to `.ogg` (Opus) via `ffmpeg` using `-codec:a libopus -application voip -b:a 48k`. Include native `MEDIA:` links for both `.ogg` and `.mid`.
+
+### Pitfalls — Rendering & Audio
+- **FluidSynth Ctypes**: Passing `ctypes` buffers directly to `fluid_synth_write_float` can cause argument errors in some Python environments. Default to CLI `fluidsynth -F` for reliability.
+- **FFmpeg Filters**: Some environments use older FFmpeg versions. If `peaknorm` fails, fall back to basic conversion.
+- **Mido vs music21**: `music21` is heavy. Use `mido` for quick file analysis and structure inspection.
 ```
 
 **Key shift:** Steps 3-5 are now the compositional core. Melody is no longer "generated" as a side effect of scale patterns — it is explicitly constructed from a pitch pattern applied to a rhythmic pattern, then refined.
@@ -548,17 +750,87 @@ inverted = invert_note(melody, axis=60)  # invert around C4
 
 ### Step 10: Export
 
-#### Export to MIDI (music21 v10)
+#### Export to MIDI (music21 v10 — use `writestr()`)
 
 ```python
 from musicom.converters.music21_score import unit_to_stream
+from music21 import midi
 
 s = unit_to_stream(melody)
 mf = midi.translate.streamToMidiFile(s)
-mf.write(fp='/tmp/hermes/songs/my_composition.mid')
+midi_bytes = mf.writestr()  # v10: only working method
+
+with open('/tmp/hermes/songs/my_composition.mid', 'wb') as f:
+    f.write(midi_bytes)
 ```
 
-#### Export to PianoRoll (numpy array)
+### MIDI v10 Instrument Migration
+In `music21` v10.x, some legacy instrument attributes (like `instrument.Voice`) may be missing or relocated.
+- **Lead Vocals:** Use `instrument.Vocalist()` if available; fallback to `instrument.Instrument()` with the part name explicitly labeled as "Lead Vocal".
+- **Bass:** Use `instrument.ElectricBass()` for modern pop-country and electric styles.
+- **Initialization:** Always initialize the instrument object at `offset=0` within the `stream.Part`.
+
+### Multitrack Export
+When exporting multitrack scores (e.g., Vocal + Guitar + Bass):
+1. Create separate `stream.Part()` objects.
+2. Assign unique MIDI programs via `instrument` objects at the start of each part.
+3. Bundle into a `stream.Score()`.
+4. Use `mf = midi.translate.streamToMidiFile(score)` followed by `mf.writestr()` for the safest cross-platform binary write.
+
+#### High-Quality (HQ) FluidSynth Workflow (Mandatory for Acoustic Styles)
+Use explicit `ctypes.c_float` rendering with built-in effects.
+
+```python
+import numpy as np
+import wave
+import ctypes
+
+lib = ctypes.CDLL('libfluidsynth.so.3')
+SOUNDFONT = '/usr/share/sounds/sf2/FluidR3_GM.sf2'
+
+def advanced_render(tracks, base_path, sr=44100):
+    settings = lib.new_fluid_settings()
+    lib.fluid_settings_setstr(settings, b"audio.driver", b"file")
+    lib.fluid_settings_setnum(settings, b"synth.gain", 1.0) # Boost internally
+    
+    synth = lib.new_fluid_synth(settings)
+    lib.fluid_synth_sfload(synth, SOUNDFONT.encode(), 1)
+    
+    # Enable Freeverb for cinematic scale / depth
+    # lib.fluid_synth_set_reverb(synth, 0.9, 0.5, 1.0, 0.8) # roomsize, damping, width, level
+    
+    # Calculate durations (including 3.0s master reverb tail!)
+    num_samples = int((total_dur + 3.0) * sr) 
+    master_l, master_r = np.zeros(num_samples, dtype=np.float32), np.zeros(num_samples, dtype=np.float32)
+
+    for ch, t in enumerate(tracks):
+        lib.fluid_synth_program_change(synth, ch, t['inst'])
+        curr_time = 0.0
+        for e in t['events']:
+            lib.fluid_synth_noteon(synth, ch, e['pitch'], e.get('vel', 100))
+            dur_samples = int(e['dur'] * sr)
+            bl, br = (ctypes.c_float * dur_samples)(), (ctypes.c_float * dur_samples)()
+            lib.fluid_synth_write_float(synth, dur_samples, bl, 0, 1, br, 0, 1)
+            # Add to master...
+            
+            lib.fluid_synth_noteoff(synth, ch, e['pitch'])
+            # Render a 100ms release tail for acoustic realism
+            tail = int(0.1 * sr)
+            tl, tr = (ctypes.c_float * tail)(), (ctypes.c_float * tail)()
+            lib.fluid_synth_write_float(synth, tail, tl, 0, 1, tr, 0, 1)
+            # Add to master...
+
+            curr_time += e['dur']
+            
+    # Render final Reverb Wash tail...
+
+    # Mastering Peak Normalization to ~-1dB
+    master_mono = (master_l + master_r) * 0.5
+    peak = np.max(np.abs(master_mono))
+    if peak > 0: master_mono = master_mono * (0.89 / peak) 
+    
+    # Int16 Output
+```
 
 ```python
 from musicom.converters.pypianoroll_converter import unit_to_pianoroll
@@ -735,8 +1007,14 @@ harmony = gen.generate()
 # 7. Convert to MIDI (music21 v10 API)
 stream_out = unit_to_stream(melody)
 mf = midi.translate.streamToMidiFile(stream_out)
-mf.write(fp='/tmp/hermes/songs/dorian_jazz_pattern.mid')
+midi_bytes = mf.writestr()
+with open('/tmp/hermes/songs/dorian_jazz_pattern.mid', 'wb') as f:
+    f.write(midi_bytes)
 ```
+
+## Genre Apprenticeship Mode
+
+When user asks to learn a genre while composing, create a short numbered study project and teach through the artifact. For rock, use `references/rock-apprenticeship-study.md`: build riff → backbeat → bass lock → power chords → form, export paired MIDI/OGG, and add a high-contrast Rhythm-DNA dashboard.
 
 ## Output Formats & Locations
 
@@ -747,6 +1025,8 @@ Default output directory: `/tmp/hermes/songs/`
 | MIDI | `.mid` | DAW import, edit | Lossless, editable |
 | WAV | `.wav` | Raw audio, editing | Lossless PCM |
 | OGG (Opus) | `.ogg` | Telegram voice bubbles | Compressed, voice-optimized |
+
+**Note**: Always export a matching `.mid` file alongside any audio render to maintain DAW compatibility.
 | MP3 | `.mp3` | General sharing | Compressed, universal |
 | FLAC | `.flac` | Archival | Lossless compression |
 | MusicXML | `.xml` | Sheet music export | Lossless, notation |
