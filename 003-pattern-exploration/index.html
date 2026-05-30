@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project 003: Systematic Pattern Exploration</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: 'JetBrains Mono', monospace; padding: 2rem; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .card { background: #0f172a; border: 1px solid #1e293b; padding: 1.5rem; border-radius: 12px; }
+        h1, h3 { color: #22d3ee; }
+        img { width: 100%; border-radius: 8px; margin-top: 1rem; border: 1px solid #1e293b; }
+        .subset-label { font-size: 0.8rem; color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <h1><span style="color:#fb7185">●</span> Project 003: Pattern Atlas</h1>
+    <p>Systematic exploration of Pitch and Rhythm DNA.</p>
+    
+    <div class="grid">
+        <div class="card">
+            <h3>Pitch Pattern Subsets</h3>
+            <p class="subset-label">Visualizing PitchClass sets within the 12TET system.</p>
+            <img src="PitchPatterns/subset_map_pentatonic.png" alt="Pentatonic Subset">
+            <p style="font-size:0.7rem; margin-top:0.5rem;">C Pentatonic (Cyan) as a subset of C Major (Gray).</p>
+            <img src="PitchPatterns/subset_map_triad.png" alt="Triad Subset">
+            <p style="font-size:0.7rem; margin-top:0.5rem;">C Major Triad (Rose) as a subset of C Major (Gray).</p>
+        </div>
+        
+        <div class="card">
+            <h3>Pillar 1: Tonal DNA</h3>
+            <ul>
+                <li>Heptatonic: 7-note parent patterns</li>
+                <li>Pentatonic: 5-note derived subsets</li>
+                <li>Chord: 3-4 note focus subsets</li>
+            </ul>
+            <a href="PitchPatterns/church_modes_comparison.mid" style="color:#22d3ee">Download Tonal Atlas MIDI</a>
+        </div>
+    </div>
+</body>
+</html>

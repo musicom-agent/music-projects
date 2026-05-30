@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Musicom Project 011: Country Uke</title>
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: 'JetBrains Mono', monospace; padding: 2rem; max-width: 900px; margin: auto; }
+        .card { background: #0f172a; border-radius: 12px; border: 1px solid #1e293b; padding: 2rem; margin-bottom: 2rem; }
+        h1 { color: #22d3ee; border-bottom: 2px solid #22d3ee; padding-bottom: 1rem; }
+        .rose { color: #fb7185; }
+        .cyan { color: #22d3ee; }
+        pre { background: #1e293b; padding: 1.5rem; border-radius: 8px; font-size: 1.1rem; border-left: 4px solid #fb7185; }
+        audio { width: 100%; filter: invert(100%) hue-rotate(180deg) brightness(1.5); }
+        .stats { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+        .stat-item { background: #1e293b; padding: 0.5rem 1rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>011-country-uke <span class="rose">v1.2</span></h1>
+    
+    <div class="stats">
+        <div class="stat-item"><span class="cyan">Genre:</span> Country/Folk</div>
+        <div class="stat-item"><span class="cyan">Key:</span> C Major</div>
+        <div class="stat-item"><span class="cyan">BPM:</span> 85</div>
+    </div>
+
+    <div class="card">
+        <h2>Instrumental Master (32 Measures)</h2>
+        <audio controls src="Audio/country_uke_8bars.ogg"></audio>
+        <p style="margin-top: 1rem;">Full length version: Ukulele Strumming (Karplus-Strong).</p>
+    </div>
+
+    <div class="card">
+        <h2>Ukulele Tablature</h2>
+        <pre>
+   C         G         Am        F         (Repeat x2)
+A|-3-3-3-3-|-2-2-2-2-|-0-0-0-0-|-0-0-0-0-|
+E|-0-0-0-0-|-3-3-3-3-|-0-0-0-0-|-1-1-1-1-|
+C|-0-0-0-0-|-2-2-2-2-|-0-0-0-0-|-0-0-0-0-|
+G|-0-0-0-0-|-0-0-0-0-|-2-2-2-2-|-2-2-2-2-|
+        </pre>
+        <h3>Chord Fingering (GCEA)</h3>
+        <ul>
+            <li><span class="rose">C</span>: 0 0 0 3</li>
+            <li><span class="rose">G</span>: 0 2 3 2</li>
+            <li><span class="rose">Am</span>: 2 0 0 0</li>
+            <li><span class="rose">F</span>: 2 0 1 0</li>
+        </ul>
+    </div>
+    
+    <div class="card" style="border-left: 4px solid #22d3ee;">
+        <h2>Project Files</h2>
+        <ul>
+            <li><a href="MIDI/country_uke_8bars.mid" class="cyan">country_uke_8bars.mid</a></li>
+            <li><a href="Audio/country_uke_8bars.ogg" class="cyan">country_uke_8bars.ogg</a></li>
+            <li><a href="Tab/uke_tab.txt" class="cyan">uke_tab.txt</a></li>
+        </ul>
+    </div>
+</body>
+</html>
