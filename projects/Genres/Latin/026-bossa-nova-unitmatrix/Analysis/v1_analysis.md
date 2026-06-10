@@ -5,7 +5,7 @@
 - Columns: Intro, A, B, A', Outro
 - Cell logic: each cell references a PitchPattern and RhythmPattern
 
-## Rhythm DNA
+## Rhythm Pattern
 - Bossa syncopation
 - Percussion row explicit on GM channel 10
 - Kick, side stick, hi-hat, conga, shaker

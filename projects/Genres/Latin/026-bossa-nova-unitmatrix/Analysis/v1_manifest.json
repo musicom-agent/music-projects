@@ -1,6 +1,7 @@
 {
   "project": "026-bossa-nova-unitmatrix",
   "workflow": "UnitMatrix-first",
+  "visualization": "columns=form sections, rows=tracks, cells=separate patterns",
   "rows": [
     "Guitar",
     "Bass",

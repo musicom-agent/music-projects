@@ -19,17 +19,25 @@ audio{width:100%;margin-top:10px}
 </head>
 <body>
 <h1>026 // Bossa Nova UnitMatrix</h1>
-<div class="small">UnitMatrix-first composition. Rows = voices. Columns = sections. Cells = pattern cells.</div>
+<div class="small">UnitMatrix-first composition. Rows = tracks. Columns = sections. Cells = separate Pattern objects.</div>
 <div>
 <span class="badge">80 BPM</span>
 <span class="badge">4/4</span>
 <span class="badge">Intro → A → B → A' → Outro</span>
 <span class="badge">Percussion on MIDI Ch 10</span>
 </div>
+<div class="card">
+<h2>UnitMatrix Visualization</h2>
+<div class="mono">Columns:   Intro              A                  B                  A'                 Outro
+Rows
+Guitar     | Pattern G0 / Pattern G0 | Pattern G1 / Pattern G1 | Pattern G2 / Pattern G2 | Pattern G3 / Pattern G3 | Pattern G4 / Pattern G4
+Bass       | Pattern B0 / Pattern B0 | Pattern B1 / Pattern B1 | Pattern B2 / Pattern B2 | Pattern B3 / Pattern B3 | Pattern B4 / Pattern B4
+Percussion | Pattern P0 (kick+stick+hat)        | Pattern P1 (bossa kick+stick+hat)  | Pattern P2 (bossa+conga)           | Pattern P3 (bossa+shaker lift)     | Pattern P4 (outro drop)</div>
+</div>
 <div class="grid">
-<div class="card"><h2>Row 0: Guitar DNA</h2><div class="mono">█░░█░█░░█░░█░█░░</div></div>
-<div class="card"><h2>Row 1: Bass DNA</h2><div class="mono">█░█░█░█░█░█░█░█░</div></div>
-<div class="card"><h2>Row 2: Percussion DNA</h2><div class="mono">█░█░░█░█░░█░█░░█</div></div>
+<div class="card"><h2>Row 0: Guitar Pattern</h2><div class="mono">█░░█░█░░█░░█░█░░</div></div>
+<div class="card"><h2>Row 1: Bass Pattern</h2><div class="mono">█░█░█░█░█░█░█░█░</div></div>
+<div class="card"><h2>Row 2: Percussion Pattern</h2><div class="mono">█░█░░█░█░░█░█░░█</div></div>
 </div>
 <div class="card">
 <h2>Files</h2>

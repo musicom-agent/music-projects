@@ -3,10 +3,10 @@
 ## Concept
 Bossa Nova study built from a UnitMatrix-first workflow. Rows = Guitar, Bass, Percussion. Columns = Intro, A, B, A', Outro.
 
-## DNA
+## Pattern
 - **PitchPattern:** retrograde-inverted bossa motif, clamped to playable guitar register.
 - **RhythmPattern:** syncopated bossa pulse with explicit percussion row.
-- **UnitMatrix:** rows are voices, columns are form sections.
+- **UnitMatrix:** rows are tracks, columns are form sections, cells are separate Pattern objects.
 - **Meter:** 4/4
 - **Tempo:** 80 BPM
 - **Form:** Intro (4) -> A (12) -> B (8) -> A' (12) -> Outro (4)
