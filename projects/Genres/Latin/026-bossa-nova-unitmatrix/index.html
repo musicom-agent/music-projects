@@ -72,28 +72,34 @@ audio{width:100%;margin-top:10px}
 <audio controls src="./Audio/v1_bossa_nova_unitmatrix.ogg"></audio>
 </div>
 <script>
-const sections = ["Intro","A","B","A'","Outro"];
+const sections = [
+  {name:"Intro", bars:4},
+  {name:"A", bars:12},
+  {name:"B", bars:8},
+  {name:"A'", bars:12},
+  {name:"Outro", bars:4},
+];
 const rows = [
   {name:"Guitar", cls:"guitar", patterns:[
-    {tag:"Pattern G0", notes:[62,65,69,72], beats:[0.0,1.5]},
-    {tag:"Pattern G1", notes:[62,65,67,69,72], beats:[0.0,0.75,1.5,2.5,3.25]},
-    {tag:"Pattern G2", notes:[67,69,72,74,77], beats:[0.0,0.75,1.5,2.5,3.25]},
-    {tag:"Pattern G3", notes:[62,65,67,69,72], beats:[0.0,0.75,1.5,2.5,3.25]},
-    {tag:"Pattern G4", notes:[62,65,69], beats:[0.0]},
+    {tag:"Pattern G0", base:"Scale: D Dorian | Degrees: 1-3-5-7 | Contour: tonic spread", notes:[62,65,69,72], beats:[0.0,1.5]},
+    {tag:"Pattern G1", base:"Scale: D Dorian | Degrees: 1-3-4-5-7 | Contour: walk-up", notes:[62,65,67,69,72], beats:[0.0,0.75,1.5,2.5,3.25]},
+    {tag:"Pattern G2", base:"Scale: G Dorian lift | Degrees: 1-2-3-5-6 | Contour: section B rise", notes:[67,69,72,74,77], beats:[0.0,0.75,1.5,2.5,3.25]},
+    {tag:"Pattern G3", base:"Scale: D Dorian | Degrees: 1-3-4-5-7 | Contour: return variation", notes:[62,65,67,69,72], beats:[0.0,0.75,1.5,2.5,3.25]},
+    {tag:"Pattern G4", base:"Scale: D Dorian | Degrees: 1-3-5 | Contour: close", notes:[62,65,69], beats:[0.0]},
   ]},
   {name:"Bass", cls:"bass", patterns:[
-    {tag:"Pattern B0", notes:[38,41,45,47], beats:[0.0,2.0]},
-    {tag:"Pattern B1", notes:[38,41,43,45,47], beats:[0.0,1.0,2.0,3.0]},
-    {tag:"Pattern B2", notes:[43,45,47,50,52], beats:[0.0,1.0,2.0,3.0]},
-    {tag:"Pattern B3", notes:[38,41,43,45,47], beats:[0.0,1.0,2.0,3.0]},
-    {tag:"Pattern B4", notes:[38,41], beats:[0.0]},
+    {tag:"Pattern B0", base:"Chord: Dm9 | Root pattern: 1-5-9-11 | Function: tonic bed", notes:[38,41,45,47], beats:[0.0,2.0]},
+    {tag:"Pattern B1", base:"Chord: Dm9 | Root pattern: 1-5-6-7-9 | Function: support A", notes:[38,41,43,45,47], beats:[0.0,1.0,2.0,3.0]},
+    {tag:"Pattern B2", base:"Chord: Gm9 | Root pattern: 1-3-5-7-9 | Function: lift B", notes:[43,45,47,50,52], beats:[0.0,1.0,2.0,3.0]},
+    {tag:"Pattern B3", base:"Chord: Dm9 | Root pattern: 1-5-6-7-9 | Function: return A'", notes:[38,41,43,45,47], beats:[0.0,1.0,2.0,3.0]},
+    {tag:"Pattern B4", base:"Chord: Dm6 | Root pattern: 1-5 | Function: close", notes:[38,41], beats:[0.0]},
   ]},
   {name:"Percussion", cls:"perc", patterns:[
-    {tag:"Pattern P0", notes:[36,37,42,42], beats:[0.0,1.5,0.5,2.5,3.5]},
-    {tag:"Pattern P1", notes:[36,37,42,42], beats:[0.0,1.0,0.5,1.5,2.5,3.5]},
-    {tag:"Pattern P2", notes:[36,37,42,42,63], beats:[0.0,1.0,1.75,0.5,1.5,2.5,3.5,2.75]},
-    {tag:"Pattern P3", notes:[36,37,42,42,54], beats:[0.0,1.0,0.25,0.75,1.25,1.75,2.25,2.75,3.25,3.75]},
-    {tag:"Pattern P4", notes:[36,37,42], beats:[0.0,2.0,0.5,2.5]},
+    {tag:"Pattern P0", base:"Subset: GM drum kit | Cells: kick / side-stick / hat", notes:[36,37,42,42], beats:[0.0,1.5,0.5,2.5,3.5]},
+    {tag:"Pattern P1", base:"Subset: GM drum kit | Cells: kick / side-stick / hat", notes:[36,37,42,42], beats:[0.0,1.0,0.5,1.5,2.5,3.5]},
+    {tag:"Pattern P2", base:"Subset: GM drum kit + conga | Cells: kick / side-stick / hat / conga", notes:[36,37,42,42,63], beats:[0.0,1.0,1.75,0.5,1.5,2.5,3.5,2.75]},
+    {tag:"Pattern P3", base:"Subset: GM drum kit + shaker | Cells: kick / side-stick / hat / shaker", notes:[36,37,42,42,54], beats:[0.0,1.0,0.25,0.75,1.25,1.75,2.25,2.75,3.25,3.75]},
+    {tag:"Pattern P4", base:"Subset: GM drum kit | Cells: ending pickup", notes:[36,37,42], beats:[0.0,2.0,0.5,2.5]},
   ]},
 ];
 const palette = {guitar:'#00d992', bass:'#818cf8', perc:'#fb7185'};
@@ -117,7 +123,7 @@ matrix.appendChild(document.createElement('div'));
 sections.forEach(section => {
   const h = document.createElement('div');
   h.className = 'mhead';
-  h.textContent = section;
+  h.innerHTML = `${section.name}<br><span class="small">${section.bars} bars</span>`;
   matrix.appendChild(h);
 });
 rows.forEach(row => {

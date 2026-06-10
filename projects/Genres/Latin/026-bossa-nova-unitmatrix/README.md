@@ -7,9 +7,10 @@ Bossa Nova study built from a UnitMatrix-first workflow. Rows = Guitar, Bass, Pe
 - **PitchPattern:** retrograde-inverted bossa motif, clamped to playable guitar register.
 - **RhythmPattern:** syncopated bossa pulse with explicit percussion row.
 - **UnitMatrix:** rows are tracks, columns are form sections, cells are separate Pattern objects.
+- **Cell base subset:** each melodic cell shows its scale and/or chord base. Melody cells also show scale degrees.
 - **Meter:** 4/4
 - **Tempo:** 80 BPM
-- **Form:** Intro (4) -> A (12) -> B (8) -> A' (12) -> Outro (4)
+- **Form:** Intro (4 bars) -> A (12 bars) -> B (8 bars) -> A' (12 bars) -> Outro (4 bars)
 
 ## Instrumentation
 - Nylon guitar
@@ -19,7 +20,7 @@ Bossa Nova study built from a UnitMatrix-first workflow. Rows = Guitar, Bass, Pe
 ## Files
 - [MIDI](MIDI/v1_bossa_nova_unitmatrix.mid)
 - [MusicXML](Scores/v1_bossa_nova_unitmatrix.musicxml)
-- [Flat.io score](https://flat.io/score/6a299787ccb715f4c528dd90)
+- [Flat.io score](https://flat.io/score/6a29be924f4787e16bad4026)
 - [Audio](Audio/v1_bossa_nova_unitmatrix.ogg)
 - [Renders](Renders/v1_bossa_nova_unitmatrix.wav)
 - [Analysis](Analysis/v1_analysis.md)

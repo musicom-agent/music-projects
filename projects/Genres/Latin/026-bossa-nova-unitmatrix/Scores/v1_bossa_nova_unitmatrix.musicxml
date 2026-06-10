@@ -19,36 +19,36 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pba278960ac8a568a7d86af593f63456d">
+    <score-part id="Pcd96bc60c21e5cbf29322b95535b88b1">
       <part-name>Acoustic Guitar</part-name>
       <part-abbreviation>Ac Gtr</part-abbreviation>
-      <score-instrument id="I2b7fb9a6282652464ac5784cc2f8e490">
+      <score-instrument id="Id3e3ded21d0e647818d51571313ea476">
         <instrument-name>Acoustic Guitar</instrument-name>
         <instrument-abbreviation>Ac Gtr</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I2b7fb9a6282652464ac5784cc2f8e490">
+      <midi-instrument id="Id3e3ded21d0e647818d51571313ea476">
         <midi-channel>1</midi-channel>
         <midi-program>25</midi-program>
       </midi-instrument>
     </score-part>
-    <score-part id="P31cc9ed0bfb7452f162864aa76e0d7dc">
+    <score-part id="P333c398cf4c1d8b47a3fc4b9a14a1f9d">
       <part-name>Acoustic Bass</part-name>
       <part-abbreviation>Ac b</part-abbreviation>
-      <score-instrument id="I6837fde1eadb9707cd7d02a660b4c17a">
+      <score-instrument id="Ibe1577e6bc18d0d171442dda42d83919">
         <instrument-name>Acoustic Bass</instrument-name>
         <instrument-abbreviation>Ac b</instrument-abbreviation>
       </score-instrument>
-      <midi-instrument id="I6837fde1eadb9707cd7d02a660b4c17a">
+      <midi-instrument id="Ibe1577e6bc18d0d171442dda42d83919">
         <midi-channel>2</midi-channel>
         <midi-program>33</midi-program>
       </midi-instrument>
     </score-part>
-    <score-part id="Pec58701b989d273865b7449eb256c4a4">
+    <score-part id="Peb58fe519dfaa293173475a843116485">
       <part-name />
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pba278960ac8a568a7d86af593f63456d">
+  <part id="Pcd96bc60c21e5cbf29322b95535b88b1">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -2442,7 +2442,7 @@
     </measure>
   </part>
   <!--=========================== Part 2 ===========================-->
-  <part id="P31cc9ed0bfb7452f162864aa76e0d7dc">
+  <part id="P333c398cf4c1d8b47a3fc4b9a14a1f9d">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -4441,7 +4441,7 @@
     </measure>
   </part>
   <!--=========================== Part 3 ===========================-->
-  <part id="Pec58701b989d273865b7449eb256c4a4">
+  <part id="Peb58fe519dfaa293173475a843116485">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
