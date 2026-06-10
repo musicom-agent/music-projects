@@ -17,14 +17,16 @@ a{color:var(--accent)}
 .mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;color:#e4e4e7;line-height:1.55;font-size:14px}
 audio{width:100%;margin-top:10px}
 .matrix-wrap{overflow:auto}
-.matrix{display:grid;grid-template-columns:180px repeat(5,minmax(180px,1fr));gap:8px;min-width:1080px;align-items:stretch}
+.matrix{display:grid;grid-template-columns:180px repeat(5,minmax(200px,1fr));gap:8px;min-width:1180px;align-items:stretch}
 .mcell,.mhead,.rhead{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#0d0d0f}
 .mhead{position:sticky;top:0;background:linear-gradient(180deg,#111,#0d0d0f);z-index:1;color:var(--accent);font-weight:700;text-align:center}
 .rhead{display:flex;align-items:center;justify-content:space-between;font-weight:700;color:#fff}
-.cell{min-height:122px;display:flex;flex-direction:column;gap:8px}
+.cell{min-height:196px;display:flex;flex-direction:column;gap:8px}
 .cell .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.cell .pattern{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;font-size:13px;line-height:1.45;white-space:pre-wrap}
+.cell .pattern{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;font-size:12px;line-height:1.42;white-space:pre-wrap}
 .cell .tag{display:inline-block;font-size:12px;padding:3px 7px;border-radius:999px;border:1px solid #2d2d2d;color:#cbd5e1;background:#0f172a}
+.pianoroll{width:100%;height:72px;display:block;background:#09090b;border:1px solid #1d1d1d;border-radius:12px}
+.roll-label{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
 .guitar{border-color:#254b41;box-shadow:inset 0 0 0 1px #0d2f26}
 .bass{border-color:#2b3c63;box-shadow:inset 0 0 0 1px #111a31}
 .perc{border-color:#53354b;box-shadow:inset 0 0 0 1px #2a141f}
@@ -73,27 +75,43 @@ audio{width:100%;margin-top:10px}
 const sections = ["Intro","A","B","A'","Outro"];
 const rows = [
   {name:"Guitar", cls:"guitar", patterns:[
-    {tag:"Pattern G0", pattern:"Pitch: [62, 65, 69, 72]\nRhythm: [0.0, 1.5]"},
-    {tag:"Pattern G1", pattern:"Pitch: [62, 65, 67, 69, 72]\nRhythm: [0.0, 0.75, 1.5, 2.5, 3.25]"},
-    {tag:"Pattern G2", pattern:"Pitch: [67, 69, 72, 74, 77]\nRhythm: [0.0, 0.75, 1.5, 2.5, 3.25]"},
-    {tag:"Pattern G3", pattern:"Pitch: [62, 65, 67, 69, 72]\nRhythm: [0.0, 0.75, 1.5, 2.5, 3.25]"},
-    {tag:"Pattern G4", pattern:"Pitch: [62, 65, 69]\nRhythm: [0.0]"},
+    {tag:"Pattern G0", notes:[62,65,69,72], beats:[0.0,1.5]},
+    {tag:"Pattern G1", notes:[62,65,67,69,72], beats:[0.0,0.75,1.5,2.5,3.25]},
+    {tag:"Pattern G2", notes:[67,69,72,74,77], beats:[0.0,0.75,1.5,2.5,3.25]},
+    {tag:"Pattern G3", notes:[62,65,67,69,72], beats:[0.0,0.75,1.5,2.5,3.25]},
+    {tag:"Pattern G4", notes:[62,65,69], beats:[0.0]},
   ]},
   {name:"Bass", cls:"bass", patterns:[
-    {tag:"Pattern B0", pattern:"Pitch: [38, 41, 45, 47]\nRhythm: [0.0, 2.0]"},
-    {tag:"Pattern B1", pattern:"Pitch: [38, 41, 43, 45, 47]\nRhythm: [0.0, 1.0, 2.0, 3.0]"},
-    {tag:"Pattern B2", pattern:"Pitch: [43, 45, 47, 50, 52]\nRhythm: [0.0, 1.0, 2.0, 3.0]"},
-    {tag:"Pattern B3", pattern:"Pitch: [38, 41, 43, 45, 47]\nRhythm: [0.0, 1.0, 2.0, 3.0]"},
-    {tag:"Pattern B4", pattern:"Pitch: [38, 41]\nRhythm: [0.0]"},
+    {tag:"Pattern B0", notes:[38,41,45,47], beats:[0.0,2.0]},
+    {tag:"Pattern B1", notes:[38,41,43,45,47], beats:[0.0,1.0,2.0,3.0]},
+    {tag:"Pattern B2", notes:[43,45,47,50,52], beats:[0.0,1.0,2.0,3.0]},
+    {tag:"Pattern B3", notes:[38,41,43,45,47], beats:[0.0,1.0,2.0,3.0]},
+    {tag:"Pattern B4", notes:[38,41], beats:[0.0]},
   ]},
   {name:"Percussion", cls:"perc", patterns:[
-    {tag:"Pattern P0", pattern:"Kick: [0.0, 2.0]\nStick: [1.5, 3.5]\nHat: [0.5, 1.5, 2.5, 3.5]"},
-    {tag:"Pattern P1", pattern:"Kick: [0.0, 2.0]\nStick: [1.0, 3.0]\nHat: [0.5, 1.5, 2.5, 3.5]"},
-    {tag:"Pattern P2", pattern:"Kick: [0.0, 1.75, 2.0]\nStick: [1.0, 3.0]\nHat: [0.5, 1.5, 2.5, 3.5]\nConga: [0.75, 2.75]"},
-    {tag:"Pattern P3", pattern:"Kick: [0.0, 2.0]\nStick: [1.0, 3.0]\nHat: [0.5, 1.5, 2.5, 3.5]\nShaker: [0.25, 0.75, 1.25, 1.75, 2.25, 2.75, 3.25, 3.75]"},
-    {tag:"Pattern P4", pattern:"Kick: [0.0]\nStick: [2.0]\nHat: [0.5, 2.5]"},
+    {tag:"Pattern P0", notes:[36,37,42,42], beats:[0.0,1.5,0.5,2.5,3.5]},
+    {tag:"Pattern P1", notes:[36,37,42,42], beats:[0.0,1.0,0.5,1.5,2.5,3.5]},
+    {tag:"Pattern P2", notes:[36,37,42,42,63], beats:[0.0,1.0,1.75,0.5,1.5,2.5,3.5,2.75]},
+    {tag:"Pattern P3", notes:[36,37,42,42,54], beats:[0.0,1.0,0.25,0.75,1.25,1.75,2.25,2.75,3.25,3.75]},
+    {tag:"Pattern P4", notes:[36,37,42], beats:[0.0,2.0,0.5,2.5]},
   ]},
 ];
+const palette = {guitar:'#00d992', bass:'#818cf8', perc:'#fb7185'};
+function svgRoll(notes, beats, color){
+  const width = 240, height = 72, minPitch = 24, maxPitch = 84, beatMax = 4;
+  const sx = width / beatMax;
+  const sy = (height - 12) / (maxPitch - minPitch);
+  const rects = [];
+  const n = Math.min(notes.length, beats.length);
+  for (let i = 0; i < n; i++) {
+    const note = notes[i], beat = beats[i];
+    const x = 10 + beat * sx;
+    const y = 8 + (maxPitch - note) * sy;
+    rects.push(`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="8" height="8" rx="2" fill="${color}"/>`);
+  }
+  const beatsLines = [0,1,2,3,4].map(b => `<line x1="${10 + b*sx}" y1="6" x2="${10 + b*sx}" y2="66" stroke="#222" stroke-width="1"/>`).join('');
+  return `<svg class="pianoroll" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true">${beatsLines}${rects.join('')}</svg>`;
+}
 const matrix = document.getElementById('matrix');
 matrix.appendChild(document.createElement('div'));
 sections.forEach(section => {
@@ -110,7 +128,9 @@ rows.forEach(row => {
   row.patterns.forEach(cell => {
     const d = document.createElement('div');
     d.className = `mcell cell ${row.cls}`;
-    d.innerHTML = `<div class="label">${cell.tag}</div><div class="pattern">${cell.pattern.replace(/\n/g,'<br>')}</div>`;
+    const beatsText = cell.beats.map(b => Number(b).toFixed(2)).join(', ');
+    const notesText = cell.notes.join(', ');
+    d.innerHTML = `<div class="label">${cell.tag}</div>${svgRoll(cell.notes, cell.beats, palette[row.cls])}<div class="roll-label"><span>mini piano roll</span><span>${cell.notes.length} notes</span></div><div class="pattern">Notes: [${notesText}]<br>Beats: [${beatsText}]</div>`;
     matrix.appendChild(d);
   });
 });

@@ -16,6 +16,8 @@
   ],
   "files": {
     "midi": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/MIDI/v1_bossa_nova_unitmatrix.mid",
+    "musicxml": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/Scores/v1_bossa_nova_unitmatrix.musicxml",
+    "flat_io_score_id": "6a299787ccb715f4c528dd90",
     "wav": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/Renders/v1_bossa_nova_unitmatrix.wav",
     "ogg": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/Audio/v1_bossa_nova_unitmatrix.ogg"
   },

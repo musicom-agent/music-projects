@@ -18,10 +18,16 @@ Bossa Nova study built from a UnitMatrix-first workflow. Rows = Guitar, Bass, Pe
 
 ## Files
 - [MIDI](MIDI/v1_bossa_nova_unitmatrix.mid)
+- [MusicXML](Scores/v1_bossa_nova_unitmatrix.musicxml)
+- [Flat.io score](https://flat.io/score/6a299787ccb715f4c528dd90)
 - [Audio](Audio/v1_bossa_nova_unitmatrix.ogg)
 - [Renders](Renders/v1_bossa_nova_unitmatrix.wav)
 - [Analysis](Analysis/v1_analysis.md)
 - [Generator](Scripts/generate_v1.py)
+
+## Workflow updates
+- Every iteration now gets a mini piano roll per UnitMatrix cell in the dashboard.
+- Every composition project now exports MusicXML and publishes to Flat.io when token available.
 
 ## Workflow correction
 This project uses the corrected composer workflow:
