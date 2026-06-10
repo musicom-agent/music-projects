@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>026 Bossa Nova UnitMatrix</title>
+<style>
+:root{--bg:#050507;--surface:#101010;--accent:#00d992;--text:#f4f4f5;--muted:#a1a1aa;--blue:#818cf8;--hot:#fb7185;}
+body{margin:0;padding:32px;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top right,#063b2b 0,#050507 34%);color:var(--text)}
+h1{font-size:60px;line-height:1;margin:0 0 8px;color:var(--accent);letter-spacing:-2px}
+.card{background:linear-gradient(180deg,#101010,#0a0a0b);border:1px solid #242424;border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 0 30px #00d99212}
+.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;color:#e4e4e7;line-height:1.55;font-size:14px}
+a{color:var(--accent)}
+.badge{display:inline-block;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:5px 10px;margin:4px;font-family:ui-monospace,monospace}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.small{color:var(--muted)}
+audio{width:100%;margin-top:10px}
+</style>
+</head>
+<body>
+<h1>026 // Bossa Nova UnitMatrix</h1>
+<div class="small">UnitMatrix-first composition. Rows = voices. Columns = sections. Cells = pattern cells.</div>
+<div>
+<span class="badge">80 BPM</span>
+<span class="badge">4/4</span>
+<span class="badge">Intro → A → B → A' → Outro</span>
+<span class="badge">Percussion on MIDI Ch 10</span>
+</div>
+<div class="grid">
+<div class="card"><h2>Row 0: Guitar DNA</h2><div class="mono">█░░█░█░░█░░█░█░░</div></div>
+<div class="card"><h2>Row 1: Bass DNA</h2><div class="mono">█░█░█░█░█░█░█░█░</div></div>
+<div class="card"><h2>Row 2: Percussion DNA</h2><div class="mono">█░█░░█░█░░█░█░░█</div></div>
+</div>
+<div class="card">
+<h2>Files</h2>
+<ul>
+<li><a href="./Audio/v1_bossa_nova_unitmatrix.ogg">Audio/v1_bossa_nova_unitmatrix.ogg</a></li>
+<li><a href="./MIDI/v1_bossa_nova_unitmatrix.mid">MIDI/v1_bossa_nova_unitmatrix.mid</a></li>
+<li><a href="./Scripts/generate_v1.py">Scripts/generate_v1.py</a></li>
+</ul>
+<audio controls src="./Audio/v1_bossa_nova_unitmatrix.ogg"></audio>
+</div>
+</body>
+</html>

@@ -34,6 +34,9 @@ references:
   - references/official-skill-standards.md
   - references/rock-apprenticeship-study.md
   - references/voice-derived-motif-workflow.md
+  - references/greek-music-dna.md
+  - references/bollywood-dna.md
+  - references/unitmatrix-first-composer-workflow.md
 ---
 
 # Musicom Composer — End-to-End Music Composition
@@ -56,6 +59,10 @@ See `references/lyria-3-model-clarification.md` for full breakdown.
 ## Purpose
 
 Orchestrates the full music composition workflow across the three Musicom repos. **The core principle: every musical element is a Pattern.** Pitch patterns and rhythm patterns are first-class compositional elements that combine into melodic phrases, which then flow through harmony, structure, and transformation stages to produce a complete composition as MIDI + audio, or exported to MusicXML/PianoRoll.
+
+**UnitMatrix rule:** use a UnitMatrix-first model for all compositions. Rows = voices / pattern layers. Columns = measures / sections. Cells = explicit PitchPattern and/or RhythmPattern material, then render from that structure.
+
+Support note: see `references/unitmatrix-first-composer-workflow.md` for the percussion-routing and verification fix.
 
 ## Generic Interactive Composer Workflow — Axel ↔ Agent
 
@@ -126,7 +133,9 @@ Represent the idea with inspectable patterns before rendering:
 - **Structure DNA**: section map across bars; density curve; contrast plan.
 - **Timbre DNA**: instrument/program choices, articulation, register, effects.
 
-Always expose the DNA in human-readable form. Prefer high-contrast ASCII grids with `█` onsets and `░` rests.
+- **Cadence DNA**: Always explicitly document the harmonic cadence (e.g., Andalusian i-VII-VI-V) and rhythmic cycle (e.g., 3/4 or 12/8 weight) in the project `README.md`.
+- **Numpy Pluck Synthesis**: To avoid "boring" sine waves in fallbacks, use additive synthesis (sine + odd harmonics) with an exponential decay (`exp(-k*t)`) to simulate string plucks.
+- **Flamenco Weights**: Flamenco rhythms require specific accent weight on beat 1 (Fandango) or beats 3, 6, 8, 10, 12 (Bulerías). Use `volume` scaling in generators to reflect this.
 
 ### 5. Compose a fast playable draft
 
@@ -212,16 +221,32 @@ Composition grows by accumulating validated decisions:
 - production makes it listenable
 - dashboard makes logic visible
 
-### 11. Publish and preserve
+### MIDI Percussion & GM Channels
 
-When iteration produces durable value:
+When exporting MIDI for percussion:
+- **Part Assignment**: Assign the percussion part to `instrument.Percussion()`.
+- **GM Percussion Persistence**: Modern `music21` (v10) often loses channel metadata during `streamToMidiFile` translation. To guarantee percussion playback:
+    1.  Explicitly force `event.channel = 9` (GM Channel 10) by iterating through `mf.tracks` events.
+    2.  Set `event.midiProgram = 0` (Standard Set) on the `instrument.Percussion` object.
+- **Note Persistence Invariants**: Avoid inserting `note.Note` objects into a `stream.Part` without an explicit starting offset. Use `part.insert(absolute_offset, note_obj)` within a calculated loop to prevent the MIDI translator from dropping "offset-less" events.
+- **Hard Refresh Render**: If the user reports that a file "has not changed," use `rm <file>` before re-running the generation script to bypass filesystem caching or partial-write artifacts.
+- **Normalization Protocol**: Synthesis velocities often yield low RMS. Always apply a gain-boost stage in the `ffmpeg` pipeline (e.g., `volume=25dB`) followed by peak normalization or high-bitrate Opus encoding (96k) for Telegram delivery.
+- **Inversion Consistency**: When applying `Retrograde + Inversion`, always clamp the resulting MIDI pitches to a musically safe register (D3-D5 / 48-74) to prevent "dog whistle" artifacts on high-interval themes.
+- **Structure Logic**: When composing multi-minute pieces, use a `sections` list `[(name, length, pitches, rhythm)]` to drive a single offset-based loop. This ensures consistent structure and allows for easier variation than flat measure loops.
+- **Verification Loop**: proactive verification via `mido` or `music21.midi` (reading the file back) is required to ensure Channel 10 actually persists in the binary.
+- **Tone & Brevity**: Follow "Caveman Mode" (fragments, flat filler, 100% technical accuracy) in all composition status reports and news summaries.
 
-1. Update project files in `musicom-agent/music-projects`.
-2. Update `README.md`, `index.html`, notes, analysis.
-3. Verify MIDI/audio paths and dashboard links.
-4. Commit with project-number message.
-5. Push `main`.
-6. If the method changed, update this skill or a reference file in `axelwiertz/musicom-agent`.
+
+1. **Publish to Flat.io**: Export MusicXML via `music21` and sync to Flat.io REST API.
+   - **Name Format**: `{project_name}-{version}` (e.g., `023-flamenco-16-bar-v1`).
+   - **Auth**: Use Bearer token from memory (verify token length/validity).
+   - **Payload**: Base64 encoded MusicXML (`base64 -w 0`).
+2. **Directory Hygiene**: Move/Commit project to the correct **DNA-First** hierarchy.
+   - `Genres/ <GenreName>/ NNN-<ProjectName>/` (Level 1 Matrix entrance)
+   - `Knowledge/ <TopicName>/ NNN-<ProjectName>/` (Research projects)
+3. **Dashboards**: Generate VoltAgent-style `index.html`.
+4. **Git Sync**: Commit and push to `musicom-agent/music-projects`.
+
 
 ### 12. Quality gate before reporting done
 
@@ -314,10 +339,20 @@ When building project dashboards, adhere to the **VoltAgent** (Black/Emerald) ae
 - **Hierarchy:** System-ui for headers ($60px$, line-height $1.0$), JetBrains Mono for technical metrics.
 - **Project Link:** Always serve via `index.html` within the `[NNN-name]` project directory.
 
-- **Audio Driver**: Prefer **FluidSynth CLI** (`fluidsynth -ni ...`) for rendering MIDI to WAV. It is more stable than the `ctypes` bridge in sandbox environments.
-- **Synthesis Protocol**: Primary engine is **FluidSynth** (`fluidsynth` CLI) with `FluidR3_GM.sf2`. **NOTE**: The `fluidsynth` CLI is more stable than `ctypes` bindings for batch rendering. Use `-ni` (no interaction) and `-F <wav>` flags.
-- **Normalization**: Always use `ffmpeg -i <in> -af 'peaknorm=level=-1'` or verify filter availability. If `peaknorm` is missing, use `-af "volume=0.89"` or verify peak manually.
-- **Delivery**: Convert to `.ogg` (Opus) via `ffmpeg` using `-codec:a libopus -application voip -b:a 48k`. Include native `MEDIA:` links for both `.ogg` and `.mid`.
+    - **Palmas (Flamenco Claps):** Sharp filtered noise bursts. Syncopate with accents on 1 and the "&" of 2.
+    - **Guitar Physicality:** Use 10-20ms strum delays (rolls) between strings in a chord and transient touch noise for acoustic realism.
+    - **Phrygian Flavor:** Use the major III chord (e.g., G# in E Phrygian) to lean into the Phrygian Dominant flavor common in Flamenco.
+- **Flat.io Base64**: Always use `base64.b64encode(data).decode('utf-8')` for the `data` field; nested `curl` payloads with `@file` must be clean JSON.
+- **Token Persistence**: If `f64d5...` fails, check for the 128-char `16d0f...` variant in session history.
+- **MusicXML Part IDs**: Explicitly ID parts (Melody, Harmony, Palmas) in `music21` for cleaner cloud-DAW import.
+- **Standard Pathing:** Always default to `/opt/data/projects/` for composition and music experiments. Avoid `/root/projects/` unless explicitly requested.
+- **Naming Pattern:** For daily/experiment folders, use `[genre]-daily-[date]` (e.g., `bossa-nova-daily-2026-06-07`).
+- **Synthesis Clamping & Normalization**: Always bound raw pitch intervals to a musically safe register (e.g., D3-D5 / MIDI 48-74) before export. When using FluidSynth for acoustic renders, apply a standard normalization pass (e.g., `-af "volume=25dB, peaknorm=level=-1.0"`) to avoid "silent" output from low internal velocity averages.
+- **FFmpeg Filter Fallbacks**: If `peaknorm` or `aloud` filters are missing, fall back to simple `volume` scaling after detecting max volume with `volumedetect`.
+- **Transformation Ethics**: Inversion transformations MUST specify an axis. Using floating-point or relative inversion without clamping can push themes into "dog whistle" frequencies. Verify pitch range via `mido` or `music21` before final delivery.
+- **Active Research:** For every genre/compose project, proactively perform web research (or browser-based research) to extract specific technical DNA (rhythmic gravity, dromoi, scales, instrumentation) before coding.
+- **Project Structure (V7)**: Every composition project must have `Audio/`, `MIDI/`, `Analysis/`, `Notes/`, `Scores/`, and `src/` directories. Include an `index.html` dashboard following the **VoltAgent** style.
+- **Git Hygiene**: Projects folder `/opt/data/projects` often has untracked system artifacts (skills, logs). Use `git add -f <project-dir>` to target specifically, avoid staging global clutter.
 
 ### Pitfalls — Rendering & Audio
 - **FluidSynth Ctypes**: Passing `ctypes` buffers directly to `fluid_synth_write_float` can cause argument errors in some Python environments. Default to CLI `fluidsynth -F` for reliability.
@@ -1042,6 +1077,8 @@ ffmpeg -i /tmp/hermes/songs/output.wav -codec:a libopus -application voip -b:a 4
 - **Venv has no pip**: Use `apt-get install -y python3-pip` then `pip3 install --target /opt/hermes/.venv/lib/python3.13/site-packages <pkg>`. Never call `/opt/hermes/.venv/bin/pip` directly (binary doesn't exist).
 - **MIDI clock drift**: When chaining multiple MusicUnits, ensure `MusicTimeGrid(timesteps=480)` is consistent across all
 - **Envelope clicks**: The numpy fallback uses sine waves — always add ADSR envelopes (attack ~5ms, release ~20ms) to prevent clicking
+- **Sandbox Python Module Pathing**: When composing or compiling MIDI/MusicXML inside sandboxed runners via `execute_code`, libraries like `mido` and `music21` may show `ModuleNotFoundError`. Use `sys.path.insert(0, '/usr/local/lib/python3.13/dist-packages')` or run execution commands direct via system `python3` terminal environments rather than virtualenvs lacking package binds.
+- **Flat.io MusicXML REST Payload**: Always convert MusicXML scores to continuous Base64 streams (`base64 -w 0`) when programmatically syncing to Flat.io `/scores` endpoint. Avoid direct multi-line strings which break JSON parsing in REST payloads.
 - **Scale overflow**: `get_pitches_in_octave()` returns MIDI pitches; ensure your pattern intervals don't push pitches outside 0-127
 - **Pattern cycling**: When rhythm has more onsets than pitch pattern intervals, pitches cycle automatically — this is by design, but may produce unexpected results if not intentional
 - **AudioCraft quality**: Text-to-music works best with genre + mood + instrumentation + dynamics described in the prompt; avoid artist names (copyright)
@@ -1056,7 +1093,14 @@ ffmpeg -i /tmp/hermes/songs/output.wav -codec:a libopus -application voip -b:a 4
 - No bridge between musicom_ai generators and the pattern pipeline
 - No composition quality analysis or feedback loop
 
-## AI Music Model Landscape — What Can & Can't Compose
+## Portfolio Maintenance and Hygiene
+
+- **Standard Project Workflow**: For new compositions, initialize a standard 3-digit zero-padded project folder (e.g., `022-name`) with subdirs `Audio`, `MIDI`, `Analysis`, `Notes`, `Scores`, and `src`. Generate a `README.md` with Concept/DNA/Roadmap and a `index.html` VoltAgent-style dashboard.
+- **Git Sync Discipline**: Always `git pull --rebase` before pushing to `music-projects`. If system files (e.g., untracked `skills/` or `sessions/`) clutter the local project dir, delete or stash them — do NOT commit them to the creative portfolio repo.
+- **Tone & Brevity**: Follow "Caveman Mode" (fragments, flat filler, 100% technical accuracy) in all composition status reports and news summaries.
+
+## Composition Delivery Invariants
+
 
 See `references/ai-music-models-landscape.md` for the full breakdown. **Key takeaway: Lyria 3 (Google) is a video generation model, not a music model — it cannot be used as a composer skill.**
 
