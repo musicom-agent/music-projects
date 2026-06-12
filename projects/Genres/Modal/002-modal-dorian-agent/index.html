@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicom Composition Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617;
+            --card-bg: #0f172a;
+            --primary: #22d3ee;
+            --secondary: #fb7185;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            70% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover { border-color: var(--primary); }
+
+        h1, h2, h3 { color: var(--primary); margin-top: 0; }
+        
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .stat-label { color: var(--text-dim); display: block; }
+        .stat-value { color: var(--primary); font-weight: bold; }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--bg);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1><span class="status-dot"></span>Musicom Composition Agent</h1>
+        <p style="color: var(--text-dim);">Composer: Musicom | D Dorian Phase 1</p>
+    </div>
+    <div style="text-align: right;">
+        <span class="stat-value" style="font-size: 0.8rem;">EST. 2026</span>
+    </div>
+</header>
+
+<div class="grid">
+    <!-- Analytical Overview Card -->
+    <div class="card" style="grid-column: 1 / -1;">
+        <h3>Analytical Overview</h3>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+            <div class="stat-item">
+                <span class="stat-label">Modal Polarity</span>
+                <span class="stat-value">D Dorian (Bright Minor)</span>
+                <p style="font-size: 0.7rem; color: var(--text-dim);">Raised 6th (B) creates character.</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Rhythmic Complexity</span>
+                <span class="stat-value">3+3+2 Tresillo Pattern</span>
+                <p style="font-size: 0.7rem; color: var(--text-dim);">Syncopated 4/4 meter.</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Harmonic Density</span>
+                <span class="stat-value">7th Chords (Tetrads)</span>
+                <p style="font-size: 0.7rem; color: var(--text-dim);">Common-tone voice leading.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Analysis Card -->
+    <div class="card" style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+        <div>
+            <h3>Chroma Profile</h3>
+            <p style="font-size: 0.8rem; color: var(--text-dim);">Tonal center and scale saturation.</p>
+            <img src="chroma_dist.png" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+        </div>
+        <div>
+            <h3>Melodic Contour</h3>
+            <p style="font-size: 0.8rem; color: var(--text-dim);">Interval movement and motif shape.</p>
+            <img src="interval_contour.png" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+        </div>
+    </div>
+    <!-- Visualization Card -->
+    <div class="card">
+        <h3>Primary Visualization</h3>
+        <p>Piano Roll Overview (Pitch vs. Time)</p>
+        <div class="image-container">
+            <img src="dorian_complete_roll.png" alt="Piano Roll">
+        </div>
+        <div class="stats-row">
+            <div class="stat-item"><span class="stat-label">Mode</span><span class="stat-value">D Dorian</span></div>
+            <div class="stat-item"><span class="stat-label">Pattern</span><span class="stat-value">Tresillo</span></div>
+            <div class="stat-item"><span class="stat-label">Tracks</span><span class="stat-value">Melody + Harmony</span></div>
+        </div>
+    </div>
+
+    <!-- Shape Analysis Card -->
+    <div class="card">
+        <h3>Composition Shape</h3>
+        <p>Dynamics & Harmonic Narrative</p>
+        <div class="image-container">
+            <img src="volume_graph.png" alt="Volume Graph">
+        </div>
+        <div class="stats-row">
+            <div class="stat-item"><span class="stat-label">Intensity</span><span class="stat-value">Dynamic</span></div>
+            <div class="stat-item"><span class="stat-label">Length</span><span class="stat-value">4 Bars</span></div>
+        </div>
+        <p style="margin-top: 1.5rem; color: var(--text-dim); font-size: 0.9rem;">
+            Harmonic Flow: i7 &rarr; IIImaj7 &rarr; IV7 &rarr; i7
+        </p>
+    </div>
+
+    <!-- Assets Card -->
+    <div class="card">
+        <h3>Project Assets</h3>
+        <p style="margin-bottom: 1rem;">
+            <a href="https://www.bandlab.com/track/e8e36fde-b260-4c1f-b5aa-17ec43527a36?revId=65a0d835-3cc2-4f15-a2f1-a8ebfb62a15e" style="color: #f87171; font-weight: bold; text-decoration: underline;">Open in BandLab ↗</a>
+        </p>
+        <p>Raw files for external synthesis and DAW work.</p>
+        <ul style="list-style: none; padding: 0;">
+            <li>📄 <a href="two_track_composition.mid" style="color: var(--primary);">two_track_composition.mid</a></li>
+            <li>🎵 <a href="dorian_full.ogg" style="color: var(--primary);">dorian_full.ogg</a></li>
+        </ul>
+        <a href="#" class="btn">Download All (.zip)</a>
+    </div>
+</div>
+
+<footer>
+    Generated by Musicom Agent (Hermes-3) • Session Index: 20260518
+</footer>
+
+</body>
+</html>

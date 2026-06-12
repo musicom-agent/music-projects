@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 001: Drie Kleine Kleutertjes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617;
+            --card-bg: #0f172a;
+            --primary: #22d3ee;
+            --secondary: #fb7185;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: #1e293b;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 10px var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            70% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover { border-color: var(--primary); }
+
+        h1, h2, h3 { color: var(--primary); margin-top: 0; }
+        
+        .image-container img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .stat-label { color: var(--text-dim); display: block; }
+        .stat-value { color: var(--primary); font-weight: bold; }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--bg);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <h1><span class="status-dot"></span>Project 001: Drie Kleine Kleutertjes</h1>
+        <p style="color: var(--text-dim);">Composer: Musicom | Traditional</p>
+    </div>
+    <div style="text-align: right;">
+        <span class="stat-value" style="font-size: 0.8rem;">EST. 2026</span>
+    </div>
+</header>
+
+<div class="grid">
+    <!-- Analysis Overview Card -->
+    <div class="card" style="grid-column: 1 / -1;">
+        <h3>Analytical Overview</h3>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+            <div class="stat-item">
+                <span class="stat-label">Modal Polarity</span>
+                <span class="stat-value">G Major (Diatonic)</span>
+                <p style="font-size: 0.7rem; color: var(--text-dim);">Standard folk scale.</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Rhythmic Complexity</span>
+                <span class="stat-value">Simple Folk Pattern</span>
+                <p style="font-size: 0.7rem; color: var(--text-dim);">Traditional 4/4 meter.</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Harmonic Density</span>
+                <span class="stat-value">Diatonic Triads</span>
+                <p style="font-size: 0.7rem; color: var(--text-dim);">Simple I-IV-V progressions.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Visualization Card -->
+    <div class="card">
+        <h3>Primary Visualization</h3>
+        <p>Piano Roll Overview (Pitch vs. Time)</p>
+        <div class="image-container">
+            <img src="piano_roll.png" alt="Piano Roll">
+        </div>
+        <div class="stats-row">
+            <div class="stat-item"><span class="stat-label">Mode</span><span class="stat-value">Traditional</span></div>
+            <div class="stat-item"><span class="stat-label">Pattern</span><span class="stat-value">Folk</span></div>
+            <div class="stat-item"><span class="stat-label">Tracks</span><span class="stat-value">Single Line</span></div>
+        </div>
+    </div>
+
+    <!-- Shape Analysis Card -->
+    <div class="card">
+        <h3>Composition Shape</h3>
+        <p>Dynamics & Harmonic Narrative</p>
+        <div class="image-container">
+            <img src="volume_graph.png" alt="Volume Graph">
+        </div>
+        <div class="stats-row">
+            <div class="stat-item"><span class="stat-label">Intensity</span><span class="stat-value">Level</span></div>
+            <div class="stat-item"><span class="stat-label">Length</span><span class="stat-value">8 Bars</span></div>
+        </div>
+        <p style="margin-top: 1.5rem; color: var(--text-dim); font-size: 0.9rem;">
+            Harmonic Flow: iv -> bvii -> vi -> v -> iv -> ii -> bvii -> iv -> bvii -> ii -> i -> bvii -> ii -> bvii -> i
+        </p>
+    </div>
+
+    <!-- Assets Card -->
+    <div class="card">
+        <h3>Project Assets</h3>
+        <p style="margin-bottom: 1rem;">
+            <a href="https://www.bandlab.com/axelwiertz/untitled-5-apr-2026-1720-ffa741c7?revId=bfe277fa-c1c0-4083-b42e-ac9cae95bf89" style="color: #f87171; font-weight: bold; text-decoration: underline;">Open in BandLab ↗</a>
+        </p>
+        <p>Raw files for external synthesis and DAW work.</p>
+        <ul style="list-style: none; padding: 0;">
+            <li>📄 <a href="MIDI/Drie_kleine_kleutertjes.mid.midi" style="color: var(--primary);">original_midi.mid</a></li>
+            <li>🎵 <a href="original.ogg" style="color: var(--primary);">original.ogg</a></li>
+        </ul>
+        <a href="#" class="btn">Download All (.zip)</a>
+    </div>
+</div>
+
+<footer>
+    Generated by Musicom Agent (Hermes-3) • Session Index: 20260518
+</footer>
+
+</body>
+</html>

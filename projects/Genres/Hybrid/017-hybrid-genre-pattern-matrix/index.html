@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>014 — Genre Pattern Matrix</title>
+<style>
+:root{--bg:#020617;--panel:#0f172a;--cyan:#22d3ee;--rose:#fb7185;--green:#00d992;--text:#e5e7eb;--muted:#94a3b8;--amber:#fbbf24;}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#102033,#020617 55%);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55}.wrap{max-width:1180px;margin:0 auto;padding:32px}h1{font-size:48px;line-height:1;margin:0 0 12px}h2{color:var(--cyan);margin-top:34px}.sub{color:var(--muted);font-size:18px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.card{background:linear-gradient(180deg,rgba(15,23,42,.95),rgba(2,6,23,.95));border:1px solid rgba(34,211,238,.22);border-radius:18px;padding:20px;box-shadow:0 0 30px rgba(34,211,238,.08)}.pill{display:inline-block;border:1px solid rgba(251,113,133,.45);color:#fecdd3;border-radius:999px;padding:4px 10px;margin:3px;font-family:'JetBrains Mono',monospace;font-size:13px}.dna{font-family:'JetBrains Mono',monospace;font-size:22px;letter-spacing:4px;color:var(--green);background:#050507;padding:12px;border-radius:12px;white-space:pre;overflow:auto}.matrix{font-family:'JetBrains Mono',monospace;font-size:13px;background:#050507;color:#dbeafe;padding:14px;border-radius:12px;white-space:pre;overflow:auto}.links a{display:block;color:var(--cyan);text-decoration:none;margin:7px 0}.listen{border-left:4px solid var(--rose);padding-left:14px}.accent{color:var(--amber)}code{font-family:'JetBrains Mono',monospace;color:#bae6fd}.footer{margin-top:40px;color:var(--muted);font-size:13px}</style>
+</head>
+<body><div class="wrap">
+<h1>014 — Genre Pattern Matrix</h1>
+<p class="sub">Learn genres by pattern DNA. Compose through matrix cells. Exercise 1: Balfolk vs Jazz vs Hybrid.</p>
+
+<div class="grid">
+<section class="card"><h2>Core Method</h2>
+<p><b>Pattern</b> = DNA. <b>MusicMatrix / UnitMatrix</b> = reserved Musicom structure.</p>
+<span class="pill">Voice rows</span><span class="pill">Measure columns</span><span class="pill">Pitch space</span><span class="pill">Time space</span><span class="pill">MusicUnit cells</span>
+<p>Genre Matrix is the education layer: Rhythm/Bass/Harmony/Melody/Timbre tags mapped onto voice-by-measure cells.</p></section>
+<section class="card"><h2>Exercise Files</h2><div class="links">
+<a href="Audio/musicmatrix_exercise1_all_three_compare.ogg">▶ MusicMatrix Compare — all three OGG</a>
+<a href="Audio/musicmatrix_exercise1a_balfolk_dorian_jig.ogg">▶ MusicMatrix A Balfolk OGG</a>
+<a href="Audio/musicmatrix_exercise1b_jazz_ii_v_i_swing.ogg">▶ MusicMatrix B Jazz OGG</a>
+<a href="Audio/musicmatrix_exercise1c_hybrid_balfolk_jazz.ogg">▶ MusicMatrix C Hybrid OGG</a>
+<a href="MIDI/musicmatrix_exercise1a_balfolk_dorian_jig.mid">⬇ MusicMatrix A Balfolk MIDI</a>
+<a href="MIDI/musicmatrix_exercise1b_jazz_ii_v_i_swing.mid">⬇ MusicMatrix B Jazz MIDI</a>
+<a href="MIDI/musicmatrix_exercise1c_hybrid_balfolk_jazz.mid">⬇ MusicMatrix C Hybrid MIDI</a>
+<a href="Analysis/musicmatrix-builder.md">📘 MusicMatrix builder notes</a>
+<a href="Analysis/musicmatrix_manifest.json">{} Manifest JSON</a>
+</div></section>
+</div>
+
+<h2>Rhythm DNA</h2>
+<div class="grid">
+<section class="card"><h3>A — Balfolk Jig</h3><div class="dna">█░░█░░
+1 2 3 4 5 6</div><p>Gravity on 1 and 4. Body first.</p></section>
+<section class="card"><h3>B — Jazz Swing</h3><div class="dna">Backbeat: ░█░█
+Ride:     ████</div><p>Swing inside beat. Backbeat on 2 and 4.</p></section>
+<section class="card"><h3>C — Hybrid</h3><div class="dna">Body: █░░█░░
+Color: Dm9 Cmaj7 G13</div><p>Balfolk feet. Jazz ears.</p></section>
+</div>
+
+<h2>Exercise 1 Matrices</h2>
+<section class="card"><h3>A — Balfolk Dorian Jig</h3><div class="matrix">Bars:     1      2      3      4      5      6      7      8
+Rhythm:   jig    jig    jig    jig    jig    jig    jig+   cadence
+Bass:     D      C      D      G      D      C      G      D
+Harmony:  Dm     C      Dm     G      Dm     C      G      Dm
+Melody:   A      A'     A      B      A      A'     B'     Cad
+Timbre:   fiddle fiddle fiddle acc+   fiddle fiddle full   resolve
+Form:     Question      Answer        Repeat        Close</div></section>
+
+<section class="card"><h3>B — Jazz ii-V-I Swing</h3><div class="matrix">Bars:     1      2      3       4       5      6      7        8
+Rhythm:   swing  swing  swing   space   swing  swing  ii-V     cadence
+Bass:     walk   walk   root-5  walk    walk   walk   turn     C
+Harmony:  Dm7    G7     Cmaj7   Cmaj7   Em7    A7     Dm7-G7   Cmaj7
+Melody:   guide  tense  resolve space   seq    tense  turn     home
+Timbre:   sax    sax    sax     piano   sax    sax    full     soft
+Form:     ii-V-I phrase         answer phrase           close</div></section>
+
+<section class="card"><h3>C — Hybrid Balfolk-Jazz</h3><div class="matrix">Bars:     1      2       3      4      5      6       7      8
+Rhythm:   jig    jig     jig    jig    jig    jig     jig+   cadence
+Bass:     D      C       D      G      D      C       G      D
+Harmony:  Dm9    Cmaj7   Dm9    G13    Dm9    Cmaj7   G13    Dm9
+Melody:   folk   folk    folk   folk   folk   folk    lift   close
+Timbre:   fiddle piano   fiddle piano  fiddle piano   full   resolve
+Form:     Balfolk body + Jazz color</div></section>
+
+
+<h2>MusicMatrix Builder</h2>
+<section class="card"><div class="matrix">Rows    = voices / pitch-space layers
+Columns = measures / time-space segments
+Cells   = MusicUnit bar material
+
+A Balfolk rows: Foot Pulse | Bass Voice | Harmony Voice | Lead Voice
+B Jazz rows:    Ride+Backbeat | Walking Bass | Piano Harmony | Sax Lead
+C Hybrid rows:  Jig Pulse | Modal Bass | Jazz Color Harmony | Folk Lead</div>
+<p>Generated with <code>/opt/hermes/.venv/bin/python3</code>, <code>music21 10.1.0</code>, Musicom <code>UnitMatrix</code>, FluidSynth, and ffmpeg.</p></section>
+
+
+<h2>V2 — Brighter + More Dance</h2>
+<section class="card"><div class="links">
+<a href="Audio/musicmatrix_exercise1_hybrid_v1_v2_compare.ogg">▶ Hybrid V1 → V2 Compare OGG</a>
+<a href="Audio/musicmatrix_exercise1d_hybrid_v2_bright_dance.ogg">▶ Hybrid V2 Bright Dance OGG</a>
+<a href="MIDI/musicmatrix_exercise1d_hybrid_v2_bright_dance.mid">⬇ Hybrid V2 MIDI</a>
+<a href="Exercises/exercise-01-v2-brighter-more-dance.md">📘 V2 exercise note</a>
+</div>
+<div class="matrix">Rows:
+1 Dance Pulse / Strong Jig
+2 Shaker Eighth Grid
+3 Bass Octave Push
+4 Bright Jazz Color Harmony
+5 Folk Lead with Lydian Bulb
+
+Transform:
+More dance = stronger 1/4 + shaker + bass octave
+Brighter   = C# #11 over G13#11 -> resolves to D</div></section>
+
+
+<h2>V3 — Reduce Brightness + Add Melody Answer</h2>
+<section class="card"><div class="links">
+<a href="Audio/musicmatrix_exercise1_hybrid_v2_v3_compare.ogg">▶ Hybrid V2 → V3 Compare OGG</a>
+<a href="MIDI/musicmatrix_exercise1e_hybrid_v3_answer.mid">⬇ Hybrid V3 MIDI</a>
+<a href="Exercises/exercise-01-v3-reduce-brightness-add-answer.md">📘 V3 exercise note</a>
+</div>
+<div class="matrix">V3 Transform:
+Reduce brightness = remove C# #11; keep softer Dorian B
+Add answer       = bars 5-8 answer bars 1-4
+Dance reset      = remove shaker; return to clear jig pulse
+
+Rows:
+1 Balanced Jig Pulse
+2 Modal Bass
+3 Soft Jazz Color Harmony
+4 Folk Lead Question Answer</div></section>
+
+
+<h2>V4 — AABB + Bass Variation</h2>
+<section class="card"><div class="links">
+<a href="Audio/musicmatrix_exercise1f_hybrid_v4_aabb_bass.ogg">▶ Final V4 AABB OGG</a>
+<a href="MIDI/musicmatrix_exercise1f_hybrid_v4_aabb_bass.mid">⬇ Final V4 MIDI</a>
+<a href="Exercises/exercise-01-v4-aabb-bass.md">📘 V4 exercise note</a>
+</div>
+<div class="matrix">Form: A A B B = 16 bars
+Rows:
+1 AABB Jig Pulse
+2 Bass Variation
+3 Soft Jazz Color Harmony
+4 Folk Lead AABB
+
+Bass variation:
+root -> fifth -> octave -> approach -> cadence
+Still preserves 1 + 4 jig gravity.</div></section>
+
+
+<h2>Exercise 2 — Classical Motif Development</h2>
+<section class="card"><div class="links">
+<a href="Audio/musicmatrix_exercise2_classical_motif_v1.ogg">▶ Exercise 2 Classical Motif OGG</a>
+<a href="MIDI/musicmatrix_exercise2_classical_motif_v1.mid">⬇ Exercise 2 MIDI</a>
+<a href="Exercises/exercise-02-classical-motif-development.md">📘 Exercise 2 note</a>
+</div>
+<div class="matrix">Motif: U U D = G A B A
+Form: 8-bar period
+Bars 1-4 = antecedent/question
+Bars 5-8 = consequent/answer
+Harmony: I | V | vi | IV | ii | V | I | I
+
+Rows:
+1 Motor Alberti Pattern
+2 Functional Bass
+3 Harmony Blocks
+4 Counterline
+5 Motif Lead</div></section>
+
+<h2>Guided Listening</h2>
+<section class="card listen">
+<ol>
+<li><b>Balfolk:</b> tap counts <span class="accent">1</span> and <span class="accent">4</span>. Hear Dorian B natural.</li>
+<li><b>Jazz:</b> tap <span class="accent">2</span> and <span class="accent">4</span>. Follow walking bass and chord-tone targets.</li>
+<li><b>Hybrid:</b> tap like Balfolk. Listen for Dm9/Cmaj7/G13 color under folk melody.</li>
+</ol>
+<p>Question: which row changed most between A and C? Answer: harmony/timbre. Rhythm and melody stay close to Balfolk.</p>
+</section>
+
+<div class="footer">Generated by Musicom Agent. Canonical workspace: /opt/data/projects/014-genre-pattern-matrix/</div>
+</div></body></html>

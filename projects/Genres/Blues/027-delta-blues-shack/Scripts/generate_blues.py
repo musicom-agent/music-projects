@@ -44,8 +44,8 @@ CHORDS = {
 
 # Instruments / Tracks matching acoustic registers
 ROWS = [
-    {"name": "Resonator Guitar (Refined Melodic Lead)", "kind": "lead", "channel": 0, "program": 25}, # Steel Acoustic
-    {"name": "Acoustic Slide (Harmony Accompaniment)", "kind": "harmony", "channel": 1, "program": 25},
+    {"name": "Resonator Guitar (Refined Melodic Lead)", "kind": "lead", "channel": 0, "program": 25}, # GM Steel Acoustic Guitar (25)
+    {"name": "Acoustic Slide (Harmony Accompaniment)", "kind": "harmony", "channel": 1, "program": 26}, # Acoustic Jazz Guitar (26) or Steel Guitar (25)
     {"name": "Mono Fingerstyle Thumb Bass (Sub-Bass)", "kind": "bass", "channel": 2, "program": 32}, # Acoustic Bass
     {"name": "Stomp Box and Claps (Background Rhythm)", "kind": "drums", "channel": 9, "program": 0},
 ]
@@ -161,10 +161,19 @@ def add_note(events: List[Tuple[int, Message]], channel: int, note: int, start: 
         acc_vel = min(127, velocity + 10)
     # weak triplet subdivision gets -8 velocity attenuation for syncopated breathing
     elif beat_pos % TPB != 0:
-        acc_vel = max(30, velocity - 8)
+        acc_vel = max(30, velocity - 12)  # slightly more contrast
 
-    events.append((start, Message("note_on", channel=channel, note=note, velocity=acc_vel, time=0)))
-    events.append((start + dur, Message("note_off", channel=channel, note=note, velocity=0, time=0)))
+    # Physicality Strum roll delay for Resonator and Acoustic Slide (channels 0 and 1)
+    # 20ms strum delay = 0.02s * 72 bpm = 1.44 beats / min? Let's use ticks. 
+    # TPB = 480. 1 beat = 480 ticks. 72 BPM -> 1.2 beats/sec -> 1 beat is 0.833s.
+    # 20ms is roughly 0.02 * (480 / 0.833) = 11.5 ticks, let's delay each note in a chord slightly.
+    delay = 0
+    if channel in [0, 1]:
+        # Simple pitch-dependent or arbitrary slight offset to stagger strum notes
+        delay = (note % 6) * 6  # stagger up to 30 ticks for strum realism
+
+    events.append((start + delay, Message("note_on", channel=channel, note=note, velocity=acc_vel, time=0)))
+    events.append((start + delay + dur, Message("note_off", channel=channel, note=note, velocity=0, time=0)))
 
 def add_program(events: List[Tuple[int, Message]], channel: int, program: int, tick: int = 0) -> None:
     events.append((tick, Message("program_change", channel=channel, program=program, time=0)))
