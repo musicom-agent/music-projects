@@ -1,0 +1,48 @@
+{
+  "genre": "West African Polyrhythms",
+  "sub_genre": "Gahu",
+  "origin": "Ewe people (Ghana/Togo/Benin)",
+  "time_signature": "4/4",
+  "tempo_range": [110, 130],
+  "unit_matrix": {
+    "grid_resolution": "16th",
+    "total_steps": 16,
+    "rhythm_patterns": [
+      {
+        "instrument": "Gankogui (Bell)",
+        "pattern": [1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+        "description": "Standard 4/4 bell pattern, provides timeline."
+      },
+      {
+        "instrument": "Axatse (Shaker)",
+        "pattern": [1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0],
+        "description": "Matches bell pattern strokes."
+      },
+      {
+        "instrument": "Kaganu (High Drum)",
+        "pattern": [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        "description": "Constant offbeat response."
+      },
+      {
+        "instrument": "Kidi (Mid Drum)",
+        "pattern": [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0],
+        "description": "Supporting dialogue pattern."
+      }
+    ],
+    "pitch_classes": {
+      "scale": "Pentatonic/Anhemitonic",
+      "tuning_notes": "Non-equal tempered, focused on drum tones (High, Mid, Low)",
+      "rows": [
+        {"name": "Mute/Slap", "midi_offset": 64},
+        {"name": "Open", "midi_offset": 60},
+        {"name": "Bass", "midi_offset": 52}
+      ]
+    }
+  },
+  "stylistic_markers": [
+    "Cyclical timeline",
+    "Call and response",
+    "Cross-rhythms (3:2, 4:3)",
+    "Syncopation against bell"
+  ]
+}

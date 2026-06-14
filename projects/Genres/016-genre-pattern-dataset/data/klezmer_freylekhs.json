@@ -1,0 +1,50 @@
+{
+  "genre": "Klezmer",
+  "sub_genre": "Freylekhs",
+  "meter": "2/4",
+  "tempo_range": [110, 140],
+  "unit_matrix": {
+    "dimensions": [4, 16],
+    "resolution": "16th",
+    "layers": [
+      {
+        "name": "Bass",
+        "role": "Foundation",
+        "pattern": "1.5.1.5.1.5.1.5",
+        "notes": "Alternating Root and Fifth"
+      },
+      {
+        "name": "Secunda",
+        "role": "Rhythmic accompaniment",
+        "pattern": ".x.x.x.x.x.x.x.x",
+        "notes": "Afterbeats (Upbeats)"
+      },
+      {
+        "name": "Lead",
+        "role": "Melody",
+        "characteristic_patterns": [
+          "x..x.x.x",
+          "x.xxx.x.",
+          "xxx.xxx."
+        ]
+      }
+    ]
+  },
+  "pitch_logic": {
+    "modes": [
+      "Freygish (Phrygian Dominant)",
+      "Misheberak (Ukrainian Dorian)",
+      "Adonai Malakh"
+    ],
+    "typical_freygish_scale": ["G", "Ab", "B", "C", "D", "Eb", "F"],
+    "ornamentation": [
+      "Krekhts (Sigh)",
+      "Dreydlekh (Trills)",
+      "Kneytsh (Bend)"
+    ]
+  },
+  "structure": {
+    "sections": ["A", "B", "C"],
+    "progression": "AABBCC or AABBACCA"
+  }
+}
