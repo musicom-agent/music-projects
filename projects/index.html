@@ -2,46 +2,395 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Musicom Projects Root</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicom Portfolio Hub</title>
     <style>
-        body { background: #020617; color: #f8fafc; font-family: 'JetBrains Mono', monospace; padding: 2rem; max-width: 1000px; margin: auto; }
-        h1 { color: #fb7185; border-bottom: 2px solid #fb7185; padding-bottom: 1rem; }
-        h2 { color: #22d3ee; margin-top: 2rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
-        ul { list-style: none; padding: 0; }
-        li { background: #0f172a; margin-bottom: 0.5rem; padding: 1rem; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #334155; }
-        li:hover { border-left-color: #22d3ee; }
-        a { color: #f8fafc; text-decoration: none; font-weight: bold; }
-        .tag { font-size: 0.8rem; background: #1e293b; padding: 0.2rem 0.5rem; border-radius: 4px; color: #94a3b8; }
-        .kb-link { display: inline-block; background: #fb7185; color: #020617; padding: 1rem 2rem; border-radius: 8px; font-weight: bold; text-decoration: none; margin: 1rem 0; font-size: 1.2rem; transition: transform 0.2s; }
-        .kb-link:hover { transform: translateY(-2px); }
+        :root {
+            --bg: #050507;
+            --surface: #0c0c0e;
+            --surface-hover: #121217;
+            --accent: #00d992;
+            --text: #e2e8f0;
+            --text-dim: #8a99ad;
+            --border: #1a1a24;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            padding: 3rem 2rem;
+            max-width: 1100px;
+            margin: auto;
+        }
+        header {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+        h1 {
+            font-size: 3rem;
+            color: var(--accent);
+            margin: 0;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+        .section-title {
+            color: var(--accent);
+            font-size: 1.6rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: all 0.25s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+        }
+        .card:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 217, 146, 0.15);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text);
+            text-decoration: none;
+            line-height: 1.3;
+        }
+        .tag-cat {
+            font-size: 0.75rem;
+            background: rgba(0, 217, 146, 0.1);
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .tag-dir {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+        .footer {
+            margin-top: 5rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 0.8rem 1.6rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
-    <h1>Musicom Master Hub</h1>
-    <a href="musicom-genre-kb/index.html" class="kb-link">📚 Open Genre Knowledge Base & Matrix</a>
+    <header>
+        <h1>Musicom Portfolio Hub</h1>
+        <div class="subtitle">Multi-Genre Neural & Algorithmic Composition Workspace</div>
+        <a href="musicom-genre-kb/index.html" class="btn">📚 Open Genre Knowledge Base Model</a>
+    </header>
 
-    <h2>Composition Portfolio</h2>
-    <ul>
-        <li><a href="001-drie-kleine-kleutertjes/dashboard/index.html">001 - Drie Kleine Kleutertjes</a> <span class="tag">Folk / Analysis</span></li>
-        <li><a href="002-dorian-agent/dashboard/index.html">002 - Dorian Agent</a> <span class="tag">Modal Synthesis</span></li>
-        <li><a href="003-pattern-exploration/dashboard/index.html">003 - Pattern Exploration</a> <span class="tag">Theory / Engines</span></li>
-        <li><a href="004-counterpoint-inversion/dashboard/index.html">004 - Counterpoint Inversion</a> <span class="tag">Classical Rules</span></li>
-        <li><a href="005-balfolk-production/dashboard/index.html">005 - Balfolk Production</a> <span class="tag">Dance / Rhythm</span></li>
-        <li><a href="007-sound-synthesis/dashboard/index.html">007 - Sound Synthesis</a> <span class="tag">Karplus-Strong / FM</span></li>
-        <li><a href="008-euclidean-dna-pioneer/dashboard/index.html">008 - Euclidean DNA Pioneer</a> <span class="tag">Generative Rhythm</span></li>
-        <li><a href="009-full-workflow-test/dashboard/index.html">009 - Full Workflow Test</a> <span class="tag">Pipeline</span></li>
-        <li><a href="010-project-dorian/dashboard/index.html">010 - Project Dorian</a> <span class="tag">Advanced Synthesis</span></li>
-        <li><a href="011-project-001/dashboard/index.html">011 - Project 001</a> <span class="tag">Legacy Base</span></li>
-        <li><a href="012-country-uke/index.html">012 - Country Uke</a> <span class="tag">Strum / Vocal Synthesis</span></li>
-        <li><a href="014-rock-apprenticeship/index.html">014 - Rock Apprenticeship</a> <span class="tag">Blues Rock / Shuffle DNA</span></li>
-        <li><a href="015-percussion-dna/index.html">015 - Percussion DNA</a> <span class="tag">Polymeter / Rhythm</span></li>
-    </ul>
+    <main>
+        <div class="section-title">🎵 Composition Studies & Genre Implementations</div>
+        <div class="grid">
 
-    <h2>Framework Repositories</h2>
-    <ul>
-        <li><a href="https://github.com/axelwiertz/musicom" target="_blank">musicom (Core Theory)</a> <span class="tag">GitHub</span></li>
-        <li><a href="https://github.com/axelwiertz/musicom_ai" target="_blank">musicom_ai (Generators)</a> <span class="tag">GitHub</span></li>
-        <li><a href="https://github.com/axelwiertz/musicom_research" target="_blank">musicom_research (References)</a> <span class="tag">GitHub</span></li>
-    </ul>
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Folk/001-folk-drie-kleine-kleutertjes/index.html" class="card-title">Drie Kleine Kleutertjes</a>
+                    <span class="tag-cat">Folk</span>
+                </div>
+                <div class="tag-dir">/Genres/Folk/001-folk-drie-kleine-kleutertjes/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Classical/002-classical-daily-2026-06-12/index.html" class="card-title">002-classical-daily-2026-06-12</a>
+                    <span class="tag-cat">Classical</span>
+                </div>
+                <div class="tag-dir">/Genres/Classical/002-classical-daily-2026-06-12/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Modal/002-modal-dorian-agent/index.html" class="card-title">002 Modal Dorian Agent</a>
+                    <span class="tag-cat">Modal</span>
+                </div>
+                <div class="tag-dir">/Genres/Modal/002-modal-dorian-agent/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Baroque/004-baroque-counterpoint-inversion/index.html" class="card-title">004 Baroque Counterpoint Inversion</a>
+                    <span class="tag-cat">Baroque</span>
+                </div>
+                <div class="tag-dir">/Genres/Baroque/004-baroque-counterpoint-inversion/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Balfolk/005-balfolk-production/index.html" class="card-title">Project 005: Balfolk Markov Jig (16 Measures)</a>
+                    <span class="tag-cat">Balfolk</span>
+                </div>
+                <div class="tag-dir">/Genres/Balfolk/005-balfolk-production/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Modal/010-modal-project-dorian/index.html" class="card-title">010 Modal Project Dorian</a>
+                    <span class="tag-cat">Modal</span>
+                </div>
+                <div class="tag-dir">/Genres/Modal/010-modal-project-dorian/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Balfolk/011-balfolk-dust-on-the-dashboard/index.html" class="card-title">011 Balfolk Dust On The Dashboard</a>
+                    <span class="tag-cat">Balfolk</span>
+                </div>
+                <div class="tag-dir">/Genres/Balfolk/011-balfolk-dust-on-the-dashboard/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Country/012-country-country-uke/index.html" class="card-title">012 — Country UnitMatrix</a>
+                    <span class="tag-cat">Country</span>
+                </div>
+                <div class="tag-dir">/Genres/Country/012-country-country-uke/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Percussion/015-percussion-percussion-dna/index.html" class="card-title">015 Percussion Percussion Dna</a>
+                    <span class="tag-cat">Percussion</span>
+                </div>
+                <div class="tag-dir">/Genres/Percussion/015-percussion-percussion-dna/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Folk/016-folk-electric-folk-d-major/index.html" class="card-title">016 - Electric Folk D Major</a>
+                    <span class="tag-cat">Folk</span>
+                </div>
+                <div class="tag-dir">/Genres/Folk/016-folk-electric-folk-d-major/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Gamelan/017-gamelan-central-java/index.html" class="card-title">017 - Gamelan Central Java</a>
+                    <span class="tag-cat">Gamelan</span>
+                </div>
+                <div class="tag-dir">/Genres/Gamelan/017-gamelan-central-java/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Hybrid/017-hybrid-genre-pattern-matrix/index.html" class="card-title">014 — Genre Pattern Matrix</a>
+                    <span class="tag-cat">Hybrid</span>
+                </div>
+                <div class="tag-dir">/Genres/Hybrid/017-hybrid-genre-pattern-matrix/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Hybrid/018-landal-bollo-koos-hybrid/index.html" class="card-title">Project 018: Landal Bollo and Koos are friends</a>
+                    <span class="tag-cat">Hybrid</span>
+                </div>
+                <div class="tag-dir">/Genres/Hybrid/018-landal-bollo-koos-hybrid/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Hybrid/018-rock-apprenticeship/index.html" class="card-title">014 — Rock Apprenticeship</a>
+                    <span class="tag-cat">Hybrid</span>
+                </div>
+                <div class="tag-dir">/Genres/Hybrid/018-rock-apprenticeship/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Groove/019-soul-groove/index.html" class="card-title">019 Soul Groove</a>
+                    <span class="tag-cat">Groove</span>
+                </div>
+                <div class="tag-dir">/Genres/Groove/019-soul-groove/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Groove/020-afrobeat-groove/index.html" class="card-title">Afrobeat Groove Project (020-afrobeat-groove)</a>
+                    <span class="tag-cat">Groove</span>
+                </div>
+                <div class="tag-dir">/Genres/Groove/020-afrobeat-groove/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Classical/021-classical-mozart/index.html" class="card-title">Classical Composition in the Style of Mozart (021-classical-mozart)</a>
+                    <span class="tag-cat">Classical</span>
+                </div>
+                <div class="tag-dir">/Genres/Classical/021-classical-mozart/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Hybrid/022-indie-pop-sunset/index.html" class="card-title">022 Indie Pop Sunset</a>
+                    <span class="tag-cat">Hybrid</span>
+                </div>
+                <div class="tag-dir">/Genres/Hybrid/022-indie-pop-sunset/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Latin/026-bossa-nova-unitmatrix/index.html" class="card-title">026 — Bossa Nova UnitMatrix</a>
+                    <span class="tag-cat">Latin</span>
+                </div>
+                <div class="tag-dir">/Genres/Latin/026-bossa-nova-unitmatrix/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Blues/027-delta-blues-shack/index.html" class="card-title">027 // Delta Blues Shack</a>
+                    <span class="tag-cat">Blues</span>
+                </div>
+                <div class="tag-dir">/Genres/Blues/027-delta-blues-shack/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Latin/028-bossa-nova-daily-2026-06-12/index.html" class="card-title">Bossa Nova Daily Experiment</a>
+                    <span class="tag-cat">Latin</span>
+                </div>
+                <div class="tag-dir">/Genres/Latin/028-bossa-nova-daily-2026-06-12/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Folk/029-een-klein-meisje/index.html" class="card-title">029 Een Klein Meisje</a>
+                    <span class="tag-cat">Folk</span>
+                </div>
+                <div class="tag-dir">/Genres/Folk/029-een-klein-meisje/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/World/bollywood-study/index.html" class="card-title">032-bollywood-study</a>
+                    <span class="tag-cat">World</span>
+                </div>
+                <div class="tag-dir">/Genres/World/bollywood-study/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Other/genre-daily-2026-06-13/index.html" class="card-title">Genre Daily 2026 06 13</a>
+                    <span class="tag-cat">Other</span>
+                </div>
+                <div class="tag-dir">/Genres/Other/genre-daily-2026-06-13/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Other/genre-daily-2026-06-14/index.html" class="card-title">Genre Daily 2026 06 14</a>
+                    <span class="tag-cat">Other</span>
+                </div>
+                <div class="tag-dir">/Genres/Other/genre-daily-2026-06-14/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Genres/Pop/indie-pop-sunset/index.html" class="card-title">Indie Pop Sunset</a>
+                    <span class="tag-cat">Pop</span>
+                </div>
+                <div class="tag-dir">/Genres/Pop/indie-pop-sunset/index.html</div>
+            </div>
+
+        </div>
+
+        <div class="section-title">📖 Theoretical Research & Synthesis Models</div>
+        <div class="grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Knowledge/Technical/000-project-template/index.html" class="card-title">000 — Project Template</a>
+                    <span class="tag-cat">Technical</span>
+                </div>
+                <div class="tag-dir">/Knowledge/Technical/000-project-template/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Knowledge/Theory/003-theory-pattern-exploration/index.html" class="card-title">003 Theory Pattern Exploration</a>
+                    <span class="tag-cat">Theory</span>
+                </div>
+                <div class="tag-dir">/Knowledge/Theory/003-theory-pattern-exploration/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Knowledge/Synthesis/007-sound-sound-synthesis/index.html" class="card-title">Pillar 2: Sound Synthesis</a>
+                    <span class="tag-cat">Synthesis</span>
+                </div>
+                <div class="tag-dir">/Knowledge/Synthesis/007-sound-sound-synthesis/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Knowledge/Theory/008-theory-euclidean-dna-pioneer/index.html" class="card-title">008 Theory Euclidean Dna Pioneer</a>
+                    <span class="tag-cat">Theory</span>
+                </div>
+                <div class="tag-dir">/Knowledge/Theory/008-theory-euclidean-dna-pioneer/index.html</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <a href="Knowledge/Technical/009-test-full-workflow-test/index.html" class="card-title">009 Test Full Workflow Test</a>
+                    <span class="tag-cat">Technical</span>
+                </div>
+                <div class="tag-dir">/Knowledge/Technical/009-test-full-workflow-test/index.html</div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="footer">
+        © 2026 Musicom Agent | Powered by Hermes Autonomous Composition Workflow
+    </div>
 </body>
 </html>
