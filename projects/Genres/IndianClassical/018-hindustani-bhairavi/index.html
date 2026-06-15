@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindustani Classical - Raga Bhairavi Dashboard</title>
+    <style>
+        body {
+            background-color: #050507;
+            color: #f3f4f6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 60px;
+            font-weight: 900;
+            line-height: 1.0;
+            color: #00d992;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #9ca3af;
+            margin-bottom: 40px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background-color: #101010;
+            border: 1px solid #1f2937;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .stat-card h3 {
+            color: #00d992;
+            margin: 0 0 10px 0;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        .stat-card p {
+            margin: 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .player-section {
+            background-color: #101010;
+            border: 1px solid #00d992;
+            padding: 35px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        .player-title {
+            color: #00d992;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        audio {
+            width: 100%;
+            outline: none;
+            margin-top: 10px;
+        }
+        .tala-grid {
+            background-color: #101010;
+            border: 1px solid #1f2937;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .tala-title {
+            color: #00d992;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .beat-container {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .beat-cell {
+            background-color: #1a1a1e;
+            border: 1px solid #222;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+        .beat-cell.accent {
+            border: 1px solid #00d992;
+            background-color: rgb(0, 217, 146, 0.05);
+        }
+        .beat-num {
+            font-size: 10px;
+            color: #6b7280;
+            margin-bottom: 4px;
+        }
+        .bol-name {
+            font-weight: bold;
+            color: #f3f4f6;
+        }
+        .accent-marker {
+            color: #00d992;
+            font-size: 10px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
+        .raga-swaras {
+            background-color: #101010;
+            border: 1px solid #1f2937;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        .swara-title {
+            color: #00d992;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .swara-scale {
+            display: flex;
+            justify-content: space-between;
+            background: #151518;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #00d992;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .swara-item {
+            text-align: center;
+        }
+        .swara-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #f3f4f6;
+        }
+        .swara-pitch {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .swara-status {
+            font-size: 10px;
+            color: #00d992;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>018 Hindustani bhairavi</h1>
+        <div class="subtitle">AUTONOMOUS MUSICOM COMPOSER SERIES -> IND-018</div>
+
+        <!-- STATS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Raga Setup</h3>
+                <p>Bhairavi</p>
+            </div>
+            <div class="stat-card">
+                <h3>Tala Loop</h3>
+                <p>Teental (16B)</p>
+            </div>
+            <div class="stat-card">
+                <h3>Base Center</h3>
+                <p>D4 (Sa=62)</p>
+            </div>
+            <div class="stat-card">
+                <h3>Tempo BPM</h3>
+                <p>95 (Madhyalaya)</p>
+            </div>
+        </div>
+
+        <!-- PLAYER -->
+        <div class="player-section">
+            <div class="player-title">Master Production Audio Render</div>
+            <audio controls>
+                <source src="Audio/bhairavi_live_render.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <!-- TALA GRAPH -->
+        <div class="tala-grid">
+            <div class="tala-title">Teental Rhythmic Grid (█ = Stroke, ░ = Offbeat Accent)</div>
+            <div class="beat-container">
+                <div class="beat-cell accent">
+                    <span class="beat-num">1</span>
+                    <span class="bol-name">Dha</span>
+                    <span class="accent-marker">Sam</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">2</span>
+                    <span class="bol-name">Dhin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">3</span>
+                    <span class="bol-name">Dhin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">4</span>
+                    <span class="bol-name">Dha</span>
+                </div>
+                <div class="beat-cell accent">
+                    <span class="beat-num">5</span>
+                    <span class="bol-name">Dha</span>
+                    <span class="accent-marker">Taali</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">6</span>
+                    <span class="bol-name">Dhin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">7</span>
+                    <span class="bol-name">Dhin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">8</span>
+                    <span class="bol-name">Dha</span>
+                </div>
+                <div class="beat-cell accent">
+                    <span class="beat-num">9</span>
+                    <span class="bol-name">Dha</span>
+                    <span class="accent-marker">Khali</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">10</span>
+                    <span class="bol-name">Tin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">11</span>
+                    <span class="bol-name">Tin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">12</span>
+                    <span class="bol-name">Ta</span>
+                </div>
+                <div class="beat-cell accent">
+                    <span class="beat-num">13</span>
+                    <span class="bol-name">Ta</span>
+                    <span class="accent-marker">Taali</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">14</span>
+                    <span class="bol-name">Dhin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">15</span>
+                    <span class="bol-name">Dhin</span>
+                </div>
+                <div class="beat-cell">
+                    <span class="beat-num">16</span>
+                    <span class="bol-name">Dha</span>
+                </div>
+            </div>
+            <div style="margin-top: 15px; font-size: 12px; color: #9ca3af;">
+                Tabla pattern uses high-contrast dynamics on subdivisions inside the live composition loop. 
+            </div>
+        </div>
+
+        <!-- RAGA SECTION -->
+        <div class="raga-swaras">
+            <div class="swara-title">Raga Bhairavi Swara Frequency Architecture (Scale Context)</div>
+            <div class="swara-scale">
+                <div class="swara-item">
+                    <div class="swara-name">Sa</div>
+                    <div class="swara-pitch">(62 / D4)</div>
+                    <div class="swara-status">Kharaj/Root</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">re</div>
+                    <div class="swara-pitch">(63 / Eb4)</div>
+                    <div class="swara-status">Komal Rep</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">ga</div>
+                    <div class="swara-pitch">(65 / F4)</div>
+                    <div class="swara-status">Komal</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">ma</div>
+                    <div class="swara-pitch">(67 / G4)</div>
+                    <div class="swara-status">Shuddha</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">Pa</div>
+                    <div class="swara-pitch">(69 / A4)</div>
+                    <div class="swara-status">Dominant</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">dha</div>
+                    <div class="swara-pitch">(70 / Bb4)</div>
+                    <div class="swara-status">Komal</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">ni</div>
+                    <div class="swara-pitch">(72 / C5)</div>
+                    <div class="swara-status">Komal</div>
+                </div>
+                <div class="swara-item">
+                    <div class="swara-name">Sa'</div>
+                    <div class="swara-pitch">(74 / D5)</div>
+                    <div class="swara-status">Tar Sa</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
