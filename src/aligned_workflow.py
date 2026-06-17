@@ -1,89 +1,84 @@
 import mido
 from mido import Message, MidiFile, MidiTrack
 
-def produce_expanded_composition():
-    # 480 ticks per beat (TPB)
+def produce_strictly_synced():
     mid = MidiFile(ticks_per_beat=480)
     
-    # Tracks
+    # 4 Voices (Tracks)
     track_melody = MidiTrack()
     track_harmony = MidiTrack()
     track_rhythm = MidiTrack()
     track_drone = MidiTrack()
     mid.tracks.extend([track_melody, track_harmony, track_rhythm, track_drone])
 
-    def add_note(track, pitch, duration, time=0, vel=70, channel=0):
-        track.append(Message('note_on', note=pitch, velocity=vel, time=time, channel=channel))
-        track.append(Message('note_off', note=pitch, velocity=0, time=duration, channel=channel))
+    # Target: 64 beats * 480 = 30720 ticks
+    target_ticks = 30720
 
-    # SCALE: D Mixolydian/Minor Hybrid for Bollywood feel
-    # D(1), E(2), F(b3), F#(3), G(4), A(5), Bb(b6), C(b7)
-    
-    # --- SECTION 1: BOLLO (4 BARS) ---
-    # Harmony: I - IV (Dm - Gm)
-    # Pattern: 4/4 Steady Quarter
-    bollo_melody = [62, 64, 65, 62, 62, 64, 65, 67, 69, 67, 65, 64, 62, 62, 62, 62] # D E F D | D E F G | A G F E | D D D D
-    bollo_chords = [(62, 65, 69), (67, 70, 74)] # Dm, Gm
-    
-    for i, p in enumerate(bollo_melody):
-        add_note(track_melody, p, 480)
-        # Harmony on each bar (every 4 beats)
-        if i % 4 == 0:
-            chord = bollo_chords[(i // 8) % 2]
-            for cp in chord: add_note(track_harmony, cp-12, 1920, time=0)
-            track_harmony[-1].time = 1920
+    def add_note(track, pitch, start_tick, duration_tick, vel=80, channel=0):
+        # Mido tracks are lists of messages with relative 'time' (delta)
+        # We must keep track of current pen position
+        pass
 
-    # --- SECTION 2: KOOS (4 BARS) ---
-    # Harmony: VII - I (C - Dm)
-    # Pattern: Jumpy / Syncopated
-    koos_melody = [60, 67, 64, 60, 64, 65, 67, 67, 60, 67, 64, 60, 55, 60, 62, 62]
-    koos_chords = [(60, 64, 67), (62, 65, 69)] # C, Dm
-    
-    for i, p in enumerate(koos_melody):
-        add_note(track_melody, p, 480)
-        if i % 4 == 0:
-            chord = koos_chords[(i // 8) % 2]
-            for cp in chord: add_note(track_harmony, cp-12, 1920, time=0)
-            track_harmony[-1].time = 1920
-
-    # --- SECTION 3: INDIAN (4 BARS) ---
-    # Harmony: bII - I (Eb - D)
-    # Pattern: 8-beat Bollywood (█░██░█░░)
-    indian_melody = [62, 63, 62, 66, 67, 66, 63, 62] * 2 
-    indian_chords = [(63, 67, 70), (62, 66, 69)] # Eb, D (Major)
-    
-    for i, p in enumerate(indian_melody):
-        add_note(track_melody, p, 240) # 8th notes to allow rapid ornaments
-        if i % 4 == 0:
-            chord = indian_chords[(i // 8) % 2]
-            for cp in chord: add_note(track_harmony, cp-12, 960, time=0)
-            track_harmony[-1].time = 960
-
-    # --- SECTION 4: BLENDED (4 BARS) ---
-    # Harmony: VI - V - I (Bb - A - D)
-    # Pattern: Fusion Poly-rhythm
-    blend_melody = [62, 63, 65, 66, 67, 69, 70, 72, 74, 73, 70, 69, 67, 66, 63, 62]
-    blend_chords = [(58, 62, 65), (57, 61, 64), (62, 66, 69)] # Bb, A, D
-    
-    for i, p in enumerate(blend_melody):
-        add_note(track_melody, p, 480)
-        if i % 4 == 0:
-            chord = blend_chords[min(i // 5, 2)]
-            for cp in chord: add_note(track_harmony, cp-12, 1920, time=0)
-            track_harmony[-1].time = 1920
-
-    # --- RHYTHM & DRONE ---
-    pattern = [1, 0, 1, 1, 0, 1, 0, 0] * 16
-    for strike in pattern:
-        if strike:
-            add_note(track_rhythm, 42, 240, vel=80, channel=9)
+    # Better approach: calculate all messages with absolute timestamps, sort them, then convert to delta
+    def build_track(events):
+        # events: list of (time, message)
+        events.sort(key=lambda x: x[0])
+        track = MidiTrack()
+        last_time = 0
+        for time, msg in events:
+            delta = time - last_time
+            msg.time = delta
+            track.append(msg)
+            last_time = time
+        # Force end of track
+        if last_time < target_ticks:
+            track.append(mido.MetaMessage('end_of_track', time=target_ticks - last_time))
         else:
-            track_rhythm.append(Message('note_off', note=0, velocity=0, time=240, channel=9))
+            track.append(mido.MetaMessage('end_of_track', time=0))
+        return track
 
-    track_drone.append(Message('note_on', note=38, velocity=30, time=0))
-    track_drone.append(Message('note_off', note=38, velocity=0, time=30720))
+    # 1. Melody Events
+    melody_events = []
+    melody_pitches = ([62, 64, 65, 62] * 4 + [60, 67, 64, 60] * 4 + 
+                      [62, 63, 62, 66] * 4 + [62, 63, 65, 66] * 4)
+    for i, p in enumerate(melody_pitches):
+        t = i * 480
+        melody_events.append((t, Message('note_on', note=p, velocity=90, time=0)))
+        melody_events.append((t + 480, Message('note_off', note=p, velocity=0, time=0)))
+
+    # 2. Harmony Events
+    harmony_events = []
+    chords = [([50, 53, 57], 3840), ([55, 58, 62], 3840), 
+              ([48, 52, 55], 3840), ([50, 53, 57], 3840),
+              ([51, 55, 58], 3840), ([50, 54, 57], 3840),
+              ([46, 50, 53], 1920), ([45, 49, 52], 1920), ([50, 54, 57], 3840)]
+    curr_t = 0
+    for pitches, dur in chords:
+        for p in pitches:
+            harmony_events.append((curr_t, Message('note_on', note=p, velocity=60, time=0)))
+            harmony_events.append((curr_t + dur, Message('note_off', note=p, velocity=0, time=0)))
+        curr_t += dur
+
+    # 3. Rhythm Events
+    rhythm_events = []
+    rhythm_pattern = [1, 0, 1, 1, 0, 1, 0, 0] * 16
+    for i, strike in enumerate(rhythm_pattern):
+        t = i * 240
+        if strike:
+            rhythm_events.append((t, Message('note_on', note=42, velocity=80, time=0, channel=9)))
+            rhythm_events.append((t + 240, Message('note_off', note=42, velocity=0, time=0, channel=9)))
+
+    # 4. Drone Events
+    drone_events = [(0, Message('note_on', note=38, velocity=30, time=0)),
+                    (target_ticks, Message('note_off', note=38, velocity=0, time=0))]
+
+    # Build tracks and replace
+    mid.tracks[0] = build_track(melody_events)
+    mid.tracks[1] = build_track(harmony_events)
+    mid.tracks[2] = build_track(rhythm_events)
+    mid.tracks[3] = build_track(drone_events)
 
     mid.save('../MIDI/composition_expanded.mid')
 
 if __name__ == "__main__":
-    produce_expanded_composition()
+    produce_strictly_synced()
