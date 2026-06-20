@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>030 - Balfolk Grand Suite Dashboard</title>
+    <style>
+        body { background: #050507; color: #00d992; font-family: 'system-ui', sans-serif; padding: 40px; line-height: 1.2; }
+        header { margin-bottom: 60px; border-bottom: 2px solid #00d992; display: inline-block; padding-bottom: 10px; }
+        h1 { font-size: 60px; margin: 0; text-transform: uppercase; letter-spacing: -2px; }
+        .stats { font-family: 'JetBrains Mono', monospace; font-size: 14px; opacity: 0.8; margin-top: 10px; }
+        
+        .matrix-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+        .unit-cell { background: #101010; border: 1px solid #333; padding: 20px; position: relative; }
+        .unit-cell h3 { margin: 0 0 15px 0; font-size: 18px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .mini-roll { width: 100%; height: 60px; background: #050505; position: relative; border: 1px solid #1a1a1a; margin-top: 10px; }
+        .roll-note { position: absolute; height: 8px; background: #818cf8; border-radius: 2px; }
+        
+        .rhythm-grid { display: flex; gap: 2px; margin-top: 10px; }
+        .pulse { width: 12px; height: 12px; background: #1a1a1a; border-radius: 1px; }
+        .pulse.on { background: #00d992; box-shadow: 0 0 5px #00d992; }
+        
+        .links { margin-top: 60px; border-top: 1px solid #222; padding-top: 20px; }
+        a { color: #00d992; text-decoration: none; border-bottom: 1px solid #00d992; margin-right: 20px; font-weight: bold; }
+        a:hover { background: #00d992; color: #050507; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>030 - GRAND SUITE</h1>
+    <div class="stats">STYLE: BALFOLK / TONIC: D / MODE: DORIAN / TEMPO: 118 BPM / METER: 6/8</div>
+</header>
+
+<section>
+    <h2>UnitMatrix Synthesis</h2>
+    <div class="matrix-container">
+        <!-- Unit 1: Intro (011) -->
+        <div class="unit-cell">
+            <h3>01: INTRO (Dusty)</h3>
+            <div class="stats">SOURCE: 011-DUST-ON-DASHBOARD</div>
+            <div class="rhythm-grid">
+                <div class="pulse on"></div><div class="pulse"></div><div class="pulse"></div>
+                <div class="pulse on"></div><div class="pulse"></div><div class="pulse"></div>
+            </div>
+            <div class="mini-roll">
+                <div class="roll-note" style="left: 0%; width: 15%; top: 20%;"></div>
+                <div class="roll-note" style="left: 50%; width: 15%; top: 30%;"></div>
+            </div>
+        </div>
+
+        <!-- Unit 2: MAIN DANCE (017) -->
+        <div class="unit-cell">
+            <h3>02: DANCE (Hybrid)</h3>
+            <div class="stats">SOURCE: 017-HYBRID-MATRIX</div>
+            <div class="rhythm-grid">
+                <div class="pulse on"></div><div class="pulse"></div><div class="pulse on"></div>
+                <div class="pulse on"></div><div class="pulse on"></div><div class="pulse"></div>
+            </div>
+            <div class="mini-roll">
+                <div class="roll-note" style="left: 0%; width: 15%; top: 50%;"></div>
+                <div class="roll-note" style="left: 33%; width: 15%; top: 40%;"></div>
+                <div class="roll-note" style="left: 50%; width: 15%; top: 30%;"></div>
+                <div class="roll-note" style="left: 66%; width: 15%; top: 40%;"></div>
+            </div>
+        </div>
+
+        <!-- Unit 3: BRIDGE (005) -->
+        <div class="unit-cell">
+            <h3>03: BRIDGE (Functional)</h3>
+            <div class="stats">SOURCE: 005-PRODUCTION</div>
+            <div class="rhythm-grid">
+                <div class="pulse on"></div><div class="pulse on"></div><div class="pulse on"></div>
+                <div class="pulse on"></div><div class="pulse on"></div><div class="pulse on"></div>
+            </div>
+            <div class="mini-roll">
+                <div class="roll-note" style="left: 0%; width: 33%; top: 60%; background:#00d992;"></div>
+                <div class="roll-note" style="left: 50%; width: 33%; top: 40%; background:#00d992;"></div>
+            </div>
+        </div>
+
+        <!-- Unit 4: CLIMAX (014) -->
+        <div class="unit-cell">
+            <h3>04: OUTRO (Cinematic)</h3>
+            <div class="stats">SOURCE: 014-CINEMATIC</div>
+            <div class="rhythm-grid">
+                <div class="pulse on"></div><div class="pulse on"></div><div class="pulse on"></div>
+                <div class="pulse on"></div><div class="pulse on"></div><div class="pulse on"></div>
+            </div>
+            <div class="mini-roll">
+                <div class="roll-note" style="left: 0%; width: 10%; top: 80%;"></div>
+                <div class="roll-note" style="left: 16%; width: 10%; top: 70%;"></div>
+                <div class="roll-note" style="left: 32%; width: 10%; top: 60%;"></div>
+                <div class="roll-note" style="left: 50%; width: 10%; top: 50%;"></div>
+                <div class="roll-note" style="left: 66%; width: 10%; top: 40%;"></div>
+                <div class="roll-note" style="left: 82%; width: 10%; top: 30%;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="links">
+    <a href="Audio/grand_suite.ogg">PLAY OGG</a>
+    <a href="MIDI/grand_suite.mid">EDIT MIDI</a>
+    <a href="README.md">PLAN (MD)</a>
+</div>
+
+</body>
+</html>
