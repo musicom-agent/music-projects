@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ project_name }} Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020617; --card-bg: #0f172a; --primary: #22d3ee; --accent: #fb7185;
+            --text: #f8fafc; --text-dim: #94a3b8; --border: #1e293b;
+        }
+        body { background-color: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; padding: 2rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+        h1, h2, h3 { color: var(--primary); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; }
+        img { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+    <header><h1>{{ project_name }}</h1><p>Composer: Musicom</p></header>
+    <div class="grid">
+        <div class="card"><h3>Analysis</h3><img src="piano_roll.png"></div>
+        <div class="card"><h3>Dynamics</h3><img src="volume_graph.png"></div>
+    </div>
+</body>
+</html>

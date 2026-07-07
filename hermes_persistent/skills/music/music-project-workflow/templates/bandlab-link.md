@@ -1,0 +1,3 @@
+BandLab project link: https://www.bandlab.com/projects/...
+
+Notes: [Any notes about the BandLab session, instrument choices, etc.]

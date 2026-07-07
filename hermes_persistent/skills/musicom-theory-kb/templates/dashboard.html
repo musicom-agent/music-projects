@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{project_name}} | Musicom Agent</title>
+    <style>
+        :root { --bg: #020617; --primary: #22d3ee; --text: #f8fafc; }
+        body { background: var(--bg); color: var(--text); font-family: monospace; }
+        .card { border: 1px solid #1e293b; padding: 1rem; border-radius: 8px; margin: 10px; }
+        img { width: 100%; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>{{project_name}}</h1>
+    <div class="card">
+        <h3>Analysis</h3>
+        <img src="piano_roll.png">
+        <img src="volume_graph.png">
+        <img src="chroma_dist.png">
+        <img src="interval_contour.png">
+    </div>
+    <div class="card">
+        <a href="{{bandlab_url}}">Open in BandLab</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{PROJECT_NAME}} - Musicom</title>
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: monospace; padding: 2rem; }
+        .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+        .primary { color: #22d3ee; }
+        img { width: 100%; border-radius: 8px; border: 1px solid #1e293b; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <h1><span class="primary">●</span> {{PROJECT_NAME}}</h1>
+    <div class="card">
+        <h3>Analysis Overview</h3>
+        <p>{{ANALYSIS_TEXT}}</p>
+    </div>
+    <div class="card">
+        <h3>Visualization</h3>
+        <img src="piano_roll.png">
+    </div>
+</body>
+</html>
