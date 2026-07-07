@@ -1,8 +1,0 @@
-=== RHYTHM DNA MARKER CATALOG ===
-Balfolk Jig     | █░░█░░ | (2,6)
-Tresillo        | █░░█░░█░ | (3,8)
-Cinquillo       | █░█░██░█ | (5,8)
-Son Clave       | █░░░█░░█░░█░░█░░ | (5,16)
-Bossa Nova      | █░░░█░░█░░█░░█░░ | (5,16)
-Techno Four     | █░░░█░░░█░░░█░░░ | (4,16)
-Arabic Maqsum   | █░░█░░█░ | (3,8)

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>005-fanfare-showband - Musicom Dashboard</title>
+    <style>
+        body { background: #020617; color: #f8fafc; font-family: 'JetBrains Mono', monospace; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        .primary { color: #22d3ee; }
+        .secondary { color: #fb7185; }
+        img { width: 100%; border-radius: 8px; border: 1px solid #1e293b; margin-top: 1rem; }
+        h1, h2, h3 { margin-top: 0; }
+        audio { width: 100%; margin-top: 1rem; }
+        ul { padding-left: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <h1><span class="primary">●</span> Style 005: Fanfare Showband (Integrated)</h1>
+    <p>A multi-voice, seamless, loop-aligned composition combining direct-event brass structures with a tight Dutch-style drumband snare rhythm.</p>
+
+    <div class="grid">
+        <div>
+            <div class="card">
+                <h2>Analysis & Properties</h2>
+                <ul>
+                    <li><strong>Tempo:</strong> 132 BPM (March / Showband cadence)</li>
+                    <li><strong>Key:</strong> Bb Major / G Minor center</li>
+                    <li><strong>Harmonic Movement:</strong> Cyclic fifths-down (1 -> 4 -> 7 -> 3 -> 6 -> 2 -> 5 -> 1)</li>
+                    <li><strong>Meter:</strong> 4/4 time, exact 8-bar loop boundaries (15,360 total ticks at 480 TPB)</li>
+                    <li><strong>Ensemble Architecture:</strong>
+                        <ul>
+                            <li><span class="primary">Trumpet (Lead):</span> Syncopated eighth-note flourishes.</li>
+                            <li><span>Trombone (Mid):</span> Warm harmony voicing driving core triads.</li>
+                            <li><span class="secondary">Tuba (Bass):</span> Diatonic fifth-stepping low pulse.</li>
+                            <li><span>Drumband Snare:</span> Steady military rolls with dynamics accenting strong beats.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>Audio Playback</h2>
+                <audio controls>
+                    <source src="Audio/loop.wav" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+
+        <div>
+            <div class="card">
+                <h2>Piano Roll</h2>
+                <img src="Audio/piano_roll.png" alt="Piano Roll">
+            </div>
+
+            <div class="card">
+                <h2>Volume/Velocity Dynamics</h2>
+                <img src="Audio/volume_graph.png" alt="Volume Envelope">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
