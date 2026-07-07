@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Fanfare - 32-Bar Showband Arena</title>
+    <style>
+        body {
+            background-color: #050507;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+        h1 {
+            color: #00d992;
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.0;
+            margin-bottom: 10px;
+        }
+        .meta {
+            font-family: 'JetBrains Mono', monospace;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .meta span {
+            color: #00d992;
+        }
+        .player-container {
+            background-color: #101010;
+            border: 1px solid #202020;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .form-map {
+            margin-top: 30px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .form-card {
+            background: #101010;
+            border: 1px solid #202020;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .form-card.active {
+            border-color: #00d992;
+        }
+        .form-card h3 {
+            color: #00d992;
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .rhythm-visual {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 2px;
+            font-size: 16px;
+            margin-top: 10px;
+            color: #00d992;
+        }
+        .download-links {
+            margin-top: 20px;
+        }
+        .download-links a {
+            color: #00d992;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: bold;
+            border: 1px solid #00d992;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .download-links a:hover {
+            background: #00d992;
+            color: #050507;
+        }
+    </style>
+</head>
+<body>
+    <h1>32-BAR SHOWBAND ARENA</h1>
+    <div class="meta">
+        PROJECT: <span>006-fanfare-showband-32bar</span> | 
+        TEMPO: <span>132 BPM</span> | 
+        KEY: <span>Bb Major</span> | 
+        STRUCTURE: <span>A-B-A-C (32 Bars)</span>
+    </div>
+
+    <div class="player-container">
+        <h3>LISTEN TO FULL ARENA MIX</h3>
+        <audio controls>
+            <source src="Audio/showband32.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+        <div class="download-links">
+            <a href="MIDI/showband32.mid" download>DOWNLOAD MIDI</a>
+            <a href="Audio/showband32.ogg" download>DOWNLOAD OGG</a>
+        </div>
+    </div>
+
+    <div class="form-map">
+        <h2>METRICAL GRAVITY & FORM MAP</h2>
+        <div class="form-grid">
+            <div class="form-card">
+                <h3>PART A (Bars 1-8)</h3>
+                <p><strong>Progression:</strong> Cyclic Fifths Down (I-IV-VII-III-VI-II-V-I)</p>
+                <p>Driving bass pulses and syncopated trumpet flourishes.</p>
+                <div class="rhythm-visual">█░░░█░░░█░░░█░░░</div>
+            </div>
+            <div class="form-card">
+                <h3>PART B (Bars 9-16)</h3>
+                <p><strong>Progression:</strong> vi-ii-V-I-IV-ii-V-V (G Minor emphasis)</p>
+                <p>Contrast layer. Lyrical woodwind-style trombone chords and long-phrase legato lines.</p>
+                <div class="rhythm-visual">█░░░░░░░█░░░░░░░</div>
+            </div>
+            <div class="form-card">
+                <h3>PART A (Bars 17-24)</h3>
+                <p><strong>Progression:</strong> Cyclic Fifths Down with dynamic build</p>
+                <p>Return of driving theme with higher trumpet velocities (+5 boost) and tighter snare response.</p>
+                <div class="rhythm-visual">█░░░█░░░█░░░█░░░</div>
+            </div>
+            <div class="form-card active">
+                <h3>PART C: FINALE (Bars 25-32)</h3>
+                <p><strong>Progression:</strong> I-V-IV-V-I-IV-V-I (Heroic Cadence)</p>
+                <p>Maximum density. Snare drum in high-velocity 16th-note rolls. Trumpet double-tonguing motif.</p>
+                <div class="rhythm-visual">████████████████</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
