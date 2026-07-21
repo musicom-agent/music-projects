@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>044 - Isorhythmic Spatial Composition Study</title>
+    <style>
+        body {
+            background-color: #050507;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+        }
+        
+        header {
+            border-bottom: 2px solid #202020;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #00d992;
+            font-size: 60px;
+            font-weight: 900;
+            line-height: 1.0;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .meta-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            color: #888888;
+            margin-top: 15px;
+        }
+        
+        .meta-item span {
+            color: #00d992;
+            font-weight: bold;
+        }
+        
+        .grid-container {
+            background-color: #101010;
+            border: 1px solid #202020;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #00d992;
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-left: 4px solid #00d992;
+            padding-left: 12px;
+        }
+        
+        h3 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        pre {
+            background-color: #08080c;
+            border: 1px solid #1a1a24;
+            padding: 20px;
+            border-radius: 6px;
+            color: #00d992;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .btn-download {
+            display: inline-block;
+            background-color: #00d992;
+            color: #050507;
+            text-decoration: none;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 12px 24px;
+            border-radius: 4px;
+            border: 2px solid #00d992;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            margin-right: 15px;
+        }
+        
+        .btn-download:hover {
+            background-color: transparent;
+            color: #00d992;
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: #00d992;
+            text-decoration: none;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 12px 24px;
+            border-radius: 4px;
+            border: 2px solid #00d992;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #00d992;
+            color: #050507;
+        }
+        
+        .math-box {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #08080c;
+            border-left: 3px solid #818cf8;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            color: #a5b4fc;
+        }
+        
+        .gradient-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #818cf8 0%, #00d992 100%);
+            border-radius: 3px;
+            margin: 25px 0;
+        }
+        
+        ul {
+            color: #cccccc;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ISORHYTHMIC SPATIALIZATION</h1>
+        <div class="meta-container">
+            <div class="meta-item">PROJECT ID: <span>044</span></div>
+            <div class="meta-item">GENRE: <span>Experimental / Ambient</span></div>
+            <div class="meta-item">COMPOSITION METHOD: <span>Method 032 (Isorhythmic Talea-Color Mapping)</span></div>
+            <div class="meta-item">DSP METHOD: <span>Method SP-021 (Binaural Woodworth-Schlosberg Spatialization)</span></div>
+            <div class="meta-item">TEMPO: <span>100 BPM</span></div>
+        </div>
+    </header>
+
+    <div class="grid-container">
+        <h2>Composition Strategy & Math</h2>
+        <p>This composition applies <strong>Isorhythmic Talea-Color Mapping (ITCM)</strong> (Method 032) to generate an evolving polyphonic structure, paired with <strong>Binaural Woodworth-Schlosberg Spatialization</strong> (Method SP-021) to position the lead voice in a dynamic 3D orbit around the listener's head.</p>
+        
+        <h3>1. Isorhythmic Talea-Color Mapping (Method 032)</h3>
+        <p>By decoupling a repeating rhythmic loop (the <strong>talea</strong>) from a repeating pitch loop (the <strong>color</strong>) of coprime lengths (&gcd;(T, C) = 1), the pitch-rhythm alignment shifts dynamically over time, creating long-form organic evolutions with zero local redundancy.</p>
+        <ul>
+            <li><strong>Lead Voice (Violin/Synth):</strong> Talea length = 9, Color length = 7. Coprime cycle = 63 events. Section B retrograde and invert the loops around the central G4 axis.</li>
+            <li><strong>Bass Voice (Bass):</strong> Talea length = 5, Color length = 4. Coprime cycle = 20 events.</li>
+            <li><strong>Pad Voice (Synth Pad):</strong> Talea length = 3, Color length = 5 chords. Coprime cycle = 15 chords.</li>
+            <li><strong>Drums Voice (Percussion):</strong> Talea length = 6, Color length = 5 drums. Coprime cycle = 30 events.</li>
+        </ul>
+
+        <h3>2. Binaural Woodworth-Schlosberg Spatialization (Method SP-021)</h3>
+        <p>The Lead Violin voice is spatialized using the <strong>Woodworth-Schlosberg formula</strong>, simulating the sub-millisecond Interaural Time Difference (ITD) and the frequency-dependent Interaural Level Difference (ILD) of human head shadowing. The violin dynamically orbits the listener's head in a 3D circle at 0.125 Hz (one rotation every 8 seconds).</p>
+        <div class="math-box">
+            ITD Delay: &tau;(&theta;) = (a / c) * (sin|&theta;| + |&theta;|)<br>
+            where head radius a = 0.0875 m, speed of sound c = 343 m/s.<br>
+            ILD Far-Ear Shadowing cutoff f_c(&theta;) drops from 20 kHz to 1 kHz based on angle &theta;.
+        </div>
+        <div class="gradient-bar"></div>
+    </div>
+
+    <div class="grid-container">
+        <h2>Rhythm DNA Timeline</h2>
+        <p>Below is the high-contrast rhythm grid showing the exact onset layout (█ representing sound, ░ representing rest) generated by the coprime loops across the 4 sections of the piece (Intro, A_Talea, B_Shift, Outro):</p>
+        <pre>
+======================================================================
+MUSICOM UNITMATRIX VISUALIZER (HIGH-CONTRAST TIMELINE)  [BPM: 100]
+Matrix shape: 4 voices x 4 sections
+======================================================================
+Section durations (ticks): [7680, 7680, 7680, 7680]
+----------------------------------------------------------------------
+Voice 00 (Lead)  : ░░░░████░░░░████░░░░████░░░░████ |████████████████████████████████ |████████████████████████████████ |████░░░░░░░░░░░░████░░░░░░░░░░░░  (Density: 69%)
+Voice 01 (Bass)  : ████████████████████████████████ |████████████████████████████████ |████████████████████████████████ |████░░░░████░░░░████░░░░████░░░░  (Density: 88%)
+Voice 02 (Pad)   : ████████████████████████████████ |████████████████████████████████ |████████████████████████████████ |████████░░░░░░░░████████░░░░░░░░  (Density: 88%)
+Voice 03 (Drums) : ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ |████████████████████████████████ |████████████████████████████████ |██░░██░░██░░██░░██░░██░░██░░██░░  (Density: 62%)
+----------------------------------------------------------------------
+Legend: █ = Sounding | ░ = Rest | | = Section boundary
+======================================================================
+        </pre>
+    </div>
+
+    <div class="grid-container">
+        <h2>Download Artifacts</h2>
+        <p>Download the lossless multi-track MIDI file for DAW editing, or listen to the high-quality 3D binaural spatialized audio (headphones recommended for the full Woodworth-Schlosberg effect):</p>
+        <p style="margin-top: 30px;">
+            <a href="MIDI/044-isorhythmic-spatial.mid" class="btn-download">Download MIDI File</a>
+            <a href="Audio/044-isorhythmic-spatial.ogg" class="btn-secondary">Download OGG Audio</a>
+        </p>
+    </div>
+</body>
+</html>
