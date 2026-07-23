@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>046 - PCFG Recursion & Digital Waveguide Woodwind (Clarinet) Synthesis Study</title>
+    <style>
+        body {
+            background-color: #050507;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            margin: 0;
+            padding: 40px;
+        }
+        
+        header {
+            border-bottom: 2px solid #202020;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #00d992;
+            font-size: 40px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .meta-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+            color: #888888;
+            margin-top: 15px;
+        }
+        
+        .meta-item span {
+            color: #00d992;
+            font-weight: bold;
+        }
+        
+        .grid-container {
+            background-color: #101010;
+            border: 1px solid #202020;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #00d992;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-left: 4px solid #00d992;
+            padding-left: 12px;
+        }
+        
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        pre {
+            background-color: #08080c;
+            border: 1px solid #1a1a24;
+            padding: 20px;
+            border-radius: 6px;
+            color: #00d992;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .btn-download {
+            display: inline-block;
+            background-color: #00d992;
+            color: #050507;
+            text-decoration: none;
+            font-weight: 800;
+            padding: 12px 24px;
+            border-radius: 4px;
+            margin-right: 15px;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        
+        .btn-download:hover {
+            background-color: #00b375;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #00d992;
+            border: 1px solid #00d992;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 217, 146, 0.1);
+        }
+        
+        .card-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            flex: 1;
+            background-color: #101010;
+            border: 1px solid #202020;
+            border-radius: 8px;
+            padding: 25px;
+        }
+        
+        .math-block {
+            background-color: #0c0c12;
+            border-left: 2px solid #00d992;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Project 046: PCFG Recursion & Clarinet Physical Synthesis</h1>
+        <div class="meta-container">
+            <div class="meta-item">Project ID: <span>046</span></div>
+            <div class="meta-item">BPM: <span>100</span></div>
+            <div class="meta-item">Scale: <span>Bb Major</span></div>
+            <div class="meta-item">Format: <span>MIDI + OGG</span></div>
+            <div class="meta-item">Status: <span>Preflight Compliant</span></div>
+        </div>
+    </header>
+
+    <div class="grid-container">
+        <h2>Composition Audio & MIDI</h2>
+        <p>Listen to the final rendered hybrid track. The Pad and Bass voices are rendered using FluidSynth, while the Lead melody is synthesized directly in Python via physical modeling woodwind clarinet (Digital Waveguide synthesis).</p>
+        <div style="margin-bottom: 25px;">
+            <audio controls style="width: 100%; max-width: 500px;">
+                <source src="Audio/046-pcfg-clarinet.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <a href="Audio/046-pcfg-clarinet.ogg" class="btn-download">Download OGG Audio</a>
+        <a href="MIDI/046-pcfg-clarinet.mid" class="btn-download btn-secondary">Download MIDI File</a>
+    </div>
+
+    <div class="grid-container">
+        <h2>Rhythm DNA & Alignment Timeline</h2>
+        <p>High-contrast metrical gravity grid. Generates precise zero-drift alignments across all channels:</p>
+        <pre>
+======================================================================
+MUSICOM UNITMATRIX VISUALIZER (HIGH-CONTRAST TIMELINE)  [BPM: 100]
+Matrix shape: 3 voices x 8 sections
+======================================================================
+Section durations (ticks): [1920, 1920, 1920, 1920, 1920, 1920, 1920, 1920]
+----------------------------------------------------------------------
+Voice 00 (Lead)  : ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████  (Density: 100%)
+Voice 01 (Pad)   : ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████  (Density: 100%)
+Voice 02 (Bass)  : ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████  (Density: 100%)
+----------------------------------------------------------------------
+Legend: █ = Sounding | ░ = Rest | | = Section boundary
+======================================================================</pre>
+    </div>
+
+    <div class="card-row">
+        <div class="card">
+            <h2>Method 034: PCFG Recursion</h2>
+            <p><strong>Probabilistic Context-Free Grammar (PCFG) Recursion</strong> builds musical structures hierarchically. Symbols representing bars of lead, pads, or bass are recursively expanded down to rhythmic/pitch terminals according to rules weighted by style probabilities, preserving symmetry across voices.</p>
+            <div class="math-block">
+                <strong>Grammar Transition:</strong><br>
+                S &rarr; LEAD_BAR_I PAD_BAR_I BASS_BAR_I | LEAD_BAR_V PAD_BAR_V BASS_BAR_V &hellip;<br>
+                LEAD_BAR_I &rarr; HALF_L_I1 HALF_L_I2 (prob: 0.7)<br>
+                HALF_L_I1 &rarr; QUARTER_L_I1 QUARTER_L_I2 (prob: 0.8) | n0_h (prob: 0.2)<br>
+                QUARTER_L_I1 &rarr; n0_q (prob: 0.5) | n2_e n4_e (prob: 0.5)
+            </div>
+        </div>
+        <div class="card">
+            <h2>Method SP-023: Clarinet Digital Waveguide</h2>
+            <p><strong>Digital Waveguide Woodwind Synthesis</strong> models physical acoustics. A bidirectional delay-line tracks wave propagation. A non-linear reed table maps mouth pressure and reflection pressure difference to a reflection coefficient, and an open bell acts as a filter reflection.</p>
+            <div class="math-block">
+                <strong>Waveguide Delay:</strong><br>
+                D = fs / (2 &middot; f0)<br><br>
+                <strong>Reed Interaction:</strong><br>
+                &Delta;P = P_mouth - P_reflected<br>
+                R_reed = slope &middot; &Delta;P + offset (clamped [-1, 1])<br>
+                P_forward = P_reflected + &Delta;P &middot; R_reed
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
