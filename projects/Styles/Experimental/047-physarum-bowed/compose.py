@@ -147,7 +147,7 @@ def digital_waveguide_bowed_string(freq, sr, duration, bow_velocity=0.18, bow_fo
     if n_samples <= 0:
         return np.array([], dtype=np.float32)
         
-    delay_total = int(round(sr / freq))
+    delay_total = int(round(sr / (2.0 * freq)))
     delay_neck = int(round(delay_total * bow_position))
     delay_bridge = delay_total - delay_neck
     
