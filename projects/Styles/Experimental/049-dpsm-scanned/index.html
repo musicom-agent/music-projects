@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>049 - Deconstructive Phase-Shift Minimalism & Scanned Synthesis</title>
+    <style>
+        body {
+            background-color: #050507;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            margin: 0;
+            padding: 40px;
+        }
+        
+        header {
+            border-bottom: 2px solid #202020;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: #00d992;
+            font-size: 32px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+        
+        .meta-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 14px;
+            color: #888888;
+            margin-top: 15px;
+        }
+        
+        .meta-item span {
+            color: #00d992;
+            font-weight: bold;
+        }
+        
+        .grid-container {
+            background-color: #101010;
+            border: 1px solid #202020;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            color: #00d992;
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-left: 4px solid #00d992;
+            padding-left: 12px;
+        }
+        
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        pre {
+            background-color: #08080c;
+            border: 1px solid #1a1a24;
+            padding: 20px;
+            border-radius: 6px;
+            color: #00d992;
+            overflow-x: auto;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .btn-download {
+            display: inline-block;
+            background-color: #00d992;
+            color: #050507;
+            text-decoration: none;
+            font-weight: 800;
+            padding: 12px 24px;
+            border-radius: 4px;
+            margin-right: 15px;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        
+        .btn-download:hover {
+            background-color: #00b375;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #00d992;
+            border: 1px solid #00d992;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 217, 146, 0.1);
+        }
+        
+        .card-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            flex: 1;
+            background-color: #101010;
+            border: 1px solid #202020;
+            border-radius: 8px;
+            padding: 25px;
+        }
+        
+        .math-block {
+            background-color: #0c0c12;
+            border-left: 2px solid #00d992;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Project 049: DPSM Phasing & Scanned Synthesis</h1>
+        <div class="meta-container">
+            <div class="meta-item">Project ID: <span>049</span></div>
+            <div class="meta-item">BPM: <span>110</span></div>
+            <div class="meta-item">Scale: <span>C Dorian</span></div>
+            <div class="meta-item">Format: <span>MIDI + OGG Stereo Master</span></div>
+            <div class="meta-item">Status: <span>Preflight Compliant</span></div>
+        </div>
+    </header>
+
+    <div class="grid-container">
+        <h2>Composition Audio & MIDI</h2>
+        <p>Listen to the final rendered piece. Synthesized using a custom physical-modeling <strong>Scanned Synthesis (SP-018)</strong> engine in Python for the main synth tracks, blended with an <strong>Acoustic Bass</strong> voice rendered via FluidSynth (TimGM6mb SoundFont):</p>
+        <ul>
+            <li><strong>Piano 1 (Static)</strong>: Panned Left (75% L, 25% R). Delivers the primary rhythmic loop.</li>
+            <li><strong>Piano 2 (Shifting)</strong>: Panned Right (25% L, 75% R). Shifts its phase forward by exactly one sixteenth-note (120 ticks) at the start of each bar.</li>
+            <li><strong>Bass (Chord Roots)</strong>: Panned Center. Grounding C Dorian chord roots with subtle octave-to-fifth skips.</li>
+        </ul>
+        <div style="margin-bottom: 25px; margin-top: 25px;">
+            <audio controls style="width: 100%; max-width: 500px;">
+                <source src="Audio/049-dpsm-scanned.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+        <a href="Audio/049-dpsm-scanned.ogg" class="btn-download">Download OGG Audio</a>
+        <a href="MIDI/049-dpsm-scanned.mid" class="btn-download btn-secondary">Download MIDI File</a>
+    </div>
+
+    <div class="grid-container">
+        <h2>Rhythm DNA & Alignment Timeline</h2>
+        <p>High-contrast metrical alignment grid showing perfect vertical synchronization (zero-drift) across all voices:</p>
+        <pre>
+======================================================================
+MUSICOM UNITMATRIX VISUALIZER (HIGH-CONTRAST TIMELINE)  [BPM: 110]
+Matrix shape: 3 voices x 8 sections
+======================================================================
+Section durations (ticks): [1920, 1920, 1920, 1920, 1920, 1920, 1920, 1920]
+----------------------------------------------------------------------
+Voice 00 (Piano1) : ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████  (Density: 100%)
+Voice 01 (Piano2) : ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████  (Density: 100%)
+Voice 02 (Bass)   : ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████ | ████████  (Density: 100%)
+----------------------------------------------------------------------
+Legend: █ = Sounding | ░ = Rest | | = Section boundary
+======================================================================</pre>
+    </div>
+
+    <div class="card-row">
+        <div class="card">
+            <h2>Method 026: DPSM Phasing</h2>
+            <p><strong>Deconstructive Phase-Shift Minimalism</strong> maps identical, loop-based musical layers onto a structural timeline while introducing fractional step offsets to secondary layers. Over successive sections, the secondary voice slides out of phase, creating highly syncopated emergent harmonies and polyrhythmic interference patterns.</p>
+            <div class="math-block">
+                <strong>Phase-Offset Modulo Mapping:</strong><br>
+                P_v[t] = LoopPitches[(t + &phi;_{v, s}) mod L]<br>
+                R_v[t] = LoopTriggers[(t + &phi;_{v, s}) mod L]<br>
+                Where &phi;_{1, s} = 0 (static) and &phi;_{2, s} = s - 1 (incrementing offset)
+            </div>
+        </div>
+        <div class="card">
+            <h2>Method SP-018: Scanned Synthesis</h2>
+            <p><strong>Scanned Synthesis</strong> is a physical-modeling synthesis method. A 1D mass-spring-damper closed string is solved at a slow control rate (100Hz), updating mass positions and velocities. An audio cursor scans this shape at the pitch's fundamental frequency, creating a dynamically evolving wavetable.</p>
+            <div class="math-block">
+                <strong>Spring-Mass System ODE Update:</strong><br>
+                a_i[k] = k_s(x_{i+1} - 2x_i + x_{i-1}) - k_c x_i - d_s v_i<br>
+                v_i[k+1] = v_i[k] + a_i[k] &middot; &Delta;t<br>
+                x_i[k+1] = x_i[k] + v_i[k+1] &middot; &Delta;t<br>
+                Scan Phase: &theta;[n] = (&theta;[n-1] + f_{fund}/f_s) mod 1
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
