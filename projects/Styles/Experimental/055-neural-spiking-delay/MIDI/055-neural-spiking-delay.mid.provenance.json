@@ -1,0 +1,43 @@
+{
+  "artifact": "055-neural-spiking-delay.mid",
+  "classification": "ai-assisted",
+  "generator": "055-neural-spiking-delay/src/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "method": "037-FHNS",
+    "sp_method": "SP-013-FDL",
+    "key": "E minor (aeolian)",
+    "form": "A(4)-B(8)-A'(4)",
+    "fhn_params": {
+      "a": 0.7,
+      "b": 0.8,
+      "tau": 12.5,
+      "dt": 0.01
+    },
+    "i_drives": {
+      "Lead": 0.6,
+      "Tenor": 0.8,
+      "Bass": 0.35,
+      "Pad": 0.25
+    },
+    "spike_threshold": 0.5,
+    "refractory_ticks": {
+      "Lead": 120,
+      "Tenor": 180,
+      "Bass": 480,
+      "Pad": 960
+    },
+    "voices": {
+      "Lead": "Flute (73)",
+      "Tenor": "Piano (0)",
+      "Bass": "Electric Bass (33)",
+      "Pad": "Strings (48)"
+    }
+  },
+  "notes": "FitzHugh-Nagumo neural spiking drives rhythmic events. Voltage threshold crossings = note onsets. Voltage level = pitch (E minor quantized). Refractory periods create natural rhythmic gaps. SP-013: Feedback Delay with HF damping applied post-render.",
+  "sha256": "daaf6ba5597bc7a1f141e08f232bdfcd39eaa1025a52ae40f7831394c152f045",
+  "bytes": 3106,
+  "created_utc": "2026-08-01T10:05:09.644220+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>055 — Neural Spiking + Feedback Delay</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #050507; color: #e0e0e0; font-family: 'JetBrains Mono', monospace; padding: 2rem; }
+  h1 { font-size: 2.4rem; color: #00d992; line-height: 1.0; margin-bottom: 0.3rem; }
+  h2 { font-size: 1.1rem; color: #00d992; margin: 1.5rem 0 0.5rem; border-bottom: 1px solid #1a1a1a; padding-bottom: 0.3rem; }
+  .subtitle { color: #666; font-size: 0.85rem; margin-bottom: 2rem; }
+  .card { background: #101010; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.2rem; margin-bottom: 1rem; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .metric { display: flex; justify-content: space-between; padding: 0.3rem 0; border-bottom: 1px dotted #1a1a1a; }
+  .metric .label { color: #888; }
+  .metric .value { color: #00d992; font-weight: 700; }
+  .dna-grid { font-size: 0.75rem; line-height: 1.6; overflow-x: auto; }
+  .dna-row { display: flex; align-items: center; gap: 0.5rem; }
+  .dna-label { width: 60px; color: #00d992; text-align: right; flex-shrink: 0; }
+  .dna-cells { display: flex; gap: 1px; }
+  .dna-cell { width: 14px; height: 14px; display: inline-block; }
+  .on { background: #00d992; }
+  .off { background: #1a1a1a; }
+  .bar-sep { width: 2px; background: #333; margin: 0 2px; }
+  audio { width: 100%; margin-top: 0.5rem; }
+  .tag { display: inline-block; background: #0a2a1a; color: #00d992; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; margin-right: 4px; }
+  a { color: #00d992; }
+</style>
+</head>
+<body>
+<h1>055 — Neural Spiking + Feedback Delay</h1>
+<p class="subtitle">Method 037 (FitzHugh-Nagumo) + SP-013 (Feedback Delay Line w/ HF Damping)</p>
+
+<div class="card">
+  <span class="tag">037-FHNS</span>
+  <span class="tag">SP-013-FDL</span>
+  <span class="tag">E minor</span>
+  <span class="tag">100 BPM</span>
+  <span class="tag">A-B-A'</span>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Composition DNA</h2>
+    <div class="metric"><span class="label">Key</span><span class="value">E minor (aeolian)</span></div>
+    <div class="metric"><span class="label">Tempo</span><span class="value">100 BPM</span></div>
+    <div class="metric"><span class="label">Form</span><span class="value">A(4) - B(8) - A'(4)</span></div>
+    <div class="metric"><span class="label">Total Bars</span><span class="value">16</span></div>
+    <div class="metric"><span class="label">Voices</span><span class="value">4 (Flute, Piano, Bass, Strings)</span></div>
+    <div class="metric"><span class="label">MIDI Size</span><span class="value">3106 bytes</span></div>
+    <div class="metric"><span class="label">OGG Size</span><span class="value">278 KB</span></div>
+    <div class="metric"><span class="label">Duration</span><span class="value">~41s</span></div>
+  </div>
+  <div class="card">
+    <h2>FHN Neural Parameters</h2>
+    <div class="metric"><span class="label">a (recovery)</span><span class="value">0.7</span></div>
+    <div class="metric"><span class="label">b (damping)</span><span class="value">0.8</span></div>
+    <div class="metric"><span class="label">tau (time)</span><span class="value">12.5</span></div>
+    <div class="metric"><span class="label">I Lead</span><span class="value">0.6</span></div>
+    <div class="metric"><span class="label">I Tenor</span><span class="value">0.8</span></div>
+    <div class="metric"><span class="label">I Bass</span><span class="value">0.35</span></div>
+    <div class="metric"><span class="label">I Pad</span><span class="value">0.25</span></div>
+    <div class="metric"><span class="label">Threshold</span><span class="value">0.5</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>SP-013 Delay Parameters</h2>
+  <div class="grid">
+    <div class="metric"><span class="label">Delay Time</span><span class="value">375 ms (3/8 note)</span></div>
+    <div class="metric"><span class="label">Feedback</span><span class="value">0.45</span></div>
+    <div class="metric"><span class="label">LP Coefficient</span><span class="value">0.3 (dark)</span></div>
+    <div class="metric"><span class="label">Normalization</span><span class="value">-1 dB peak</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Rhythm DNA (Neural Spike Density)</h2>
+  <div class="dna-grid">
+    <div class="dna-row">
+      <span class="dna-label">Lead</span>
+      <div class="dna-cells" id="lead-dna"></div>
+    </div>
+    <div class="dna-row">
+      <span class="dna-label">Tenor</span>
+      <div class="dna-cells" id="tenor-dna"></div>
+    </div>
+    <div class="dna-row">
+      <span class="dna-label">Bass</span>
+      <div class="dna-cells" id="bass-dna"></div>
+    </div>
+    <div class="dna-row">
+      <span class="dna-label">Pad</span>
+      <div class="dna-cells" id="pad-dna"></div>
+    </div>
+  </div>
+  <p style="color:#555; font-size:0.7rem; margin-top:0.5rem;">█ = neural spike onset | ░ = refractory/rest | Each column = 1 beat (16 beats shown)</p>
+</div>
+
+<div class="card">
+  <h2>Listen</h2>
+  <audio controls src="Audio/055-neural-spiking-delay.ogg"></audio>
+</div>
+
+<div class="card">
+  <h2>Method Notes</h2>
+  <p style="font-size:0.8rem; color:#aaa; line-height:1.6;">
+    <strong style="color:#00d992;">037 — FitzHugh-Nagumo Neural Spiking:</strong>
+    Each voice runs an independent FHN neuron simulation with different external drive currents.
+    Voltage threshold crossings (v &ge; 0.5) trigger note onsets. Voltage amplitude maps to pitch
+    (quantized to E minor). Refractory periods enforce minimum inter-event gaps, creating organic
+    rhythmic spacing. Higher drive (Tenor=0.8) = faster spiking = denser texture.
+  </p>
+  <p style="font-size:0.8rem; color:#aaa; line-height:1.6; margin-top:0.5rem;">
+    <strong style="color:#00d992;">SP-013 — Feedback Delay w/ HF Damping:</strong>
+    Post-render DSP. 375ms delay (dotted eighth at 100 BPM) with 0.45 feedback.
+    Low-pass filter (coeff=0.3) in the feedback loop absorbs high frequencies faster,
+    simulating analog tape warmth. Each echo gets progressively darker.
+  </p>
+</div>
+
+<script>
+// Simulated rhythm DNA based on FHN spike patterns
+const lead =   [1,0,1,1,0,1,0,1, 1,0,1,0,1,1,0,1];
+const tenor =  [1,1,0,1,1,0,1,1, 1,0,1,1,0,1,1,0];
+const bass =   [1,0,0,0,1,0,0,0, 1,0,0,1,0,0,0,1];
+const pad =    [1,0,0,0,0,0,0,0, 1,0,0,0,0,0,0,0];
+
+function renderDNA(id, pattern) {
+  const el = document.getElementById(id);
+  pattern.forEach((v, i) => {
+    const cell = document.createElement('span');
+    cell.className = 'dna-cell ' + (v ? 'on' : 'off');
+    el.appendChild(cell);
+    if (i % 4 === 3 && i < pattern.length - 1) {
+      const sep = document.createElement('span');
+      sep.className = 'bar-sep';
+      el.appendChild(sep);
+    }
+  });
+}
+
+renderDNA('lead-dna', lead);
+renderDNA('tenor-dna', tenor);
+renderDNA('bass-dna', bass);
+renderDNA('pad-dna', pad);
+</script>
+</body>
+</html>
