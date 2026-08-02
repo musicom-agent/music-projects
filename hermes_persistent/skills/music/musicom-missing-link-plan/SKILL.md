@@ -10,6 +10,15 @@ metadata:
 
 # Architecture Plan: Musicom Missing Links
 
+> **STATUS: IMPLEMENTED (Phase 4/5).** All three areas now ship as real,
+> tested code in `/opt/data/repos/musicom`. Use these entry points:
+> - Area 1 vocal: `ai/generators/vocal_synth.py` — `FormantVocalGuide.render_melody(unit, path, vowels=[...])` and `.render_syllable(freq, dur, vowel, path)`. Sine fallback when scipy missing; stdlib `wave` write fallback.
+> - Area 2 grid: `ai/utils/visualizer.py` — `render_grid(matrix, ...)` (string, with per-voice Density %) + `write_grid_visualization(matrix, path)`.
+> - Area 3 sync: `ai/integration/daw_sync.py` — `DAWClockBridge(bpm).run_clock(pulses, dry_run=)`, 24 PPQN MIDI clock, headless fallback.
+> - Bonus: `workflows/paradigm_compare.py` (Stochastic/Rules/Nature compare) + `workflows/provenance.py` (AI-labeling sidecars).
+> Tests: `tests/test_phase4_features.py`, `tests/test_phase5_companion.py`. Golden-file regression: `tests/test_harness_golden.py`.
+> See repo `AGENTS.md` for the canonical usage guide.
+
 ## Area 1: Low-Memory Vocal Guide Synthesizer (The Vocal Gap)
 Integrate a lightweight, local-first vocal guide oscillator using a singing formant filter pipeline. Avoids heavy DiffSinger RAM bounds.
 

@@ -33,11 +33,16 @@ Always perform a "White Box" analysis of generated MIDI:
 - Log these accuracy percentages in the daily summary.
 - If the project is lyrics-driven, validate prosody fit too: stress, punctuation, question/answer phrasing, and singability.
 
-### 3. Repository Separation
+### 3. Repository Separation & Inter-Engine Exchange
 Distribute complex composer interfaces into three distinct repositories:
 - `[project]-core`: The Python logic/library.
 - `[project]-api-backend`: FastAPI/REST wrapper for headless orchestration.
 - `[project]-web-portal`: React/Next.js frontend for human-composer steering.
+
+*   **Continuous-to-Block Interface (Melodica Adapter)**: When bringing continuous-time, parametric note streams (e.g. from Melodica) into Musicom's discrete `UnitMatrix` pipeline:
+    - Avoid direct repository merges to preserve domain and architectural boundaries. Use a lightweight interface / adapter payload instead (`MelodicaToMatrixConverter`).
+    - Standardize note exchange format to serialize floats (beats) strictly into integer ticks using cumulative, zero-drift offset algorithms.
+    - Clamp overlapping or long-sustained notes cleanly inside their respective matrix cell boundaries during segmentation to prevent block spillover or track desync.
 
 ## Common Pitfalls
 - **Workdir confusion**: When running background services (e.g., Uvicorn), `cd` into the directory explicitly or use absolute paths for the APP target; do not rely on `--workdir` flags which may not be supported by all server versions.
@@ -235,6 +240,7 @@ Every generated composition or audio sequence MUST be exported as a paired set:
 1. **Audio (`.ogg`/`.mp3`)**: For instant Telegram playback (voice bubble).
 2. **MIDI (`.mid`)**: For DAW import and editing, generated via `music21` alongside the audio.
 Never generate an audio file without its matching MIDI file in the same directory. Note: The user wants a MIDI file for EVERY audio file.
+*   **Precise Tick Alignment (MIDI Export)**: Never rely on standard high-level MIDI libraries or unaligned streams. When exporting MIDI representation from a UnitMatrix block structure, use native `mido` with isolated voice tracks to avoid note collisions, overlapping note truncations, and channel cross-talk. Calculate absolute timelines stochastically, then sort tick queues cleanly before writing.
 
 ## Generate & Stream Step (Continuous Mode)
 

@@ -81,6 +81,11 @@ Multiple `--viz` types render as a grid in a single image.
 - Output images can be inspected with `vision_analyze` for automated audio analysis
 - Useful for comparing audio outputs, debugging synthesis, or documenting audio processing pipelines
 
+## Pitfalls: Fundamental Frequency (F0) Tracking on Noisy/Chirpy Audio
+- **False Pitch Tracking (Double/Halving):** Standard YIN or PYIN implementations (`librosa.pyin`) can lock onto high-frequency birds, transients, or ground rumble instead of the melodic line. 
+- **The Bandpass Workaround:** Before extracting pitch classes or onsets from historic field recordings, pass the audio through a strict bandpass filter (e.g. keeping only 150Hz to 1600Hz) using `librosa.istft` or `ffmpeg`. This strips wind rumble and high bird chirps, allowing PYIN to cleanly lock onto Oud, flutes, and human voice.
+- **Harmonic-Percussive Separation (HPSS):** Separate sustained melodic components using `librosa.effects.hpss` first to isolate instruments from percussive clicks and environment background transients.
+
 ## Fallback: librosa Analysis When `songsee` Is Unavailable or Too Coarse
 
 For short incoming voice/sound clips that must become musical material, use Python feature extraction directly:

@@ -63,5 +63,11 @@ When the user says any of the following, **immediately** switch to 100% caveman 
 - "Just give me the answer."
 - "You always do Y and I hate it."
 - "Remember this: speak like caveman."
+- "Continue" (When used as a prompt to resume or resolve error blocks).
+
+## DAW & Programmatic Composition Best Practices
+- **Reaper Headless Pitfall:** Avoid running active rendering command lines like `-renderproject` or `-peaktest` inside restricted, displayless container/sandbox environments lacking active audio servers (JACK, ALSA). Use programmatic generation of `.RPP` structures instead and offload heavy audio processing to local client machines.
+- **ACE-Step Zustand Automation:** To programmatically build compositions via ACE-Step `window.__store`, always ensure MIDI regions are fully initialized using `.getState().ensureMidiClip(trackId)` before writing notes via `.getState().addMidiNote(clipId, note)`.
+- **openDAW Programmable Synth:** Leverage the scriptable *Apparat* instrument to write native JavaScript DSP synthesis code blocks rather than heavy multi-megabyte sample tables when working with openDAW.org.
 
 **Action:** Drop all filler. Use fragments. Maintain 100% technical accuracy. Priority: Accuracy > Tone > Brevity.

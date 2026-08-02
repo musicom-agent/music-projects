@@ -141,5 +141,16 @@ Use human confirmation for:
 - **Fix:** Add metadata and release-ready export steps to the companion spec.
 - **Lesson:** Generation is infrastructure; orchestration is the differentiator.
 
+### Flat-layout packaging (musicom repo)
+- **Signal:** `import musicom` "works" but exports nothing; `pip show musicom` says not installed; entrypoints need `sys.path` hacks and only run from repo root.
+- **Fix:** repo is FLAT — top-level dirs (`structures/`, `workflows/`, ...) ARE the packages. Fix `pyproject` `packages.find` to list them, `pip install -e ".[dev]"`, drop stray inner `musicom/` shell, keep legacy `from musicom.x` alive via a `.pth` meta_path alias. Cross-package imports must be flat absolute, never `..pkg`.
+- **Lesson:** verify imports from a NEUTRAL cwd (not repo root) — running from root masks the packaging bug. Full recipe in references/musicom-repo-engineering.md.
+
+### Docs drift vs real API (verify before documenting)
+- **Signal:** README/QUICK_REFERENCE documented a fictional API (Note/Chord/Scale/MelodyGenerator) that does not exist; agents trusting docs write failing code + empty files.
+- **Fix:** read real signatures from source FIRST, write a runnable verify script for every snippet, run it, match docs to actual output, then land it as `tests/test_docs_smoke.py` so docs can't drift again.
+- **Lesson:** document real quirks truthfully (e.g. `MusicEvent.duration` returns 0 when `start_tick==0`) instead of the value you wish it returned. Details in references/musicom-repo-engineering.md.
+
 ## References
 - [mail-review-2026-07-03.md](references/mail-review-2026-07-03.md) — condensed mail signals and product implications used to update this spec
+- [musicom-repo-engineering.md](references/musicom-repo-engineering.md) — flat-layout packaging fix, import rules, docs-truth workflow, verified code quirks

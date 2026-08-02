@@ -20,6 +20,25 @@ Single source of truth for all researched Musicom composition and analysis metho
 - 015 Ostinato Constraint Writing
 - 016 Groove-Locked Pattern Writing
 - 017 Cascaded Diffusion Hierarchical Composition
+- 018 Schillinger System of Musical Design
+- 019 L-System Algorithmic Composition
+- 020 Sound-Mass Spatial Trajectory (SMSTC)
+- 021 Cellular Automata Grid Evolution
+- 022 Markov-Constraint Wavefront Sequencing (MCWS)
+- 023 Tendency Masking Stochastic Bounds
+
+## Sound Production Methods
+- SP-001 Multi-timbral SoundFont (SF2)
+- SP-002 VST3 Polyphonic Stacking
+- SP-003 Modal Physical Modeling (Plate/Bar)
+- SP-004 Formant Vocal Synthesis
+- SP-005 Headless DAW/MTC Sync
+- SP-006 Zero-Drift Humanization
+- SP-007 Spectral Masking EQ
+- SP-008 Dynamic Range Compression (DRC)
+- SP-009 Convolutive Reverberation
+- SP-010 FM Synthesizer Voicing
+- SP-013 Aperiodic Granular Synthesis
 
 ## Source Groups
 - Daily research: `daily.md`

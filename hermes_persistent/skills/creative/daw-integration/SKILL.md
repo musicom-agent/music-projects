@@ -93,6 +93,75 @@ def render_native(midi_path, ogg_path):
   93| | **DAW API** | Headless score management | ✅ | See Flat.io |
 | **LMMS** | CLI + project files | ✅ Linux | Could be installed |
 | **Ardour** | OSC + JACK | ✅ Linux | Advanced option |
+| **REAPER** | Lua / ReaScript CLI, OSC | ✅ Installed (Headless) | **Definitively Selected Desktop Production Target** |
+| **ACE-Step** | Zustand window.__store, React, MIDI | ✅ Verified (Local Repo) | **Primary Web-Native Agent Sandboxed Workspace** |
+| **openDAW** | WebAudio, Apparat JS Scriptable Synth | ✅ Verified (OpenSource) | **Pure DSP / Modular JavaScript Audio Engine** |
+
+## Silent Padding & Track Alignment Pitfall (CRITICAL)
+
+When using the `UnitMatrix` workflow, different tracks often have different silent/active sections (e.g., a lead instrument rests during the intro while rhythm instruments play).
+
+### The Desync Bug
+If an empty section is represented by an empty `MusicUnit` (`events=[]`) or dummy notes with `pitch=0` or `volume=0`, the MIDI encoder's duration calculations may skip these rests. As a result, the timeline offset for that track **does not advance** by the expected section ticks, leading to severe track length mismatches and desynchronization (desync) upon import into desktop DAWs.
+
+### The Structural Fix in Core Library (Upgraded July 2026)
+This timing fix has been permanently implemented at the class level within the core Musicom workflow (`UnitMatrixComposer.to_midi()` under `/opt/data/repos/musicom/workflows/unitmatrix_composer.py`).
+
+1. **Absolute Milestone Mapping:** Instead of relying on sequential incremental delta-times which accumulate rounding errors, the exporter harvests all absolute `start_tick` and `end_tick` parameters across all sections for a given voice row.
+2. **Chronological Sorting:** It flattens the absolute event boundaries into an explicit chronological `timeline` array containing `on` and `off` milestones. Crucially, it sorts `off` events to execute strictly *before* `on` events occurring on the same tick to prevent overlapping node conflicts.
+3. **Automatic Silent Tail Padding:** Upon completing the event queue, it calculates the remaining ticks required to reach the expected project length (`total_ticks_expected - current_tick`). If any gap exists, it automatically appends a silent padding milestone:
+   ```python
+   # Append silent tail padding to guarantee exact down-to-the-tick track synchronization
+   track.append(mido.Message('note_on', note=0, velocity=0, channel=voice['channel'], time=remaining_ticks))
+   track.append(mido.Message('note_off', note=0, velocity=0, channel=voice['channel'], time=0))
+   ```
+4. **Usage:** Always use the class-level `composer.to_midi(output_path)` method rather than scripting ad-hoc manual MIDI track writers inside project execution playbooks. This keeps all timing logic perfectly unified and robust.
+
+## Headless REAPER (Definitive Desktop Target)
+
+REAPER is selected as the primary professional desktop production DAW. It is installed on the local system under `/opt/data/tools/reaper/REAPER/`.
+
+### Headless Execution Mechanism
+We built a custom headless GDK-free interface driver (`libSwell.so`) with `NOGDK=1` compiled from Cockos WDL.
+- This allows full CLI command execution and headless Lua/ReaScript execution.
+- Config directory: `~/.config/REAPER/`
+- Audio fallback mode: `dummy` (Crucial to prevent rendering/batch engines blocking on active hardware drivers).
+
+### reaper.ini Headless Configuration
+To run headless commands without a physical audio device, verify `~/.config/REAPER/reaper.ini` matches:
+```ini
+[reaper]
+libsndcards=0
+linux_audio_mode=3
+linux_hw_driver=dummy
+linux_hw_device=
+linux_hw_out_device=
+linux_hw_srate=44100
+linux_hw_blocksize=512
+linux_hw_periods=3
+```
+
+### Automation Workflows
+1. **RPP Construction:** Rather than spawning slow GUI subprocesses, programmatic agents can write plain-text `.RPP` files containing raw `<TRACK>` and `<ITEM>` definitions directly in Python.
+2. **ReaScript Execution:** REAPER supports running Python / Lua scripts via CLI:
+   ```bash
+   /opt/data/tools/reaper/REAPER/reaper /path/to/project.rpp /path/to/script.lua
+   ```
+3. **Headless Limit Pitfall:** Render operations (`-renderproject` or `-peaktest`) may hang in containerized environments if the audio system (dummy driver) has configuration mismatching state. For safe delivery, write plain-text `.RPP` and export raw `.mid` files directly so the user can double-click and render locally with desktop hardware drivers.
+
+## Web-Native Agent Workspace: ACE-Step & openDAW
+
+When operating in our containerized/agentic sandboxes, local UI-less operation makes traditional desktop DAWs sluggish. **ACE-Step** and **openDAW** act as the perfect web-native canvases.
+
+### ACE-Step Zustand Store Integration
+ACE-Step exposes its complete audio timeline, tempo, track allocation, and MIDI grids via Zustand on the client window (`window.__store`). 
+- **Track Appending:** Add tracks using `addTrack(displayName, type)` where type is `'pianoRoll' | 'sample'`.
+- **Note Placement:** Use `ensureMidiClip(trackId)` to instantiate a MIDI container, then inject notes atomically via `addMidiNote(clipId, { pitch, startBeat, durationBeats, velocity })`.
+- **Zero-Drift Execution:** Standardize on **Option A** (delivering absolute-aligned MIDI files under `/StagedMidi/`) to import instantly into local Logic Pro setups. We fall back to **Option B** (feeding `window.__store` JSON structures via Developer Console/Web Sockets) once browser/HTTP connection endpoints are fully wired.
+
+### openDAW & Apparat Scripting
+openDAW features the **Apparat** plugin—a fully programmable synthesizer and sampler scripted entirely in raw **JavaScript**.
+- Musicom can programmatically generate standard JS DSP logic files (e.g. implementing procedural FM operators, Karplus-Strong string synthesis, or custom envelopes) and inject them straight into the browser audio graph.
 
 ## Flat.io API
 

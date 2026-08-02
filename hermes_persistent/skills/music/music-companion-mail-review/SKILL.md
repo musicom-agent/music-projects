@@ -20,8 +20,18 @@ Turn newsletter and inbox noise into a small set of actionable product signals f
 - IMAP credentials from `/opt/data/.env.mail`
 - Focus on AI music, DAW workflows, creator tooling, distribution, royalties, rights, metadata, provenance, and artist workflow
 
+## Automation Support
+The skill includes a pre-built python script `scripts/fetch_newsletters.py` to fetch, strip, and format recent emails.
+
+### Execution
+Run the script to fetch the past week of emails:
+```bash
+python3 scripts/fetch_newsletters.py
+```
+This reads credentials from `/opt/data/.env.mail`, filters by `SINCE` 7 days ago with a fallback to the last 15 emails, strips HTML tags, and truncates the body to preserve LLM context.
+
 ## Procedure
-1. Read recent mail and identify messages with product-relevant music signals.
+1. Read recent mail and identify messages with product-relevant music signals (use the provided `scripts/fetch_newsletters.py` script for IMAP fetching).
 2. Prefer newsletter content and industry updates over ordinary personal mail.
 3. Extract only durable signals:
    - workflow patterns

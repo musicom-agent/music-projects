@@ -1,0 +1,246 @@
+{
+  "jobs": [
+    {
+      "id": "8f1a31d006c8",
+      "name": "daily-composition-methods-research",
+      "prompt": "1. Research one new music composition method (algorithmic, traditional, or AI-driven).\n2. Use the 'Musical Elements Framework' (PITCH, RHYTHM, HARMONY, STRUCTURE, TEXTURE).\n3. Explain how the method fills in the UnitMatrix (Voices & Sections).\n4. Append the method to /opt/data/projects/Research/CompositionMethods/methods_db.md.\n5. Notify Axel via Telegram with a summary of the new method.",
+      "skills": [],
+      "skill": null,
+      "model": "kilo-auto/balanced",
+      "provider": "kilo-gateway",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "0 9 * * *"
+      },
+      "schedule_display": "0 9 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 35
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-26T08:54:29.488622+00:00",
+      "next_run_at": "2026-07-29T09:00:00+00:00",
+      "last_run_at": "2026-07-28T09:03:11.325744+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null,
+      "provider_snapshot": null,
+      "model_snapshot": null
+    },
+    {
+      "id": "e2760579d2c8",
+      "name": "MusicTech Surveillance & Replicability Analysis",
+      "prompt": "Find latest music tech hardware and software gear news/reviews on https://musictech.com/, https://www.synthtopia.com/, and https://www.soundonsound.com/. Focus on technical capabilities: synthesis methods, algorithmic sequencers, MIDI patterns, DSP, spectral, or orchestration. Analyze whether I (Musicom Agent) can replicate or use them via Python, FluidSynth, Mido, custom math, or DSP. Deliver direct technical report. No filler, caveman style.",
+      "skills": [],
+      "skill": null,
+      "model": "kilo-auto/balanced",
+      "provider": "kilo-gateway",
+      "provider_snapshot": null,
+      "model_snapshot": null,
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1,4",
+        "display": "0 9 * * 1,4"
+      },
+      "schedule_display": "0 9 * * 1,4",
+      "repeat": {
+        "times": null,
+        "completed": 7
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-07T13:02:50.270523+00:00",
+      "next_run_at": "2026-07-30T09:00:00+00:00",
+      "last_run_at": "2026-07-27T09:00:56.814877+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: Skipped to prevent unintended spend: global inference config drifted since this job was created (model 'google/gemini-3.5-flash' -> 'kilo-auto/balanced'), and this job is unpinned. No inference call was made. To run on the new config, pin it explicitly: `cronjob action=update job_id=e2760579d2c8 provider=<provider> model=<model>` (or pin the original values to keep them). See #44585.",
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": [
+        "web",
+        "terminal"
+      ],
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "da570fa233fd",
+      "name": "daily-sound-production-research",
+      "prompt": "1. Research one new sound production or audio synthesis method (physical modeling, subtractive, FM, wavetable, spectral, granular, post-processing DSP, spatialization, etc.).\n2. Focus on technical mechanics, synthesis equations, and implementation requirements (Python/NumPy, FluidSynth, or VST pipelines).\n3. Append the researched method to the Sound Production Methods Framework in '/opt/data/projects/Research/CompositionMethods/methods_db.md' under the 'Sound Production Methods Framework' section using the SP-XXX ID format.\n4. Keep the framework table clean and formatted. Report the discovered method clearly to Axel in caveman style.",
+      "skills": [],
+      "skill": null,
+      "model": "kilo-auto/balanced",
+      "provider": "kilo-gateway",
+      "provider_snapshot": null,
+      "model_snapshot": null,
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "0 9 * * *"
+      },
+      "schedule_display": "0 9 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 19
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-09T16:06:37.632394+00:00",
+      "next_run_at": "2026-07-29T09:00:00+00:00",
+      "last_run_at": "2026-07-28T09:04:09.550578+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": [
+        "web",
+        "terminal"
+      ],
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "4da0554c15c0",
+      "name": "weekly-newsletter-digest-summarizer",
+      "prompt": "Read the output of fetch_newsletters.py script (injected below).\nIdentify actual weekly newsletters / digests. Strip out transactional notifications (Google setup, GitHub failed runs, etc.).\nIf no newsletters found, report \"No newsletters found in past 7 days.\"\nIf newsletters found, summarize each newsletter. Use caveman style: short fragments, high accuracy, zero filler, no marketing speak.\nExtract key signals, technical insights, or action items.\nOutput format:\n## NEWSLETTER DIGEST\n\n### [Newsletter Subject] - [Sender] ([Date])\n- **Summary**: [Short caveman summary of core content]\n- **Key Signal**: [Actionable technical pattern, insight, or announcement]\n\n(Repeat for each)",
+      "skills": [],
+      "skill": null,
+      "model": "kilo-auto/balanced",
+      "provider": "kilo-gateway",
+      "provider_snapshot": null,
+      "model_snapshot": null,
+      "base_url": null,
+      "script": "fetch_newsletters.py",
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1",
+        "display": "0 9 * * 1"
+      },
+      "schedule_display": "0 9 * * 1",
+      "repeat": {
+        "times": null,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-19T17:32:32.297071+00:00",
+      "next_run_at": "2026-08-03T09:00:00+00:00",
+      "last_run_at": "2026-07-27T09:00:57.155768+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: Skipped to prevent unintended spend: global inference config drifted since this job was created (model 'google/gemini-3.5-flash' -> 'kilo-auto/balanced'), and this job is unpinned. No inference call was made. To run on the new config, pin it explicitly: `cronjob action=update job_id=4da0554c15c0 provider=<provider> model=<model>` (or pin the original values to keep them). See #44585.",
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "1fc3fd65d359",
+      "name": "daily-algorithmic-composition-production",
+      "prompt": "You are a senior Musicom algorithmic composition and sound production agent. Every day, you must autonomously create or iterate on an algorithmic music project in the 'projects/Styles/' directory.\n\nFollow these strict steps:\n1. SELECT RANDOM METHODS FROM DATABASE:\n   Read `/opt/data/projects/Research/CompositionMethods/methods_db.md`.\n   Extract the list of all available Composition Method IDs (e.g., 001 to 035+) and Sound Production Method IDs (e.g., SP-001 to SP-024+).\n   Select one Composition Method ID and one Sound Production Method ID completely at random. Do NOT bias toward the latest additions or research outputs. Ensure a high-entropy random choice across the entire framework.\n\n2. SELECT TARGET PROJECT:\n   Inspect /opt/data/projects/Styles/. Decide to either:\n   - Create a brand new project in a style folder (Fanfare, Folk, Reggae, Arabic, Experimental, Electronic). Use the next available 3-digit zero-padded ID. Copy from /opt/data/projects/Research/_TEMPLATE/.\n   - Or continue an existing project to produce a new version (e.g., v2, v3).\n\n3. COMPOSE MELODY, HARMONY, AND STRUCTURE:\n   - Execute all Python generation using `/opt/data/micromamba/envs/musicom/bin/python`.\n   - HARD RULE: Use the installed `musicom` engine library. Never bypass `UnitMatrixComposer`.\n   - Sanctioned workflow: `create_matrix` -> `add_voice` -> `add_section` -> `fill_voice_section` -> `validate` -> `to_midi`.\n   - Prevent cumulative timing drift / track desync: Collect all start/end ticks, sort note-offs before note-ons, and pad any shorter track to the exact target length.\n   - Run `composer.validate()`. Assert exported .mid file size > 40 bytes.\n   - Write a `provenance.json` sidecar.\n   - Write a `grid_visualization.txt` of the rhythm DNA.\n\n4. RENDER HIGH-QUALITY AUDIO:\n   - Render MIDI to WAV using FluidSynth CLI: `/opt/data/micromamba/envs/musicom/bin/fluidsynth -ni -F <wav_path> -g 1.2 /usr/share/sounds/sf2/FluidR3_GM.sf2 <midi_path>` (ensure soundfont path is correct).\n   - Apply peak normalization to ~-1dB via FFmpeg or Python/NumPy.\n   - Compress WAV to Opus OGG: `ffmpeg -i <wav_path> -codec:a libopus -application voip -b:a 48k <ogg_path> -y`.\n   - Keep only compressed .ogg and .mid. Delete intermediate raw .wav.\n\n5. GENERATE DASHBOARD:\n   - Create or update `index.html` dashboard in the project directory using VoltAgent styling (Black/Emerald theme, #050507 background, #00d992 accent, JetBrains Mono font, ASCII rhythm grid).\n\n6. RUN COMPLIANCE PREFLIGHT:\n   - Execute the preflight check: `/opt/data/micromamba/envs/musicom/bin/python /opt/data/projects/Research/preflight_check.py <your_project_dir>`\n   - Ensure it returns Exit 0. Fix any violations.\n\n7. COMMIT AND DELIVER:\n   - Commit files with clear message.\n   - Deliver exactly ONE audio file (.ogg) back to the Telegram chat as the primary MEDIA: item.\n   - Report the details in strict, concise caveman style: high technical accuracy, no filler, short fragments. State:\n     - Project folder and ID\n     - Selected composition methods (e.g. Method 022) and sound production methods (e.g. SP-013)\n     - Core musical DNA (pitch, rhythm, harmony, structure)\n     - Key metrics and preflight status.",
+      "skills": [
+        "musicom-composer"
+      ],
+      "skill": "musicom-composer",
+      "model": "kilo-auto/balanced",
+      "provider": "kilo-gateway",
+      "provider_snapshot": null,
+      "model_snapshot": null,
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 * * *",
+        "display": "0 10 * * *"
+      },
+      "schedule_display": "0 10 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 9
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-21T15:48:01.900708+00:00",
+      "next_run_at": "2026-07-29T10:00:00+00:00",
+      "last_run_at": "2026-07-28T10:05:04.811060+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": [
+        "terminal",
+        "file",
+        "web"
+      ],
+      "workdir": "/opt/data",
+      "fire_claim": null
+    }
+  ],
+  "updated_at": "2026-07-28T10:05:04.811825+00:00"
+}

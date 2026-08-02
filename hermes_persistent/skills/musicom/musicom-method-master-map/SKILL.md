@@ -1,185 +1,57 @@
 ---
 name: musicom-method-master-map
-description: Master map of Musicom composition and analysis methods, including roundtrip, daily selection, and researched method variants.
-version: 0.1.0
-author: Musicom Agent
-license: MIT
+type: Method Map
+title: Musicom Method Master Map
+description: Canonical index of stochastic, rules-based, and nature-led algorithmic music composition methods.
+resource: https://github.com/axelwiertz/musicom
+tags: [music, algorithms, methods, master-map, okf]
+timestamp: 2026-07-15T20:45:00Z
 ---
 
-# Musicom Method Master Map
+# Musicom Method Master Map (OKF)
 
-## Environment & Implementation
-- **Python:** 3.13 strictly required.
-- **Dependency Management:** Use `uv` with an editable install (`pip install -e .`). 
-- **Core Dependencies:** `numpy`, `mido`, `scipy`, `music21`, `networkx`, `pandas`, `matplotlib`.
-- **Constraint:** `librosa` and `numba` are incompatible with Python 3.13; bypass for core generation.
-- **Import Pattern:** Use absolute imports (`from musicom.rules import ...`) and ensure `sys.path.insert(0, '/opt/data/repos')` in standalone scripts.
+Every algorithmic composition method used inside the Musicom framework must map to one of three core paradigms:
 
-## Workflow: The 5-Step Loop
-1. **Environment Setup**
-   ```bash
-   source /opt/data/repos/musicom/.venv/bin/activate
-   export PYTHONPATH=$PYTHONPATH:/opt/data/repos
-   ```
+## 1. Stochastic (Probabilistic)
+*   **002 Markov Transitions:** Generates probabilistic harmonic/melodic paths based on state weights.
+*   **023 Tendency Masking:** Generates pitch clouds bounded by moving corridors $L(t)$ and $U(t)$.
+*   **039 Spectral Morphology Analysis (SMA):** Derives musical material from FFT analysis of source audio — spectral peaks drive pitch, spectral flux drives rhythm, inharmonicity ratio drives harmony, and band energy drives texture.
+*   **041 Ant Colony Optimization Path Finding (ACOPF):** Swarm of ant agents traverse musical graphs depositing pheromones on successful paths. Iterative optimization converges on coherent melodies, voice-leading, and chord progressions while evaporation prevents stagnation.
 
-2. **Rule Integration**
-   - **Active Usage:** Do not hard-code notes. Use `musicom.rules.progression` for chord degrees and `musicom.rules.counterpoint` to validate intervals.
-   - **Verification:** Always run `Counterpoint(unit1, unit2).has_parallel_perfect_intervals()` to ensure classical voice-leading compliance.
+## 2. Rules-Based (Deterministic)
+*   **001 Skeleton-First:** Forms structural grids from DNA pitch and rhythm seeds.
+*   **011 Euclidean Groove:** Evaluates rhythmic cycles using pulse and hit counts.
+*   **025 Xenakis Sieve:** Generates scales/grids using modular congruence formulas.
+*   **032 Isorhythmic Talea-Color Mapping (ITCM):** Decouples rhythmic loop (talea) and pitch loop (color) of coprime lengths to generate non-repeating shifting melodic motifs.
+*   **033 Wave Function Collapse Grid Synthesis (WFCGS):** Collapses a grid of voice and section superpositions using strict vertical/horizontal adjacency constraints.
+*   **034 Probabilistic Context-Free Grammar (PCFG) Recursion:** Recursively expands non-terminal symbols into hierarchical pitch, rhythm, and structural trees using Chomskyan rewrite rules with weighted branching probabilities.
+*   **044 Persistent Homology and Topological Data Analysis (PHTDA):** Embeds musical parameters as point clouds, constructs Vietoris-Rips simplicial complexes at multiple scales, computes Betti numbers and persistence diagrams to extract topological features (connected components, loops, voids). Persistent features map to structural coherence; transient features drive ornamentation and texture.
 
-## Purpose
-Single source of truth for all researched Musicom composition, variation, and reverse-analysis methods.
+## 3. Nature-Led (Physical/Emergent)
+*   **026 DPSM (Phase-Shift Minimalism):** Emerges dynamic polyrhythms via misaligned phase offsets.
+*   **030 Reaction-Diffusion Turing Patterns (RDTP):** Generates musical structures and textures from localized chemical concentrations evolving over a 2D reaction-diffusion grid (Gray-Scott model).
+*   **031 Swarm Intelligence Flocking (Boids):** Simulates Reynolds' flocking algorithm (separation, alignment, cohesion) to guide multiple autonomous musical agents in a multi-dimensional pitch-time-velocity space.
+*   **035 Physarum Polycephalum Transport Network Optimization (PPTNO):** Simulates slime mold protoplasmic tube growth, thickness, and contractive oscillations between pitch-coordinate food sources to optimize path-based voice leading and rhythmic density.
+*   **036 Abelian Sandpile Avalanche Rhythmics (ASAR):** Simulates sand accumulation, toppling thresholds, and critical avalanche cascades on a 2D grid to model musical tension, rhythmic triggers, and polyphonic density.
+*   **037 FitzHugh-Nagumo Neural Spiking (FHNS):** Simulates membrane potential dynamics and refractory recovery periods of neural spiking cells to trigger rhythmic impulses, modulate velocities, and map voltages to pitch contours.
+*   **038 Kuramoto Oscillator Phase Synchronization (KOPS):** Simulates coupled limit-cycle oscillators to model collective synchronization, rhythmic lock-in, and harmonic transitions.
+*   **043 Strange Attractor Trajectory Mapping (SATM):** Uses deterministic chaotic dynamical systems (Lorenz, Rössler attractors) to generate bounded, aperiodic trajectories in 3D phase space. Coordinates map to pitch, velocity drives rhythm, attractor topology governs macro-form.
 
-## Scope
-Covers methods for:
-- composition
-- variation generation
-- reverse analysis
-- roundtrip comparison
-- daily iterative selection
-- prosody / lyrics-driven mapping
-- hierarchical diffusion-style composition
+## Method Hybridization Patterns
 
-## Method Index
+Sparse rhythmic methods (011 Euclidean, 032 Isorhythmic) produce staccato, gap-filled textures. User rejected sparse-only output as "staccato instead of flowing."
 
-### 001 Skeleton-First Refinement
-- Input: DNA, pitch seed, rhythm seed
-- Output: UnitMatrix skeleton
-- Best for: baseline form-first drafting
-- Roundtrip fit: high
+**Solution**: Combine sparse rhythmic methods with continuous fill methods:
+- **Sparse rhythmic layer**: Euclidean groove (kick/snare), isorhythmic talea (melodic motif)
+- **Continuous fill layer**: DPSM phase-shifted arpeggios (3 layers offset by 1/3 beat), sustained string pads, walking bass fills
+- **Result**: Rhythmic interest from sparse method + flowing texture from continuous method
 
-### 002 Markov Probabilistic Transitions
-- Input: prior state / local context
-- Output: probabilistic pitch and harmony continuation
-- Best for: local variation, stochastic fill
-- Roundtrip fit: medium
+**Example**: Disco v2 (Euclidean only) → 75% drums, 25% bass/strings = staccato. Disco v3 (Euclidean + DPSM) → 75% drums, 100% bass/arpeggios/strings = flowing groove.
 
-### 003 Genetic Genome Selection
-- Input: candidate population
-- Output: selected and mutated winner
-- Best for: version evolution, compare-select loops
-- Roundtrip fit: high
+**Rule**: When using methods 011, 032, or other sparse rhythmic generators, always add at least one continuous layer (026 DPSM, sustained pad, or walking bass) to maintain flow.
 
-### 004 Prosodic Narrative Coupling
-- Input: lyrics, stress, punctuation, narrative arc
-- Output: melody, rhythm, contour, call-response mapping
-- Best for: lyric-first composition
-- Roundtrip fit: high
+---
 
-### 005 Prosodic Syntax Mapping
-- Input: punctuation, syntax, clause boundaries
-- Output: cadence types, rests, contour shifts
-- Best for: text-to-phrase translation
-- Roundtrip fit: high
-
-### 006 Cadence and Closure Mapping
-- Input: phrase endings, closure strength
-- Output: tonic / non-tonic closure behavior
-- Best for: end-phrase planning
-- Roundtrip fit: high
-
-### 007 Narrative Arc Register Planning
-- Input: story arc / section arc
-- Output: register and tension distribution
-- Best for: large-scale form control
-- Roundtrip fit: medium-high
-
-### 008 Call-Response Voice Allocation
-- Input: dialogue / phrase pairs
-- Output: distributed voice roles and alternation
-- Best for: conversational music, antiphony
-- Roundtrip fit: high
-
-### 009 Rhyme Density Control
-- Input: rhyme clusters, word repetition density
-- Output: rhythmic density and accent shaping
-- Best for: lyrical propulsion
-- Roundtrip fit: medium-high
-
-### 010 Hierarchical Diffusion Composition
-- Input: multi-level symbolic plan
-- Output: macro form, meso skeleton, lead sheet, accompaniment
-- Best for: whole-song hierarchical generation
-- Roundtrip fit: medium
-
-### 011 Euclidean Groove Locking
-- Input: pulse count, hit count, offset
-- Output: locked rhythmic cycle
-- Best for: percussion, ostinato, groove design
-- Roundtrip fit: high
-
-### 012 Inversion / Retrograde / Sequencing Transform
-- Input: motif or pitch set
-- Output: transformed variant family
-- Best for: classical development and motif mutation
-- Roundtrip fit: high
-
-### 013 Negative Harmony Mapping
-- Input: tonal center and harmonic axis
-- Output: mirrored harmony set
-- Best for: tonal contrast and reharmonization
-- Roundtrip fit: medium
-
-### 014 Ostinato Constraint Writing
-- Input: loop cell or repeating cell
-- Output: stable repeated pattern under variation above
-- Best for: trance, modal, accompaniment beds
-- Roundtrip fit: high
-
-### 015 Groove-Locked Pattern Writing
-- Input: rhythmic anchor + syncopation rules
-- Output: stable groove patterns across sections
-- Best for: dance music and section glue
-- Roundtrip fit: high
-
-### 016 Cascaded Diffusion Hierarchical Composition
-- Input: 4-level symbolic hierarchy
-- Output: macro-form, meso-development, lead sheet, accompaniment
-- Best for: whole-song generation
-- Roundtrip fit: medium-high
-
-### 017 Schillinger System of Musical Design
-- Input: Generator numbers (a, b) and axis trajectories
-- Output: Resultant rhythms, coordinate-projected pitches, strata density
-- Best for: Systematic/mathematical algorithmic composition
-- Roundtrip fit: High (mathematical precision)
-
-## Recommended Routing
-
-### Composition
-- Start with 001 for stable DNA
-- Use 012 for motif development
-- Use 011, 014, 015 for groove and repetition
-- Use 004, 005, 008, 009 for lyric-driven work
-- Use 010 or 016 for large-scale hierarchical planning
-- Use 003 for compare-select evolution
-
-### Reverse Analysis
-- Audio -> transcription -> feature extraction -> 001 or 004 mapping
-- Use 002 for probabilistic inference on uncertain regions
-- Use 011, 014, 015 to recover rhythmic identity
-- Use 012 and 013 to explain transformation relations
-
-### Roundtrip Evaluation
-- Compare candidates with the same analysis pass
-- Score pitch, rhythm, harmony, structure, texture, and text fit
-- Feed winner back into next cycle
-
-## Folder Merge Rule
-All method notes, reports, and research summaries must live under one merged folder:
-- `references/methods/`
-
-Recommended contents:
-- `index.md` — master map
-- `daily.md` — daily research log
-- `roundtrip.md` — compare-select-feedback protocol
-- `analysis/` — reverse-analysis notes
-- `composition/` — forward composition notes
-- `prosody/` — lyric and text mapping notes
-- `hierarchical/` — diffusion / multi-level planning notes
-- `methods/` — generic research notes (e.g. `method-015-schillinger.md`)
-
-## Operating Rule
-If a new method appears in any report, add it to this master map and place the source note in the merged folder.
-
-## Research-to-Database Bridge
-When a method is appended to `methods_db.md`, mirror the method name and short summary into the master map in the same session when practical. Keep the master map as the index; keep long method prose in the database file. If the append flow needs verification or notification handling, use the Musicom Composer support note: `references/method-addition-verification.md`.
+## Technical Pitfall: MIDI Tail Truncation
+When compiling cells, short active phrases stop playing before the global track boundary, causing DAW timeline drift on export.
+*   **Fix:** Append an absolute silent padding event (`pitch=0, volume=0`) at `total_section_ticks - 1` to ensure perfect track-length symmetry across all rows.

@@ -165,6 +165,7 @@ Every listening artifact needs a DAW artifact:
 - **Telegram Constraint**: Send **one soundfile only** in music iterations. When comparing versions, send the "compare" OGG as the sole `MEDIA:` item. List other version paths as text only.
 - **Headless Environment Fixes**: If `matplotlib`, `networkx`, or `librosa` are missing/failing, use `unittest.mock.MagicMock` to bypass import errors in Musicom internal imports.
 - **WAV Cleanup**: Remove large raw/intermediate WAVs before commit; keep only compressed `.ogg` and `.mid`.
+- **Diatonic Note Scaling**: Always avoid custom mathematical index modulo wrappers (like `% 7`) inside localized project files for chord-pitch calculations. Local project wrappers inevitably introduce off-by-octave scale inversions on wrapping steps (like vii° and iii). Instead, always route diatonic pitch calculations through the canonical framework helper: `Scale7ChordDegree.get_diatonic_note(key_root, scale, degree_index)`. This ensures consistent absolute voice-leading without transposition errors.
 - `index.html` dashboard for published project review.
 
 ### 7. Teach through the artifact
@@ -343,10 +344,28 @@ When building project dashboards, adhere to the **VoltAgent** (Black/Emerald) ae
 - **Delivery**: Convert to `.ogg` (Opus) via `ffmpeg` using `-codec:a libopus -application voip -b:a 48k`. Include native `MEDIA:` links for both `.ogg` and `.mid`.
 
 ### Pitfalls — Rendering & Audio
+- **Digital Waveguide / Physical Modeling Waveguide Octave Drop**: In digital waveguide models (such as Karplus-Strong or bowed strings), a string with fixed/rigid ends incurs a sign inversion (phase reflection of $\approx -1.0$) at both the bridge and the nut. Because of these two sign inversions, a wave completes its polarity cycle after a full round-trip of the string, which has a delay of $2 \cdot D_{\text{total}}$ (where $D_{\text{total}} = D_{\text{neck}} + D_{\text{bridge}}$). If $D_{\text{total}}$ is defined as $\text{sr} / \text{freq}$, the synthesized pitch will be exactly one octave too low ($f_{\text{fund}} = \text{freq} / 2$). To resolve this and match MIDI notes exactly, calculate the total delay based on half the cycle period: $D_{\text{total}} = \text{sr} / (2 \cdot \text{freq})$.
 - **FluidSynth Ctypes**: Passing `ctypes` buffers directly to `fluid_synth_write_float` can cause argument errors in some Python environments. Default to CLI `fluidsynth -F` for reliability.
 - **FFmpeg Filters**: Some environments use older FFmpeg versions. If `peaknorm` fails, fall back to basic conversion.
 - **Mido vs music21**: `music21` is heavy. Use `mido` for quick file analysis and structure inspection.
-```
+
+### Zero-Drift Absolute Alignment (Method 022/023 Enforcement)
+- **Cumulative Tick Drift**: When generating sequence structures in separate tracks or voices, any rest segments or skipped ticks will cause tracks to fall out of vertical grid synchronization during MIDI parsing. 
+- **Enforcement Rule**: Always enforce identical absolute lengths across all tracks at MIDI compilation. Collect all absolute timestamps (`start_tick`, `end_tick`), perform a strict chronological sort ensuring note-offs execute immediately before note-ons at duplicate ticks, and pad the remaining tail of shorter tracks up to the target track length using an empty MIDI event padding block.
+- **Musicom Integration**: Never write custom tracking wrappers in isolated execution or project scripts. Always use the canonical class-level structures and generators within the core library (such as `UnitMatrixComposer.to_midi()` and specialized generator models in `generators/`).
+- **External Engine Adapters (Melodica Interoperability)**: Connect external parametric engines (like Melodica) using clean, non-dependent ports and adapters (e.g. `converters/melodica_adapter.py`). External continuous timelines (beat floats) must segment cleanly into discrete integer ticks using rounding math, clamped to relative coordinate matrices (`UnitMatrix(shape=(rows, cols))`) to enforce temporal boundaries without cumulative rounding drift. Never merge codebase structures; use the clean adapter interface to cleanly map outputs.
+- `index.html` dashboard for published project review.
+
+### Autonomous Daily Production Pipeline (Job ID 1fc3fd65d359)
+- **Random Selection Protocol (V2)**: The daily production run is scheduled at `10:00 AM` and runs decoupled from daily research output chains. It reads the complete method database and selects random algorithms to ensure high creative variety and maximum coverage of the method space.
+- **Workflow Steps**:
+  1. Read `/opt/data/projects/Research/CompositionMethods/methods_db.md` to identify all active composition (001-035+) and production (SP-001 to SP-024+) methods.
+  2. Perform a high-entropy random choice of one composition method and one sound production method.
+  3. Instantiate a clean project directory using `/opt/data/projects/Research/_TEMPLATE/` or increment an existing style project version.
+  4. Build MIDI using `UnitMatrixComposer` exclusively to guarantee zero-drift. Run preflight check.
+  5. Render to Wav via FluidSynth CLI and normalize to -1dB peak via FFmpeg before converting to Opus `.ogg`. Delete intermediate WAV files to conserve storage.
+  6. Generate a VoltAgent-themed `index.html` dashboard matching the Black/Emerald aesthetic.
+- **Template Reference**: See `templates/daily_production_template.py` for a fully compliant, verified implementation of this workflow.
 
 **Key shift:** Steps 3-5 are now the compositional core. Melody is no longer "generated" as a side effect of scale patterns — it is explicitly constructed from a pitch pattern applied to a rhythmic pattern, then refined.
 
@@ -1098,6 +1117,30 @@ ffmpeg -i /tmp/hermes/songs/output.wav -codec:a libopus -application voip -b:a 4
 - **numpy not in system Python**: Use `/opt/hermes/.venv/bin/python3`
 - **Generator returns multiple units**: PatternGenerator returns `List[MusicUnit]` — iterate or concatenate
 
+### Pitfalls — Mido Timing & Grid Safety
+- **Mido Negative Delta timing bug**: When humanizing timing offsets (such as using randomized shifts for micro-timing), sequential events can backtrack and trigger `ValueError: message time must be non-negative in MIDI file`. To prevent this, always track the ending tick of the prior event (`min_start = events_list[-1].end_tick`) and enforce `h_start = max(min_start, humanize(start))`.
+- **Absolute Measure Alignment**: Always lock the final event of each column/measure in a UnitMatrix/Composer track to `BAR_TICKS` exactly (e.g., `end_tick = BAR_TICKS`) to prevent cumulative timing drift and track length validation mismatches.
+- **Multi-section zero-drift pad pattern**: When splitting events across multiple sections (e.g., Section A = bars 0-15, Section B = bars 16-31), events have absolute ticks but each section expects relative ticks starting at 0. Use this pattern:
+  ```python
+  def pad_unit(events, section_ticks, offset=0):
+      for e in events:
+          if e.end_tick > section_ticks:
+              e.end_tick = section_ticks
+          if e.start_tick >= section_ticks:
+              e.start_tick = section_ticks - 10
+          e.start_tick = max(0, e.start_tick - offset)
+          e.end_tick = max(0, e.end_tick - offset)
+      if not events or events[-1].end_tick < section_ticks:
+          events.append(MusicEvent(pitch=0, volume=0, start_tick=section_ticks-10, end_tick=section_ticks))
+      return events
+  
+  # Usage: split events at SECTION boundary
+  unit_a = MusicUnit(events=pad_unit(events[:len(events)//2], SECTION, offset=0))
+  unit_b = MusicUnit(events=pad_unit(events[len(events)//2:], SECTION, offset=SECTION))
+  ```
+- **MidiInstrument enum is limited**: `MidiInstrument` only exposes 10 instruments: `ACOUSTIC_GUITAR, BASS, CHURCH_ORGAN, FLUTE, PERCUSSION, PIANO, STRING_ENSEMBLE, SYNTH_PAD, TRUMPET, VIOLIN`. For other instruments (e.g., distortion guitar, marimba, accordion), use raw MIDI program numbers (0-127) directly: `composer.add_voice("Guitar", program=30, channel=0)` for Distortion Guitar.
+- **FluidSynth massive WAV pitfall**: When MIDI has timing issues (e.g., events extending far beyond expected duration), FluidSynth can produce multi-GB WAV files. Always verify MIDI structure before rendering. If WAV exceeds 100MB, abort and inspect MIDI timing. Use `ls -lh` to check file size before converting to OGG.
+
 ## ⚠️ Known Implementation Gaps
 
 - `PitchPattern`, `RhythmPattern`, and `MelodicPhrase` are documented as core classes but **do not exist as implemented classes** — the workflow uses tuple-based intervals and manual construction instead
@@ -1132,6 +1175,10 @@ Map user voice messages to diatonic intervals:
 - Example: "Polo Beer" motif (1-3-5-4-2).
 - Implementation: Transpose the extracted sequence to the project target Key to allow for "chemical bonding" with other themes.
 
+
+### v0.1.3 (2026-07-21)
+- Added autonomous daily production pipeline workflow and template setup.
+- Enforced strict FluidSynth CLI rendering and peak normalization rules.
 
 ### v0.1.2 (2026-05-17)
 - Added Lyria 3 correction section (NOT a music model — video generation only)

@@ -14,6 +14,11 @@ metadata:
 
 Create, clone, fork, configure, and manage GitHub repositories. Each section shows `gh` first, then the `git` + `curl` fallback.
 
+## References
+- `references/github-api-cheatsheet.md` (GitHub API curl references)
+- `references/multi-repo-audit.md` (fragmented repositories cleanup)
+- `references/secret-leak-remediation.md` (remediation workflow for GitGuardian alerts/secrets committed)
+
 ## Prerequisites
 
 - Authenticated with GitHub (see `github-auth` skill)

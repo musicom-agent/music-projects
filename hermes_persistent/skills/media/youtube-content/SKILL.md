@@ -70,6 +70,9 @@ After fetching the transcript, format it based on what the user asks for:
 
 ## Error Handling
 
+- **Authentication / Cloud IP Block (Bot block)**:
+  * YouTube commonly blocks cloud provider IPs. If `youtube-transcript-api` or `yt-dlp` returns a bot challenge, verification error, or IP ban, **do not loop on retries**.
+  * Immediately fall back to searching public engines (using `curl` + custom Python parsing logic) for standard lyrics, chords, or text transcriptions on database sites (like Genius, SongLyrics, or LyricsFreak).
 - **Transcript disabled**: tell the user; suggest they check if subtitles are available on the video page.
 - **Private/unavailable video**: relay the error and ask the user to verify the URL.
 - **No matching language**: retry without `--language` to fetch any available transcript, then note the actual language to the user.

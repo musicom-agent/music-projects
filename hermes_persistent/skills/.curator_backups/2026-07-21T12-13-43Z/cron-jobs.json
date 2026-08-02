@@ -1,0 +1,237 @@
+{
+  "jobs": [
+    {
+      "id": "8f1a31d006c8",
+      "name": "daily-composition-methods-research",
+      "prompt": "1. Research one new music composition method (algorithmic, traditional, or AI-driven).\n2. Use the 'Musical Elements Framework' (PITCH, RHYTHM, HARMONY, STRUCTURE, TEXTURE).\n3. Explain how the method fills in the UnitMatrix (Voices & Sections).\n4. Append the method to /opt/data/projects/Research/CompositionMethods/methods_db.md.\n5. Notify Axel via Telegram with a summary of the new method.",
+      "skills": [],
+      "skill": null,
+      "model": "google/gemini-3.5-flash",
+      "provider": "kilo",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "0 9 * * *"
+      },
+      "schedule_display": "0 9 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 28
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-26T08:54:29.488622+00:00",
+      "next_run_at": "2026-07-22T09:00:00+00:00",
+      "last_run_at": "2026-07-21T09:04:44.340339+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "e2760579d2c8",
+      "name": "MusicTech Surveillance & Replicability Analysis",
+      "prompt": "Find latest music tech hardware and software gear news/reviews on https://musictech.com/, https://www.synthtopia.com/, and https://www.soundonsound.com/. Focus on technical capabilities: synthesis methods, algorithmic sequencers, MIDI patterns, DSP, spectral, or orchestration. Analyze whether I (Musicom Agent) can replicate or use them via Python, FluidSynth, Mido, custom math, or DSP. Deliver direct technical report. No filler, caveman style.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "provider_snapshot": "kilocode",
+      "model_snapshot": "google/gemini-3.5-flash",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1,4",
+        "display": "0 9 * * 1,4"
+      },
+      "schedule_display": "0 9 * * 1,4",
+      "repeat": {
+        "times": null,
+        "completed": 5
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-07T13:02:50.270523+00:00",
+      "next_run_at": "2026-07-23T09:00:00+00:00",
+      "last_run_at": "2026-07-20T09:04:36.003520+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": [
+        "web",
+        "terminal"
+      ],
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "da570fa233fd",
+      "name": "daily-sound-production-research",
+      "prompt": "1. Research one new sound production or audio synthesis method (physical modeling, subtractive, FM, wavetable, spectral, granular, post-processing DSP, spatialization, etc.).\n2. Focus on technical mechanics, synthesis equations, and implementation requirements (Python/NumPy, FluidSynth, or VST pipelines).\n3. Append the researched method to the Sound Production Methods Framework in '/opt/data/projects/Research/CompositionMethods/methods_db.md' under the 'Sound Production Methods Framework' section using the SP-XXX ID format.\n4. Keep the framework table clean and formatted. Report the discovered method clearly to Axel in caveman style.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "provider_snapshot": "kilocode",
+      "model_snapshot": "google/gemini-3.5-flash",
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "display": "0 9 * * *"
+      },
+      "schedule_display": "0 9 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 12
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-09T16:06:37.632394+00:00",
+      "next_run_at": "2026-07-22T09:00:00+00:00",
+      "last_run_at": "2026-07-21T09:03:27.861010+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": [
+        "web",
+        "terminal"
+      ],
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "4da0554c15c0",
+      "name": "weekly-newsletter-digest-summarizer",
+      "prompt": "Read the output of fetch_newsletters.py script (injected below).\nIdentify actual weekly newsletters / digests. Strip out transactional notifications (Google setup, GitHub failed runs, etc.).\nIf no newsletters found, report \"No newsletters found in past 7 days.\"\nIf newsletters found, summarize each newsletter. Use caveman style: short fragments, high accuracy, zero filler, no marketing speak.\nExtract key signals, technical insights, or action items.\nOutput format:\n## NEWSLETTER DIGEST\n\n### [Newsletter Subject] - [Sender] ([Date])\n- **Summary**: [Short caveman summary of core content]\n- **Key Signal**: [Actionable technical pattern, insight, or announcement]\n\n(Repeat for each)",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "provider_snapshot": "kilocode",
+      "model_snapshot": "google/gemini-3.5-flash",
+      "base_url": null,
+      "script": "fetch_newsletters.py",
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1",
+        "display": "0 9 * * 1"
+      },
+      "schedule_display": "0 9 * * 1",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-19T17:32:32.297071+00:00",
+      "next_run_at": "2026-07-27T09:00:00+00:00",
+      "last_run_at": "2026-07-20T09:01:12.514045+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "fire_claim": null
+    },
+    {
+      "id": "64c8cafc9eab",
+      "name": "musicom preflight scan",
+      "prompt": "",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "provider_snapshot": null,
+      "model_snapshot": null,
+      "base_url": null,
+      "script": "musicom_preflight.sh",
+      "no_agent": true,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 1",
+        "display": "0 9 * * 1"
+      },
+      "schedule_display": "0 9 * * 1",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-07-20T16:16:17.141332+00:00",
+      "next_run_at": "2026-07-27T09:00:00+00:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "8684633270",
+        "chat_name": "Axel",
+        "thread_id": null,
+        "user_id": "8684633270"
+      },
+      "enabled_toolsets": null,
+      "workdir": null
+    }
+  ],
+  "updated_at": "2026-07-21T09:04:44.341018+00:00"
+}

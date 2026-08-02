@@ -1,9 +1,11 @@
 __pycache__/
 *.pyc
-.DS_Store
 *.tmp
 *.bak
 .env
+.env.mail
+*.mail
+.gitconfig
 .github_token
 .git-credentials
 venv/
@@ -11,3 +13,4 @@ venv/
 repos/
 projects/
 music-projects/
+hermes_persistent/.env.mail
